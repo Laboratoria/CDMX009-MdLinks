@@ -1,0 +1,25 @@
+{
+  "name": "CDMX009-MdLinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keupa/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keupa/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/keupa/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "jest": "^26.0.1",
+    "meow": "^7.0.1"
+  }
+}
