@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/shari12/CDMX009-MdLinks#readme",
   "dependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0"
   }
 }
