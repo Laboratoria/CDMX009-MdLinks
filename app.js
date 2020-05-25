@@ -42,14 +42,8 @@ function verifyLinks(links) {
         fetch(link.href)
             .then( res => {
                 if( res.status === 200 ){
-                    res.url
-                    res.status
-                    res.statusText 
                     console.log('href: ' + res.url + ' status: ' + res.status + ' OK'.bold + ' ✓'.green)
                 }else {
-                    res.url
-                    res.status
-                    res.statusText
                     console.log('href: ' + res.url + ' status: ' + res.status + ' FAILED'.bold +  ' ✕'.red)
                 } 
             })
