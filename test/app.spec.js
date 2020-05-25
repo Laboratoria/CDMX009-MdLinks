@@ -1,9 +1,9 @@
-const indexMd = require('../app');
+const indexFile = require('../app');
 
-describe('indexMd', () => {
+describe('indexFile', () => {
 
     it('should be a function', () => {
-        expect(typeof indexMd).toBe('function');
+        expect(typeof indexFile).toBe('function');
     });
 });
 

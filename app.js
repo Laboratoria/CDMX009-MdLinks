@@ -1,31 +1,43 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const path = require('path'); 
+const https = require('https');
+let file;
+let string;
 
+//Find file
+const indexFile = () => {
+  let fileFlag = process.argv.indexOf('--file');
+  file = process.argv[fileFlag + 1];
+  return console.log('file:', file);
+}
+indexFile();
 
-//Grab provided args
-//const [,, ...args] = process.argv
-
-//Print provided args
-//console.log(`Hola ${args}`);
-let fs = require('fs');
-
-//Global
-let mdFile;
-
-//Find md file
-function indexMd (){
-let fileFlag = process.argv.indexOf('--file');
-mdFile = process.argv[fileFlag + 1];
-console.log(mdFile);
-return mdFile
+//Read file
+  const readFile = () => {
+  string = fs.readFileSync(file, 'utf8');
+  return string;
 };
-indexMd()
 
-//Read md file
-function readMd () {
-   let stringMd = fs.readFileSync(mdFile, 'utf8');
-/*    console.log(stringMd);
- */};
-readMd();
+//Find the md path file
+let pathFile = path.extname(file); 
+  if (pathFile === '.md'){
+    console.log('path:', pathFile);
+    readFile();
+  }
+  else {
+    console.log('path:', 'this is not a md file');
+  }
+//console.log('path:', pathFile) 
+
+//Find links
+const fileLinks = () => {
+  let matches = string.match(/\bhttps?:\/\/\S+/gi);
+  console.log('match:', matches);
+}
+fileLinks();
+
+module.exports = indexFile;
 
 
-module.exports = indexMd;
+
