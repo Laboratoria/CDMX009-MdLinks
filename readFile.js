@@ -1,17 +1,17 @@
 const fs = require('fs').promises;
+const { showLinks } = require('./showLinks');
+
 function readFile(path) {
     return fs.readFile(path, 'utf8')
     .then(function(data){
-        // console.log(data)
+        showLinks(data);
         return `${data}`
     })
     .catch(function(err){
-        //console.log(err);
         return err;
     })
 }
-readFile('./README.md');
-
+readFile('./README.md')
 module.exports = {
     readFile,
 }
