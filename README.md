@@ -255,7 +255,7 @@ pendientes de tu proyecto anterior.
 
 ### Node
 - [ ] Sistema de archivos
-- [ ] package.json
+- [x] package.json
 - [ ] crear modules
 - [ ] Instalar y usar modules
 - [ ] npm scripts
@@ -269,7 +269,7 @@ pendientes de tu proyecto anterior.
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+- [x] Organización en Github
 
 ### Buenas prácticas de desarrollo
 - [ ] Modularización
