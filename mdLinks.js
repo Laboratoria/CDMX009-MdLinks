@@ -35,7 +35,7 @@ function isValidURL(){
             }else if (response.status == 404) {
                 broke +=1;
             }
-            console.log("work:"+`${work}`+" " + "broke:"+`${broke}`)
+            console.log("funciona:"+`${work}`+" " + "roto:"+`${broke}`)
           }).catch(function(error) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
           });
