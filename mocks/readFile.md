@@ -1,0 +1,1 @@
+Estos archivos normalmente contienen _links_ (vínculos/ligas) que
