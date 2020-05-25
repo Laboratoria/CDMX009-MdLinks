@@ -1,0 +1,22 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "mdlinks",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaviHaze/CDMX009-MdLinks.git"
+  },
+  "author": "Monica R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaviHaze/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/ClaviHaze/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "jest": "^26.0.1"
+  }
+}
