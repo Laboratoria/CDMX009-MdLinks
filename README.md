@@ -143,7 +143,7 @@ La función debe retornar una promesa (`Promise`) que resuelva a un arreglo
 (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
 las siguientes propiedades:
 
-- `href`: URL encontrada.
+- `hreff`: URL encontrada.
 - `text`: Texto que aparecía dentro del link (`<a>`).
 - `file`: Ruta del archivo donde se encontró el link.
 
@@ -154,19 +154,19 @@ const mdLinks = require("md-links");
 
 mdLinks("./some/example.md")
   .then(links => {
-    // => [{ href, text, file }]
+    // => [{ hreff, text, file }]
   })
   .catch(console.error);
 
 mdLinks("./some/example.md", { validate: true })
   .then(links => {
-    // => [{ href, text, file, status, ok }]
+    // => [{ hreff, text, file, status, ok }]
   })
   .catch(console.error);
 
 mdLinks("./some/dir")
   .then(links => {
-    // => [{ href, text, file }]
+    // => [{ hreff, text, file }]
   })
   .catch(console.error);
 ```
