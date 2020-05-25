@@ -35,7 +35,7 @@ function isValidURL(){
             }else if (response.status == 404) {
                 broke +=1;
             }
-            //console.log("work:"+`${work}`+" " + "broke:"+`${broke}`)
+            console.log("work:"+`${work}`+" " + "broke:"+`${broke}`)
           }).catch(function(error) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
           });
@@ -43,7 +43,7 @@ function isValidURL(){
 
           //return "work:"+`${work}`+" " + "broke:"+`${broke}`
     }
-    console.log("work:"+`${work}`+" " + "broke:"+`${broke}`)
+   // console.log("work:"+`${work}`+" " + "broke:"+`${broke}`)
 }
 isValidURL()
 
