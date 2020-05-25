@@ -1,0 +1,23 @@
+{
+  "name": "CDMX009-MdLinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrisFyD/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IrisFyD/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/IrisFyD/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
