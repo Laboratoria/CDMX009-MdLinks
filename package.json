@@ -1,0 +1,19 @@
+{
+    "name": "mdlinks",
+    "version": "1.0.0",
+    "description": "MDlinks validate your md files ",
+    "main": "app.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^4.0.0",
+        "fs": "0.0.1-security",
+        "inquirer": "^7.1.0",
+        "jest": "^26.0.1",
+        "markdown": "^0.5.0",
+        "markdown-it": "^11.0.0"
+    }
+}
