@@ -105,9 +105,7 @@ function statsLinks(result, totalLinks, links) {
         let uniqueLinks = links.filter(unique);
         let howManyUnique = uniqueLinks.length
 
-        function unique(value, index, self) {
-            return self.indexOf(value) === index;
-        }
+  
         console.log(chalk.italic('Validation statistics:'));
         console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
         console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
@@ -133,13 +131,7 @@ function statsBasic() {
 
         console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
 
-        let uniqueLinks = links.filter(unique);
-        let howManyUnique = uniqueLinks.length
-        console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
-
-        function unique(value, index, self) {//comprueba, si el valor dado es el primero que ocurre, de lo contrario, debe ser un duplicado y no se copiará.
-            return self.indexOf(value) === index;
-        }
+        
     }
 }
 fileRoute()
