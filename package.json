@@ -1,0 +1,30 @@
+{
+    "name": "markdown-links",
+    "version": "1.0.0",
+    "description": "Get links from a markdown file and verify their status.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "ava"
+    },
+    "keywords": [
+        "cli-app",
+        "cli",
+        "links",
+        "markdown",
+        "verify",
+        "stats"
+    ],
+    "dependencies": {
+        "chalk": "^4.0.0",
+        "fs": ".0.1-secu0rity",
+        "meow": "^7.0.1",
+        "node-fetch": "^2.6.0",
+        "path": "^0.12.7",
+        "yargs": "^15.3.1"
+    },
+    "devDependencies": {
+        "ava": "^3.8.2",
+        "jest": "^26.0.1"
+    }
+}
