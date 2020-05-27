@@ -1,0 +1,36 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "Libreria de node para archivos md",
+  "main": "node index.js",
+  "scripts": {
+    "eslint": "eslint --ext .js src/ test/",
+    "pretest": "npm run eslint",
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElizaFlores11/CDMX009-MdLinks.git"
+  },
+  "author": "Elizabeth Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElizaFlores11/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/ElizaFlores11/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "babel-jest": "^26.0.1",
+    "eslint": "^7.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.13.1",
+    "glob": "^7.1.6",
+    "jest": "^26.0.1",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
