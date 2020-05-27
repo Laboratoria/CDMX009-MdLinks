@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const path = require('path');
 const mDLinks = require('./links.js');
+const questions = require('./questions.js')
 
 // I have a crush on figlet
 console.log(chalk.bold.cyan(figlet.textSync('md-links', {
@@ -12,7 +13,9 @@ console.log(chalk.bold.cyan(figlet.textSync('md-links', {
   horizontalLayout: 'default',
 })));
 
+
 let userPath = process.argv[2];
+const responses = questions.askFor();
 
 if (!path.isAbsolute(userPath)) {
   userPath = path.resolve(userPath);

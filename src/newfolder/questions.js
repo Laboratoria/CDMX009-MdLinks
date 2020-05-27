@@ -14,6 +14,45 @@ module.exports = {
           return 'Please type a valid path';
         },
       },
-    ];
   },
+];
+return inquirer.prompt(questions);
+},
+askingValidate: () => {
+const questions = [
+  {
+    name: 'validate',
+    type: 'list',
+    message: 'Do you want to know the validate links?',
+    choices: ['yes', 'no']
+    validate: function(value) {
+      if (value.length && (value === "yes" || value === "no")) {
+        return true;
+      } else {
+        return 'select valid answer';
+      }
+    }
+  }
+];
+return inquirer.prompt(questions);
+},
+askingStats: () => {
+const questions = [
+  {
+    name: "stats",
+    type: "list",
+    message: 'Do you want to know the stats?',
+    choices: ['yes', 'no']
+    validate: function(value) {
+      if (value.length && (value === "yes" || value === "no")) {
+        return true;
+      } else {
+        return "Porfavor ingresa una respuesta con y/n";
+      }
+    }
+  }
+];
+return inquirer.prompt(questions);
+}
+};
 };
