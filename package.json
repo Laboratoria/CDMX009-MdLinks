@@ -20,6 +20,7 @@
     "figlet": "^1.4.0",
     "jest": "^26.0.1",
     "mark-it-down": "^0.3.0",
-    "markdown-it": "^11.0.0"
+    "markdown-it": "^11.0.0",
+    "node-fetch": "^2.6.0"
   }
 }
