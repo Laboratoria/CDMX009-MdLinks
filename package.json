@@ -1,6 +1,6 @@
 {
   "name": "cdmx009-mdlinks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Proyecto MdLinks para Laboratoria generación 009 Ciudad de México",
   "main": "index.js",
   "scripts": {
