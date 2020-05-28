@@ -19,7 +19,7 @@ algunas estadísticas.
 Para empeazar, se diseñó un diagrama de flujo para conocer las opciones que debía de tener el usuario al hacer uso de la librería y así estructurar el proyecto orientado al diagrama mientras también se realizaba a la par el test unitario para ver el correcto funcionamiento de las funciones creadas.
 Se creó con Nodejs y [chalk](https://www.npmjs.com/package/chalk).
 
-![diagrama-de-flujo](Imágenes/diagrama de flujo.png)
+![diagrama-de-flujo](Imágenes/diagrama.png)
 
 ## ¿Qué hace?
 
@@ -30,7 +30,7 @@ Cuando tiene el archivo correspondiente puedes pedirle que te entregue el status
 
 ![validate](Imágenes/validate.png)
 
-![stats-validate](Imágenes/stats y validate.png)
+![stats-validate](Imágenes/dos.png)
 
 ## ¿Cómo lo instalo?
 
