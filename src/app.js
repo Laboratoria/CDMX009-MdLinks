@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 let uri = process.argv[2]
 let lengthProcess = process.argv.length
 let stats = process.argv[3];
-//console.log(process.argv.length);
+
 
 
 
@@ -55,20 +55,11 @@ const fileRoute = () => {
         .catch(err => err)
 }
 
-/* const readFile = (uri) => {
-    let fileMd = fs.readFileSync(uri, 'utf-8')
-    return fileMd
-    //searchLinks(fileMd)
-} */
 
 
 const searchLinks = (uri) => {
     let fileMd = fs.readFileSync(uri, 'utf-8')
-    //console.log(fileMd);
-    //let fileMd = readFile(uri)
-    //let expRegURL = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
     let newFile = fileMd.replace(/[\(\)]/g, " ");
-    //let expRegText = /(?<=\[).+?(?=\])/
     let space = " "
     let arrNewFile = newFile.split(space)
     //let linksText = arrNewFile.filter(text => text.includes('['))
@@ -78,7 +69,6 @@ const searchLinks = (uri) => {
     //console.log(arrLinks);
     let objectLinks = { links: arrLinks, path: uri, }
     return objectLinks
-
 }
 
 
@@ -113,7 +103,6 @@ const verifyLinks = (arrLinks, route) => {
                     //result.working = "work",
                     resolve(result)
                 }
-
             })
             .catch(err => {
                 if (lengthProcess === 4) {
@@ -140,11 +129,9 @@ const verifyLinks = (arrLinks, route) => {
     return Promise.all(arr)
 
 }
-/* verifyLinks().then(res => {
-    console.log(res);
- 
-})
- */
+
+
+
 let newArr = []
 let counter = 0
 function statsLinks(result, totalLinks, arrContent) {
@@ -173,7 +160,7 @@ function statsLinks(result, totalLinks, arrContent) {
     }
 
 }
-//statsLinks()
+
 
 function statsBasic(arrLinks) {
     let totalBasic = arrLinks.length
@@ -210,20 +197,4 @@ module.exports = {
     verifyLinks,
     statsLinks
 }
-/* let mdLinks = async (route, options) => {
-    let search = await searchLinks(route)
-    let links = search.links
-    if (options) {
-        return verifyLinks(links).then(resp => resp).catch(err => err);
-    } else {
-        // return new Promise(resolve => resolve(searchLinks(route)))
-        ---> return new Promise((resolve, reject) => {
-            let arrLinks = links.map(link => {
-                let objResult = { file: link, href: search.path }
-                return objResult
-            })
-            resolve(arrLinks)
-        })<----
-    }
-} */
 
