@@ -1,7 +1,7 @@
 # Markdown Links
 
 ## Documentación técnica
-Librería "basada en Node.js" cuyo objetivo es extraer los links de archivos formato Marckdown, sus funciones son: encontrar los links, validar su status y visualizar estádisticas respecto al total de links encontrados, links únicos (no se repiten) y total de links inválidos.
+Librería "basada en Node.js" cuyo objetivo es extraer los links de archivos formato Marckdown, sus funciones son: encontrar los links, validar su status y visualizar estádisticas respecto al total de links encontrados, links únicos y total de links inválidos.
  
 ## Instalación
 
