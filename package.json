@@ -1,6 +1,6 @@
 {
   "name": "lizethrivera-md-links",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Módulo que permite extraer links de archivos marckdown, valida que funcionen y brinda estadísticas",
   "main": "src/app.js",
   "scripts": {
@@ -11,9 +11,14 @@
     "url": "git+https://github.com/LizethRivera04/CDMX009-MdLinks.git"
   },
   "bin": {
-    "md-links": "app.js"
+    "md-links": "src/app.js"
   },
-  "keywords": [],
+  "keywords": [
+    "marckdown",
+    "nodejs",
+    "javascript",
+    "links"
+  ],
   "author": "Lizeth Rivera",
   "license": "ISC",
   "bugs": {
