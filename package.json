@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/DorsD/CDMX009-MdLinks#readme",
   "dependencies": {
-    "jest": "^26.0.1"
+    "chalk": "^4.0.0",
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0"
   }
 }
