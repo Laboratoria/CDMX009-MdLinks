@@ -9,100 +9,156 @@ const fetch = require('node-fetch');
 let uri = process.argv[2]
 let lengthProcess = process.argv.length
 let stats = process.argv[3];
+//console.log(process.argv.length);
+
+
+
+const controller = (arrLinks) => {
+    if (lengthProcess === 3) {
+        arrLinks.forEach(link => {
+            console.log(chalk`{yellow ${uri} ${link.slice(0, 50)}}`);
+        })
+    } if (stats === '--stats' || stats === '--s') {
+        statsBasic(arrLinks)
+    } if (stats === '--validate' || stats === '--val') {
+        verifyLinks(arrLinks)
+        //console.log(arrLinks);
+    } /* if (lengthProcess === 2 || uri === 'undefined') {
+        console.log(chalk.yellow('\n Instrucciones : \n md-links <path> ó \n md-links <path> <options> \n <path> : ruta del archivo o directorio \n <options> : \n --validate o --val : regresa ruta de archivo,link evaluado, status de link ; \n --stats o --s : regresa la cantidad de links encontrados y links únicos; \n --validate --stats : regresa regresa la cantidad de links encontrados, links únicos y links "rotos"'));
+    } */
+}
 
 
 const fileRoute = () => {
-    return new Promise((resolve, reject) => {
-        let extUri = path.extname(uri)
-        if (extUri != '.md') {
-            reject(console.log(chalk.magenta('Ingresa la ubicación de un archivo con extensión .md')));
-        } else {
-            readFile(uri)
+    new Promise((resolve, reject) => {
+        if (path.isAbsolute(uri)) {
+            let directory = fs.readdirSync(uri, 'utf-8')
+            let arrDir = directory.forEach(re => {
+                let extUri = path.extname(re)
+                if (extUri === '.md') {
+                    let newDir = path.join(uri, re)
+                    searchLinks(newDir)
+                }
+            })
+        }
+        if (!path.isAbsolute(uri)) {
+            let extUri = path.extname(uri)
+            if (extUri != '.md') {
+                reject(console.log(chalk.magenta('Ingresa una ruta, ejemplo: md-links some/example.md o --help')));
+            } if (extUri != '.md' && uri === '--help') {
+                console.log(chalk.yellow('\n Instrucciones :  \n md-links --help : recibe ayuda \n md-links <path> ó \n md-links <path> <options> \n <path> : ruta del archivo o directorio \n <options> : \n --validate o --val : regresa ruta de archivo,link evaluado, status de link ; \n --stats o --s : regresa la cantidad de links encontrados y links únicos; \n --validate --stats : regresa regresa la cantidad de links encontrados, links únicos y links "rotos"'));
+            } else {
+                searchLinks(uri)
+            }
         }
     })
+        .catch(err => err)
 }
 
-const readFile = (uri) => {
+/* const readFile = (uri) => {
     let fileMd = fs.readFileSync(uri, 'utf-8')
     return fileMd
-}
+    //searchLinks(fileMd)
+} */
 
 
 const searchLinks = (uri) => {
-    let fileMd = readFile(uri)
+    let fileMd = fs.readFileSync(uri, 'utf-8')
+    //console.log(fileMd);
+    //let fileMd = readFile(uri)
     //let expRegURL = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
     let newFile = fileMd.replace(/[\(\)]/g, " ");
     //let expRegText = /(?<=\[).+?(?=\])/
     let space = " "
     let arrNewFile = newFile.split(space)
-    let linksText = arrNewFile.filter(text => text.includes('['))
-    let links = arrNewFile.filter(text => text.includes('http'))
+    //let linksText = arrNewFile.filter(text => text.includes('['))
+    let arrLinks = arrNewFile.filter(text => text.includes('http'))
 
-    let objLinks = { links: links, path: uri, }
-    return objLinks
-
-}
-
-
-const verifyLinks = () => {
-
-    let searchUrl = searchLinks(uri)
-
-    let links = searchUrl.links
-    let uris = searchUrl.path
-    let totalLinks = links.length
-
-    if (stats === '--validate' || stats === '--val') {
-        const validate = links.forEach(link => new Promise((resolve) => {
-
-            fetch(link)
-                .then(res => {
-                    //console.log(res.status);
-                    if (res.ok === true && lengthProcess === 4) {
-                        let result = { message: `${uris} ${link} work ${res.status} total: ${totalLinks}` }
-                        result.working = "work"
-                        resolve(result)
-                        console.log(chalk` ${uris} ${link} {rgb(114,176,29) work ${res.status}}`);
-                        // llamar al contador funcion (2 globales)cuantos tengo, cuantos llevo
-                    } if (res.ok === true && lengthProcess === 5) {
-                        let result = { message: `${uris} ${link} work ${res.status} total: ${totalLinks}` }
-                        result.working = "work"
-                        statsLinks(result, totalLinks, links)
-                    }
-
-                })
-                .catch(err => {
-                    if (lengthProcess === 4) {
-                        let result = { message: `${uri} ${link} is broken`, working: "is broken" }
-                        console.log(chalk` ${uris} ${link} {rgb(255,89,94) is broken}`);
-                        resolve(result)
-                    }
-                    //console.log('error:', err);
-                    if (lengthProcess === 5) {
-                        let result = { message: `${uris} ${link} is broken`, working: "is broken" }
-                        statsLinks(result, totalLinks, links)
-                    }
-
-                })
-
-        }))
-        return validate
-    }
+    controller(arrLinks)
+    //console.log(arrLinks);
+    let objectLinks = { links: arrLinks, path: uri, }
+    return objectLinks
 
 }
 
 
+
+const verifyLinks = (arrLinks, route) => {
+    //console.log(arrLinks);
+    let arrContent = arrLinks
+    let totalLinks = arrLinks.length
+    //console.log(totalLinks);
+    let arr = arrContent.map(link => new Promise((resolve) => {
+        //console.log(link);
+        fetch(link)
+            .then(res => {
+                //console.log(res.status);
+                if (res.ok === true && lengthProcess === 4) {
+                    let result = { file: `${uri}` }
+                    result.href = `${link}`,
+                        result.status = `${res.status} ok`,
+                        //result.working = "work",
+                        resolve(result)
+                    console.log(chalk` {rgb(114,176,29) ✔} ${uri} ${link.slice(0, 50)} {rgb(114,176,29) work ${res.status}}`);
+                    // llamar al contador funcion (2 globales)cuantos tengo, cuantos llevo
+                } if (res.ok === true && lengthProcess === 5) {
+                    let result = { message: `${uri} ${link} work ${res.status} total: ${totalLinks}` }
+                    result.working = "work"
+                    statsLinks(result, totalLinks, arrContent)
+                } else {
+                    let result = {}
+                    result.href = `${link.slice(0, 50)}`,
+                        result.status = `${res.status} ok`,
+                        result.file = `${route}`
+                    //result.working = "work",
+                    resolve(result)
+                }
+
+            })
+            .catch(err => {
+                if (lengthProcess === 4) {
+                    let result = { file: `${uri}` }
+                    result.href = ` ${link}`
+                    result.status = "400 is broken"
+                    console.log(chalk` {rgb(255,89,94) ✖} ${uri} ${link.slice(0, 50)} {rgb(255,89,94) is broken}`);
+                    resolve(result)
+                }
+                //console.log('error:', err);
+                if (lengthProcess === 5) {
+                    let result = { message: `${uri} ${link} is broken`, working: "is broken" }
+                    statsLinks(result, totalLinks, arrContent)
+                } else {
+                    let result = {}
+                    result.href = ` ${link.slice(0, 50)}`
+                    result.status = "400 is broken"
+
+                    resolve(result)
+                }
+            })
+    }))
+    //console.log(validate);
+    return Promise.all(arr)
+
+}
+/* verifyLinks().then(res => {
+    console.log(res);
+ 
+})
+ */
 let newArr = []
 let counter = 0
-function statsLinks(result, totalLinks, links) {
+function statsLinks(result, totalLinks, arrContent) {
+    /*  console.log(result);
+     console.log(totalLinks);
+     console.log(arrContent); */
     let totalArr = newArr.length + 1
     newArr.push(result.working)
     //console.log(totalArr);
     if (totalLinks === totalArr) {
         let filtBroke = newArr.filter(news => news === 'is broken')
         counter = counter + filtBroke.length
-        let totalBasic = links.length
-        let uniqueLinks = links.filter(unique);
+        let totalBasic = arrContent.length
+        let uniqueLinks = arrContent.filter(unique);
         let howManyUnique = uniqueLinks.length
 
         function unique(value, index, self) {
@@ -112,65 +168,62 @@ function statsLinks(result, totalLinks, links) {
         console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
         console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
         console.log(chalk`{bold Broken:} {cyan ${counter}}`);
-
+        let objStatus = { Total: totalBasic, Unique: howManyUnique, Broken: counter }
+        return objStatus
     }
+
 }
 //statsLinks()
 
-function statsBasic() {
-    let searchUrl = searchLinks(uri)
-    let links = searchUrl.links
-    let uris = searchUrl.path
-    //console.log(statsLinks.links);
-    //sconsole.log(links);
-    if (lengthProcess === 3) {
-        links.forEach(link => {
-            console.log(chalk`{yellow ${uris} ${link}}`);
-        })
-    } if (stats === '--stats' || stats === '--s') {
-        let totalBasic = links.length
-        console.log(chalk.italic('Basic statistics:'));
+function statsBasic(arrLinks) {
+    let totalBasic = arrLinks.length
+    console.log(chalk.italic('Basic statistics:'));
+    console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
+    let uniqueLinks = arrLinks.filter(unique);
+    let howManyUnique = uniqueLinks.length
+    console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
 
-        console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
-
-        let uniqueLinks = links.filter(unique);
-        let howManyUnique = uniqueLinks.length
-        console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
-
-        function unique(value, index, self) {//comprueba, si el valor dado es el primero que ocurre, de lo contrario, debe ser un duplicado y no se copiará.
-            return self.indexOf(value) === index;
-        }
+    function unique(value, index, self) {//comprueba, si el valor dado es el primero que ocurre, de lo contrario, debe ser un duplicado y no se copiará.
+        return self.indexOf(value) === index;
     }
 }
 fileRoute()
-verifyLinks()
-statsBasic()
-
-
-module.exports = readFile
-
 
 
 function mdLinks(route, options) {
-    new Promise((resolve, reject) => {
-        //console.log(route);
-        //let read = readFile(route)
-        //console.log(read);
+    if (options) {
         let search = searchLinks(route)
-        //console.log(searchLinks(url));
         let links = search.links
+        let file = search.path
 
-        if (options) {
-            verifyLinks(search)
-        }
-        let arrLinks = links.map(link => {
-            let objResult = { file: link, href: search.path }
-            return objResult
-
-        })
-        resolve(arrLinks)
-    });
+        return verifyLinks(links, file).then(resp => resp).catch(err => err);
+    } else {
+        return new Promise(resolve => resolve(searchLinks(route)))
+    }
 }
-mdLinks('src/file.md', { validate: true })
+//mdLinks('src/file.md', { validate: true }).then(resp => console.log(resp))
 
+module.exports = {
+    mdLinks,
+    fileRoute,
+    searchLinks,
+    verifyLinks,
+    statsLinks
+}
+/* let mdLinks = async (route, options) => {
+    let search = await searchLinks(route)
+    let links = search.links
+    if (options) {
+        return verifyLinks(links).then(resp => resp).catch(err => err);
+    } else {
+        // return new Promise(resolve => resolve(searchLinks(route)))
+        ---> return new Promise((resolve, reject) => {
+            let arrLinks = links.map(link => {
+                let objResult = { file: link, href: search.path }
+                return objResult
+            })
+            resolve(arrLinks)
+        })<----
+    }
+} */
 

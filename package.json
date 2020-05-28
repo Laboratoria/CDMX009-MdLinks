@@ -1,8 +1,8 @@
 {
-  "name": "CDMX009-MdLinks",
+  "name": "lizethrivera-md-links",
   "version": "1.0.0",
-  "description": "[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado\r ligero muy popular entre developers. Es usado en muchísimas plataformas que\r manejan texto plano (GitHub, foros, blogs, ...), y es muy común\r encontrar varios archivos en ese formato en cualquier tipo de repositorio\r (empezando por el tradicional `README.md`).",
-  "main": "app.js",
+  "description": "Módulo que permite extraer links de archivos marckdown, valida que funcionen y brinda estadísticas",
+  "main": "src/app.js",
   "scripts": {
     "test": "jest --verbose --coverage"
   },
@@ -11,18 +11,16 @@
     "url": "git+https://github.com/LizethRivera04/CDMX009-MdLinks.git"
   },
   "bin": {
-    "md-links": "src/app.js"
+    "md-links": "app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lizeth Rivera",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LizethRivera04/CDMX009-MdLinks/issues"
   },
   "homepage": "https://github.com/LizethRivera04/CDMX009-MdLinks#readme",
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
     "jest": "^26.0.1"
   },
   "dependencies": {
