@@ -5,6 +5,7 @@ Librería "basada en Node.js" cuyo objetivo es extraer los links de archivos for
  
 ## Instalación
 
+`$ npm i lizethrivera-md-links`
 
 ## JavaScript API
 El módulo puede importarse en otros scripts de Node.js de la siguiente manera:
