@@ -4,8 +4,7 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 const path = require('path');
-const mDLinks = require('./links.js');
-const questions = require('./questions.js')
+const mDLinks = require('./md-links.js');
 
 // I have a crush on figlet
 console.log(chalk.bold.cyan(figlet.textSync('md-links', {
@@ -15,9 +14,8 @@ console.log(chalk.bold.cyan(figlet.textSync('md-links', {
 
 
 let userPath = process.argv[2];
-const responses = questions.askFor();
 
-if (!path.isAbsolute(userPath)) {
+if (path.isAbsolute(userPath)) {
   userPath = path.resolve(userPath);
 }
 
@@ -107,4 +105,6 @@ if (userPath.includes('.')) {
     .catch((error) => {
       console.log('no such directory found');
     });
-}
+} 
+
+

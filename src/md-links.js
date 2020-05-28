@@ -14,10 +14,10 @@ const readFile = path => new Promise((resolve, reject) => {
     } else {
       const renderer = new marked.Renderer();
       renderer.link = function (href, text) {
-        const pathName = path.split('\\');
+        const pathName = path.split('//');
         links.push({
-          href,
-          text,
+          href: href,
+          text: text,
           file: pathName[pathName.length - 1],
         });
       };
@@ -43,12 +43,13 @@ const validateLinks = links => Promise.all(links.map(link => new Promise((resolv
         link.status = response.status;
         link.statusTxt = 'ok';
         resolve(link);
+      } else {
+        link.statusTxt = 'fail';
+        console.log(error);
       }
     })
     .catch((error) => {
-      link.status = null;
-      link.statusTxt = 'fail';
-      console.log(error);
+      reject(console.log(error));
     });
 })));
 
@@ -58,7 +59,7 @@ const validateLinks = links => Promise.all(links.map(link => new Promise((resolv
 const stats = (links, validate) => {
   const linkStats = {};
   linkStats.total = links.length;
-  const hrefFromLink = link.map(link => link.href);
+  const hrefFromLink = links.map(link => link.href);
   const uniqueLinks = new Set(hrefFromLink);
   linkStats.unique = uniqueLinks.size;
   let count = 0;
