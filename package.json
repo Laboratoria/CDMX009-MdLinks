@@ -1,0 +1,28 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado\r ligero muy popular entre developers. Es usado en muchísimas plataformas que\r manejan texto plano (GitHub, foros, blogs, ...), y es muy común\r encontrar varios archivos en ese formato en cualquier tipo de repositorio\r (empezando por el tradicional `README.md`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DianyelaMaldonado/CDMX009-MdLinks.git"
+  },
+  "author": "Dianyela Maldonado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DianyelaMaldonado/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/DianyelaMaldonado/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "argvd": "^1.0.0",
+    "enquire": "0.0.2",
+    "figlet": "^1.4.0",
+    "meow": "^7.0.1"
+  }
+}
