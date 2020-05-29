@@ -32,7 +32,7 @@ if (userPath.includes('.')) {
   } else if (process.argv[3] === '--validate') {
     mDLinks.mdLinks(userPath, { validate: true })
       .then((links) => {
-        if (links.length > 0) {
+        if (links.length >= 0) {
           console.log(links);
         } else {
           console.log(chalk.bold.red('No links were found in your file.'));
