@@ -1,7 +1,7 @@
 # Markdown Links
 
 ## Documentación técnica
-Librería "basada en Node.js" cuyo objetivo es extraer los links de archivos formato Marckdown, sus funciones son: encontrar los links, validar su status y visualizar estádisticas respecto al total de links encontrados, links únicos y total de links inválidos.
+Librería basada en Node.js cuyo objetivo es extraer los links de archivos formato [Markdown](https://es.wikipedia.org/wiki/Markdown), sus funciones son: encontrar los links, validar su status y visualizar estádisticas respecto al total de links encontrados, links únicos y total de links inválidos.
  
 ## Instalación
 
@@ -13,7 +13,7 @@ El módulo puede importarse en otros scripts de Node.js de la siguiente manera:
 ```js
 const mdLinks = require('lizethrivera-md-links');
 
-//Se
+
 mdLinks("./some/example.md")
   .then(links => {
     // => [{ href, text, file }]
