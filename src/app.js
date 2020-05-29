@@ -5,12 +5,9 @@ let path = require('path');
 const chalk = require('chalk');
 const fetch = require('node-fetch');
 
-
 let uri = process.argv[2]
 let lengthProcess = process.argv.length
 let stats = process.argv[3];
-
-
 
 
 const controller = (arrLinks) => {
@@ -22,10 +19,8 @@ const controller = (arrLinks) => {
         statsBasic(arrLinks)
     } if (stats === '--validate' || stats === '--val') {
         verifyLinks(arrLinks)
-        //console.log(arrLinks);
-    } /* if (lengthProcess === 2 || uri === 'undefined') {
-        console.log(chalk.yellow('\n Instrucciones : \n md-links <path> ó \n md-links <path> <options> \n <path> : ruta del archivo o directorio \n <options> : \n --validate o --val : regresa ruta de archivo,link evaluado, status de link ; \n --stats o --s : regresa la cantidad de links encontrados y links únicos; \n --validate --stats : regresa regresa la cantidad de links encontrados, links únicos y links "rotos"'));
-    } */
+
+    }
 }
 
 
@@ -62,11 +57,9 @@ const searchLinks = (uri) => {
     let newFile = fileMd.replace(/[\(\)]/g, " ");
     let space = " "
     let arrNewFile = newFile.split(space)
-    //let linksText = arrNewFile.filter(text => text.includes('['))
     let arrLinks = arrNewFile.filter(text => text.includes('http'))
 
     controller(arrLinks)
-    //console.log(arrLinks);
     let objectLinks = { links: arrLinks, path: uri, }
     return objectLinks
 }
@@ -74,23 +67,17 @@ const searchLinks = (uri) => {
 
 
 const verifyLinks = (arrLinks, route) => {
-    //console.log(arrLinks);
     let arrContent = arrLinks
     let totalLinks = arrLinks.length
-    //console.log(totalLinks);
     let arr = arrContent.map(link => new Promise((resolve) => {
-        //console.log(link);
         fetch(link)
             .then(res => {
-                //console.log(res.status);
                 if (res.ok === true && lengthProcess === 4) {
                     let result = { file: `${uri}` }
                     result.href = `${link}`,
                         result.status = `${res.status} ok`,
-                        //result.working = "work",
                         resolve(result)
                     console.log(chalk` {rgb(114,176,29) ✔} ${uri} ${link.slice(0, 50)} {rgb(114,176,29) work ${res.status}}`);
-                    // llamar al contador funcion (2 globales)cuantos tengo, cuantos llevo
                 } if (res.ok === true && lengthProcess === 5) {
                     let result = { message: `${uri} ${link} work ${res.status} total: ${totalLinks}` }
                     result.working = "work"
@@ -100,7 +87,6 @@ const verifyLinks = (arrLinks, route) => {
                     result.href = `${link.slice(0, 50)}`,
                         result.status = `${res.status} ok`,
                         result.file = `${route}`
-                    //result.working = "work",
                     resolve(result)
                 }
             })
@@ -112,7 +98,6 @@ const verifyLinks = (arrLinks, route) => {
                     console.log(chalk` {rgb(255,89,94) ✖} ${uri} ${link.slice(0, 50)} {rgb(255,89,94) is broken}`);
                     resolve(result)
                 }
-                //console.log('error:', err);
                 if (lengthProcess === 5) {
                     let result = { message: `${uri} ${link} is broken`, working: "is broken" }
                     statsLinks(result, totalLinks, arrContent)
@@ -120,27 +105,20 @@ const verifyLinks = (arrLinks, route) => {
                     let result = {}
                     result.href = ` ${link.slice(0, 50)}`
                     result.status = "400 is broken"
-
                     resolve(result)
                 }
             })
     }))
-    //console.log(validate);
     return Promise.all(arr)
 
 }
 
 
-
 let newArr = []
 let counter = 0
 function statsLinks(result, totalLinks, arrContent) {
-    /*  console.log(result);
-     console.log(totalLinks);
-     console.log(arrContent); */
     let totalArr = newArr.length + 1
     newArr.push(result.working)
-    //console.log(totalArr);
     if (totalLinks === totalArr) {
         let filtBroke = newArr.filter(news => news === 'is broken')
         counter = counter + filtBroke.length
@@ -188,7 +166,7 @@ function mdLinks(route, options) {
         return new Promise(resolve => resolve(searchLinks(route)))
     }
 }
-//mdLinks('src/file.md', { validate: true }).then(resp => console.log(resp))
+
 
 module.exports = {
     mdLinks,
