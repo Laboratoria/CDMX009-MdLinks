@@ -1,4 +1,4 @@
-const { findFile } = require('../findFile');
+const { findFile } = require('../mocks/findFileTest');
 
 const mockFn = jest.fn();
 const route = new mockFn();
@@ -12,6 +12,6 @@ describe('route detection function', () => {
     })
     it ('should result in the route of readme', () => {
         const path = [ "route", "file", "flag", "md" ]
-        expect(findFile()).toBe("md")
+        expect(findFile()).toBe("README.md")
     })
 })

@@ -11,7 +11,6 @@ function readFile(path) {
         return err;
     })
 }
-readFile('./README.md')
 module.exports = {
     readFile,
 }
