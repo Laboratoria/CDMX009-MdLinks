@@ -11,7 +11,8 @@ let matches = [];
 const indexFile = () => {
   let fileFlag = process.argv.indexOf('--file');
   file = process.argv[fileFlag + 1];
-  return console.log('file:', file);
+  let directory = process.cwd();
+  return console.log('file:', file, '\n dir: ', directory);
 }
 indexFile();
 
@@ -35,12 +36,12 @@ else {
 //Find links
 const fileLinks = () => {
   matches = string.match(/\bhttps?:\/\/\S+/gi);
-  console.log('match:', matches);
+  console.log('match: ', matches);
 }
 fileLinks();
 
 //Validating links
-async function allLinks() { // PROHIBIDO USAR THEN
+/* async function allLinks() { // PROHIBIDO USAR THEN
 let array = []
   
   matches.forEach(async element => {
@@ -50,13 +51,30 @@ let array = []
       status:res.status, 
       text:res.statusText}
       
-     console.log('obj', obj)
+     console.log('link', obj)
      array.push(obj)
     }) // esperar
     console.log(array)
   
 }
-allLinks();
+allLinks(); */
+
+function allLinks() { 
+  let promises = matches.map(element=>fetch(element))
+  return Promise.allSettled(promises)
+  .then(res=>{
+    let final = res.map(result=>{
+      return {
+        url: result.value ? result.value.url:"error", 
+        status:result.value ? result.value.status:"error", 
+        text:result.value ? result.value.statusText:"error"
+      }
+    })
+    console.log(final)
+    return final
+  })
+}
+allLinks()
 
 
 module.exports = indexFile;
