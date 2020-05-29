@@ -1,7 +1,7 @@
-function mytest(nombre) {
-    return `Hola ${nombre}`
-}
+const readMdFile = require('../index.js');
 
-test('Saludo', () => {
-    expect(mytest('Karina')).toBe('Hola Karina')
+describe('readMdfile', () => {
+    it('soy una función', () => {
+        expect(typeof readMdFile).toBe('function');
+    })
 })

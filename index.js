@@ -1,12 +1,34 @@
+#!/usr/bin/env node
+
 let fs = require('fs');
+const path = require('path');
+let file;
 
-let index = process.argv.indexOf('--file')
-let uri = process.argv[index + 1];
-/* console.log(process.argv[3]); */
+const readFile = () => {
+    let fileFlag = process.argv.indexOf('--file');
+    if (fileFlag < 0) return console.log('Ingresa --file seguido de una ruta válida')
+    file = process.argv[fileFlag + 1];
+    let string = fs.readFileSync(file, 'utf-8');
+    return string;
+}
+readFile();
 
-let string = fs.readFileSync(uri, 'utf-8');
 
-console.log(process.argv);
-console.log('index: ', index);
-console.log('uri: ', uri);
-console.log('Texto en el archivo: ', string);
+const validateMD = () => {
+    let findMd = path.extname(file);
+    if (findMd === '.md') {
+        console.log('This is a .md file');
+        return file;
+    }
+    else {
+        console.log('This isn\'t a .md file');
+    }
+}
+console.log(validateMD());
+console.log(readFile());
+
+const getLinks = () => {
+
+}
+
+
