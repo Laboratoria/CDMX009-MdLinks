@@ -20,8 +20,8 @@ if (path.isAbsolute(userPath)) {
 }
 
 if (userPath.includes('.')) {
-  if ((process.argv[3] === '-validate' && process.argv[4] === '-stats')
-  || (process.argv[3] === '-stats' && process.argv[4] === '-validate')) {
+  if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
+  || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
     mDLinks.mdLinks(userPath, { validate: true })
       .then((links) => {
         const stats = mDLinks.stats(links, { validate: true });
@@ -29,7 +29,7 @@ if (userPath.includes('.')) {
         console.log(chalk.bold.blue('Unique:'), stats.unique, 'links');
         console.log(chalk.bold.red('Broken:'), stats.broken, 'links');
       });
-  } else if (process.argv[3] === '-validate') {
+  } else if (process.argv[3] === '--validate') {
     mDLinks.mdLinks(userPath, { validate: true })
       .then((links) => {
         if (links.length > 0) {
@@ -38,7 +38,7 @@ if (userPath.includes('.')) {
           console.log(chalk.bold.red('No links were found in your file.'));
         }
       });
-  } else if (process.argv[3] === '-stats') {
+  } else if (process.argv[3] === '--stats') {
     mDLinks.mdLinks(userPath, { validate: false })
       .then((links) => {
         const stats = mDLinks.stats(links, { validate: false });
@@ -59,8 +59,8 @@ if (userPath.includes('.')) {
   mDLinks.readDir(userPath)
     .then((files) => {
       if (files.length > 0) {
-        if ((process.argv[3] === '-validate' && process.argv[4] === '-stats')
-        || (process.argv[3] === '-stats' && process.argv[4] === '-validate')) {
+        if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
+        || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
           files.forEach((file) => {
             mDLinks.mdLinks(file, { validate: true })
               .then((links) => {
@@ -70,7 +70,7 @@ if (userPath.includes('.')) {
                 console.log(chalk.bold.red('Broken:'), stats.broken, 'links');
               });
           });
-        } else if (process.argv[3] === '-validate') {
+        } else if (process.argv[3] === '--validate') {
           files.forEach((file) => {
             mDLinks.mdLinks(file, { validate: true })
               .then((links) => {
@@ -81,11 +81,11 @@ if (userPath.includes('.')) {
                 }
               });
           });
-        } else if (process.argv[3] === '-stats') {
+        } else if (process.argv[3] === '--stats') {
           files.forEach((file) => {
             mDLinks.mdLinks(file, { validate: false })
               .then((links) => {
-                const stats = MDLinks.stats(links, { validate: false });
+                const stats = mDLinks.stats(links, { validate: false });
                 console.log(chalk.bold.green('Total links:'), stats.total);
                 console.log(chalk.bold.blue('Unique links:'), stats.unique);
               });
@@ -103,8 +103,6 @@ if (userPath.includes('.')) {
       }
     })
     .catch((error) => {
-      console.log('no such directory found');
+      console.log(error, 'no such directory found');
     });
-} 
-
-
+}
