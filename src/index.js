@@ -61,6 +61,7 @@ const urlStatus = async (urls) => {
                 console.log(link); 
                 //console.log(broken)
             }
+            
             count ++
             if(count == urls.length){
                 stats(urls);
@@ -74,21 +75,24 @@ const urlStatus = async (urls) => {
 }
 
 const findUrl = (data,file) =>{
-    let regExp = /\[[\w\s]*\]\(https?:\/\/[\S]*/g;
+    let regExp =  /\[(.*?)\]\(https?:\/\/[\S]*/g;  // /\[[\w\s]*\]\(https?:\/\/[\S]*/g;
     let urlArray = data.match(regExp);
     let urls = [];
     //console.log(urlArray);
     //console.log(file);
+    
     urlArray.forEach((elem)=>{
-        let urlElems =  elem.split(/\[|\]\(|\)/);
+        let urlElems =  elem.split(/\]\(/);
         //console.log(urlElems);
+        let urlText = urlElems[0].split(/\[/);
+        let urlHref = urlElems[1].split(/\)/)   
+        
         urls.push({
-            "href": urlElems[2],
-            "text": urlElems[1],
+            "href": urlHref[0],
+            "text": urlText[1],
             "File": file
         })
     })
-
     console.log(urls);
     console.log(`Total url: ${urls.length}`);
        
