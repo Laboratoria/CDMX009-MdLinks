@@ -21,7 +21,8 @@
     "argvd": "^1.0.0",
     "figlet": "^1.4.0",
     "inquirer": "^7.1.0",
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0"
   },
   "directories": {
     "test": "test"
