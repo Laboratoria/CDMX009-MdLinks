@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "argvd": "^1.0.0",
-    "enquire": "0.0.2"
+    "enquire": "0.0.2",
+    "markdown-it": "^11.0.0"
   },
   "devDependencies": {
     "jest": "^26.0.1"
