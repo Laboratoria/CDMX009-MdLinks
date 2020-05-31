@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/marielcarrillo/CDMX009-MdLinks/issues"
   },
-  "homepage": "https://github.com/marielcarrillo/CDMX009-MdLinks#readme"
+  "homepage": "https://github.com/marielcarrillo/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "jest": "^26.0.1"
+  }
 }
