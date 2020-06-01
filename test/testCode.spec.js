@@ -2,23 +2,24 @@
 const read= require('../utils/readFile.js')
 const findLinks= require('../utils/findLinks')
 const linksFunctions= require('../utils/validateAndStatusLinks')
+const mdLinks= require('../index.js')
 
-describe('function to read files', () => {
-    it('should be a function', () => {
-      expect(typeof read).toBe('function');
-    });
-    it ('should return a buffer object', async ()=>{
-      let results= await read( 'C:/Users/danyc/laboratoria/CDMX009-MdLinks/test/archivo.md');
-      expect(typeof results).toBe('object');
-    })
-    
-  });
-
-describe('this function finds links that exisit inside of a file', () =>{
-  it('should be a function', ()=>{
-    expect(typeof findLinks).toBe('function');
-  });
-})
+//describe('function to read files', () => {
+//    it('should be a function', () => {
+//      expect(typeof read).toBe('function');
+//    });
+//    it ('should return a buffer object', async ()=>{
+//      let results= await read( 'C:/Users/danyc/laboratoria/CDMX009-MdLinks/test/archivo.md');
+//      expect(typeof results).toBe('object');
+//    })
+//    
+//  });
+//
+//describe('this function finds links that exisit inside of a file', () =>{
+//  it('should be a function', ()=>{
+//    expect(typeof findLinks).toBe('function');
+//  });
+//})
 
 describe('shoul return alll the links', () => {
  
@@ -38,7 +39,7 @@ describe('this functión calls other functions', () =>{
     expect(typeof linksFunctions.getStatusLink).toBe('function');
   });
   it('should return a message  when it has wrong the first option', async () =>{
-    commandLine='--validat'
+    let commandLine='--validat'
     let goTo= await linksFunctions.getStatusLink('C:/Users/danyc/laboratoria/CDMX009-MdLinks/test/someLnks.md', commandLine);
     expect(goTo).toMatch("please type a valid option");
   })
@@ -66,9 +67,32 @@ describe('this function validate the links', () =>{
     })
   })
 
+//describe('this function recibe initial intructions and call all the other functions')
 
+describe('this function is the controler, is the initial way', () =>{
+  it ('shold be a function', () =>{
+    expect(typeof mdLinks.allTheLinks).toBe('function')
+  })
+})
 
+describe('this function read files ', () =>{
+  it ('shold be a function', () =>{
+    expect(typeof mdLinks.readFile).toBe('function')
+  })
+  it ('should return a message', () =>{
+    let uri= 'C:/Users/danyc/laboratoria/CDMX009-MdLinks/test/someLnks.js';
+    let line1= '--s'
+    let line2='--v'
 
+    expect(mdLinks.readFile(uri, line1, line2)).toMatch('you need a file with .md extention o you missed the flag --file before your path :) ')
+  })
+})
+
+describe('this function read a directory', () =>{
+  it ('shold be a function', () =>{
+    expect(typeof mdLinks.readDirectory).toBe('function')
+  })
+})
 
 
   
