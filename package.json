@@ -1,0 +1,32 @@
+{
+  "name": "CDMX009-MdLinks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "fetch": "^1.1.0",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.1.0",
+    "jest": "^25.5.4",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanyaxel/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanyaxel/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/vanyaxel/CDMX009-MdLinks#readme"
+}
