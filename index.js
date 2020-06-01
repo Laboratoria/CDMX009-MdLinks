@@ -5,13 +5,14 @@
 const findLinks = require('./utils/findLinks')
 const linksFunctions = require('./utils/validateAndStatusLinks')
 const fs = require('fs')
-const path = require('path')
 const chalk = require('chalk')
 
 const readDirectory=(uri, comandLine4, comandLine5)=>{
     let direc = fs.readdirSync(uri)
     direc.forEach(elemnt => {
-        let newF = path.extname(elemnt)
+       
+        let lastmd = elemnt.lastIndexOf(".md");
+        let newF = elemnt.slice(lastmd);
         if (newF === '.md') {
             let newPath = path.join(uri, elemnt)
             let expR = /\\/gi;
