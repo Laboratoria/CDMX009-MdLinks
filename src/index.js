@@ -67,9 +67,11 @@ if (userPath.includes('.')) {
       if (files.length > 0) {
         if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
         || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
+          spinner.start();
           files.forEach((file) => {
             mDLinks.mdLinks(file, { validate: true })
               .then((links) => {
+                spinner.stop();
                 const stats = mDLinks.stats(links, { validate: true });
                 console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
                 console.log(chalk.bold.blue('Unique links:'), stats.unique);
@@ -77,10 +79,12 @@ if (userPath.includes('.')) {
               });
           });
         } else if (process.argv[3] === '--validate') {
+          spinner.start();
           files.forEach((file) => {
             mDLinks.mdLinks(file, { validate: true })
               .then((links) => {
                 if (links) {
+                  spinner.stop();
                   console.log(links);
                 } else {
                   console.log(chalk.bold.red('No links were found in your file.'));
