@@ -1,12 +1,13 @@
 {
-  "name": "cdmx009-mdlinks",
+  "name": "verobega/md-links",
   "version": "1.0.0",
   "description": "## Preámbulo",
   "main": "index.js",
   "dependencies": {
     "argvd": "^1.0.0",
     "inquirer": "^7.1.0",
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {

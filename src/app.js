@@ -1,3 +1,137 @@
+#!/usr/bin/env node
+'use strict';
+let fs = require('fs');
+let path = require('path');
+let chalk = require('chalk');
+let fetch = require('node-fetch');
+
+let uri = process.argv[2]
+let lengthProcess = process.argv.length
+let stats = process.argv[3];
+
+
+const control = (arrLinks) => {
+    if (lengthProcess === 3) {
+        arrLinks.forEach(link => {
+            console.log(chalk`{blue${uri} ${link.slice(0, 50)}}`);
+        })
+    } if (stats === '--stats' || stats === '--s') {
+        statsBasic(arrLinks)
+    } if (stats === '--validate' || stats === '--val') {
+        validation(arrLinks)
+
+    }
+}
+
+function getPath() {
+    let index = process.argv.indexOf("--file")
+    if (index < 0) { return log(chalk.bgRed("Por favor ingresa el argumento --file seguido de la ruta del archivo Markdown.")) }
+    let uri = process.argv[index + 1]
+    let extension = path.extname(uri)
+    // log(chalk.black.bgYellowBright("extension:", extension))
+    if (extension != '.md') {
+        log(chalk.bgRed("Por favor ingresa la ruta de un archivo Markdown (extensión .md)"));
+    } else {
+        return uri
+    }
+}
+
+uri = getPath();
+
+
+const detectLinks = (uri) => {
+    let fileMd = fs.readFileSync(uri, 'utf-8')
+    let newFile = fileMd.replace(/[\(\)]/g, " ");
+    let space = " "
+    let arrNewFile = newFile.split(space)
+    let arrLinks = arrNewFile.filter(text => text.includes('http'))
+
+    control(arrLinks)
+    let objectLinks = { links: arrLinks, path: uri, }
+    return objectLinks
+}
+
+
+
+function validateLinks() { 
+    let promises = matches.map(element=>fetch(element))
+    return Promise.allSettled(promises)
+    .then(res=>{
+      let final = res.map(result=>{
+        return {
+          url: result.value ? result.value.url:"error", 
+          status:result.value ? result.value.status:"error", 
+          text:result.value ? result.value.statusText:"error"
+        }
+      })
+      console.log(final)
+      return final
+    })
+  }
+  validateLinks();
+
+let newArr = []
+let counter = 0
+function statsLinks(result, totalLinks, arrContent) {
+    let totalArr = newArr.length + 1
+    newArr.push(result.working)
+    if (totalLinks === totalArr) {
+        let filtBroke = newArr.filter(news => news === 'It is not working')
+        counter = counter + filtBroke.length
+        let totalBasic = arrContent.length
+        let uniqueLinks = arrContent.filter(unique);
+        let howManyUnique = uniqueLinks.length
+
+        function unique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+        console.log(chalk.italic('Validation statistics:'));
+        console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
+        console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
+        console.log(chalk`{bold Broken:} {cyan ${counter}}`);
+        let objStatus = { Total: totalBasic, Unique: howManyUnique, Broken: counter }
+        return objStatus
+    }
+
+}
+
+function statsBasic(arrLinks) {
+    let totalBasic = arrLinks.length
+    console.log(chalk.italic('Basic statistics:'));
+    console.log(chalk`{bold Total:} {cyan ${totalBasic}}`);
+    let uniqueLinks = arrLinks.filter(unique);
+    let howManyUnique = uniqueLinks.length
+    console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
+
+    function unique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+}
+getPath();
+
+
+function mdLinks(route, options) {
+    if (options) {
+        let search = detectLinks(route)
+        let links = search.links
+        let file = search.path
+
+        return validation(links, file).then(resp => resp).catch(err => err);
+    } else {
+        return new Promise(resolve => resolve(detectLinks(route)))
+    }
+}
+
+
+module.exports = {
+    mdLinks,
+    getPath,
+    detectLinks,
+    validateLinks,
+    statsLinks
+}
+
+
 
 //--file --validate --links --stats
 
@@ -12,114 +146,5 @@ function readFile() {
     console.log("uri: ", uri)
     console.log("contenido del archivo: ", fileContent)
     readFile();
- */
-
-    'use strict';
-var MarkDownIt = require('markdown-it'),
-    md = new MarkDownIt();
-let fs = require('fs');
-let path = require('path');
-let https = require('https');
-let http = require('http');
-const fetch = require('node-fetch');
-
-
-//find file
-function lookingForFile() {
-    let flag = process.argv.indexOf('--read')
-    let uri = process.argv[flag + 1]
-    console.log(uri);
-    let extUri = path.extname(uri)
-    if (extUri != '.md') {
-        console.log('Por favor ingresa un archivo con extensión .md');
-    } else {
-        readFile(uri)
-    }
 }
-
-//read file
-function scanFile(uri) {
-    let fileMd = fs.scanFileSync(uri, 'utf-8')
-    searchLinks(fileMd, uri)
-}
-
-
-//Get links
-function getLinks(fileMd, uri) {
-    let expRegURL = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
-    let newFile = fileMd.replace(/[\(\)]/g, " ");
-    let expRegText = /(?<=\[).+?(?=\])/
-    let space = " "
-    let arrNewFile = newFile.split(space)
-    let links = arrNewFile.filter(text => text.includes('http'))
-    statsBasic(links)
-   
-
-    arrNewFile.forEach(elementFile => {
-        let trueLink = expRegURL.test(elementFile);
-        //let trueLink = elementFile.match(expRegURL);
-        let textLink = elementFile.match(expRegText)
-        //let textLink = expRegText.exec(elementFile);
-        
-
-        if (textLink != null) {
-            textLink.forEach(text => {
-               
-                let textUrls = text
-                console.log(textUrls);
-            });
-        }
-        if (trueLink === true) {
-            //let arrLinks = [elementFile]
-            let urls = elementFile
-            verifyLinks(urls, uri)
-            console.log(`${uri} ${urls}`);
-        }
-    });
-
-}
-
-//Link's status
-function validation(urls, uri) {
-    fetch(urls)
-        .then(res => {
-            if (res.ok === true) {
-                let result = `${uri} ${urls} work ${res.status}`
-                console.log(result);
-                statsLinks(result)
-            }
-        })
-        .catch(err => {
-            let result = `${uri} ${urls} is broken`
-            console.log(result);
-            statsLinks(result)
-        })
-}
-
-let newArr = []
-
-function statsLinks(result) {
-    let space = " "
-    let cutResult = result.split(space)
-    //newArr.push(cutResult)
-    let statusResult = cutResult.slice(2, 3)
-    newArr.push(statusResult)
-    console.log(newArr);
-}
-
-function statsBasic(links) {
-    console.log(links);
-    let totalBasic = links.length
-    console.log(`Total : ${totalBasic}`);
-    let uniqueLinks = links.filter(unique);
-    let howManyUnique = uniqueLinks.length
-    console.log(`Unique : ${howManyUnique}`);
-    function unique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-}
-
-lookingForFile()
-validation()
-
-
+*/
