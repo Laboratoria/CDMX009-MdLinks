@@ -39,7 +39,7 @@ De igual forma se pueden combinar ambas opciones para tener acceso a toda la inf
 
 ## La lógica que sigeu el proyecto se basa en  en el siguiente diagrama :
 
-![Diagrama](img/flowChart.png)
+![Diagrama](/img/flowChart.png)
 
 
 
