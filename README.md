@@ -1,5 +1,5 @@
 # Markdown Links "dan-mdlinks"
-"dan-mdlinks" es una libreria creada con java script para facilitar la extracción y verificación de los links que se encunetran en un archivo markdow (.md)
+"dan-mdlinks" es una libreria creada con java script para facilitar la extracción y verificación de los links que se encuentran en un archivo markdow (.md)
  
  - Instalar la libreria via `npm install --global dan-mdlinks`
 
@@ -10,7 +10,7 @@ manera a través de la terminal:
 
 `danleonca-mdlinks --file <path-to-file/directory> [options]`
 
-const danmdlinks = require("dan-mdlinks");
+`const danmdlinks = require("dan-mdlinks");`
 
 Para acceder a las opciones puedes ejecutar 
 
