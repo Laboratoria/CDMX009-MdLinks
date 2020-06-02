@@ -82,4 +82,4 @@ Instrucciones :
 y links "rotos".
 
 
-<img src= "images/Captura de Pantalla 2020-06-02 a la(s) 12.23.30.png">
+<img src= "images/Captura de Pantalla 2020-06-02 a la(s) 12.36.10">
