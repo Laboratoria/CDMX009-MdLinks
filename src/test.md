@@ -1,5 +1,6 @@
 # This is a test
 ## It contains some links:
-[facebook](https://www.facebook.com)
-[google](https://www.google.com)
-[fake-link](https://www.fakestlinkever.com)
+- [Facebook](https://www.facebook.com)
+- [google](https://www.google.com)
+- [fake-link](https://www.fakestlinkever.com)
+- [lego error](https://www.lego.com/es-mx/404)

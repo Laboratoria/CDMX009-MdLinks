@@ -66,8 +66,8 @@ if (userPath.includes('.')) {
               .then((links) => {
                 const stats = mDLinks.stats(links, { validate: true });
                 console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
-                console.log(chalk.bold.blue('Unique:'), stats.unique, 'links');
-                console.log(chalk.bold.red('Broken:'), stats.broken, 'links');
+                console.log(chalk.bold.blue('Unique links:'), stats.unique);
+                console.log(chalk.bold.red('Broken links:'), stats.broken);
               });
           });
         } else if (process.argv[3] === '--validate') {
@@ -86,7 +86,7 @@ if (userPath.includes('.')) {
             mDLinks.mdLinks(file, { validate: false })
               .then((links) => {
                 const stats = mDLinks.stats(links, { validate: false });
-                console.log(chalk.bold.green('Total links:'), stats.total);
+                console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
                 console.log(chalk.bold.blue('Unique links:'), stats.unique);
               });
           });
