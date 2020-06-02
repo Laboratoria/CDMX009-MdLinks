@@ -34,12 +34,13 @@ La opcion stats muestra estdísticas simples, donde puedes consultar cuantos lin
     --stats     stats
 
 De igual forma se pueden combinar ambas opciones para tener acceso a toda la información
+
     --s/--stats && --v/--validate  stats & validate
 
 
-## La lógica que sigeu el proyecto se basa en  en el siguiente diagrama :
+## La lógica que sigue el proyecto se basa en  en el siguiente diagrama :
 
-![Diagrama](/img/flowChart.png)
+![Diagrama](utils/img/flowChart.png)
 
 
 
