@@ -25,10 +25,10 @@ const validate = (archive) => {
   return Promise.all(validateLinks);
 };
 
-validate('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
+/*validate('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\file.md')
 .then((res) => console.log (res))
 .catch((err) => console.log("NO SE PUEDE VERIFICAR EL STATUS DE LOS LINKS, VERIFICA TU ARCHIVO"));
-
+*/
 const getLinksStats = (path) => new Promise((resolve) => {
   validate(path)
     .then((response) => {
@@ -37,10 +37,10 @@ const getLinksStats = (path) => new Promise((resolve) => {
       resolve(`Total : ${totalLinks} Unique: ${uniqueLinks}`);
     });
 });
-getLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
+/*getLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
 .then((res) => console.log (res))
 .catch((err) => console.log("NO SE PUEDE HACER CONTEO LINKS, VERIFICA TU ARCHIVO"));
-
+*/
 const getBrokenLinksStats = (path) => new Promise((resolve) => {
   validate(path)
     .then((response) => {
@@ -50,7 +50,7 @@ const getBrokenLinksStats = (path) => new Promise((resolve) => {
 });
 
 
-getBrokenLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
+/*getBrokenLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
  .then((res) => (res));
- 
+ */
 module.exports = { validate, getLinksStats, getBrokenLinksStats };

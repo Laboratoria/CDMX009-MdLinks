@@ -3,8 +3,10 @@ const { validate } = require('./src/options.js');
 
 const mdLinks = (path, options) => new Promise((resolve) => {
   const absolute = absolutePath(path);
+ //console.log(absolute); 
   const checkpath = archiveTrue(absolute);
-   if (checkpath === true && options) {
+  //console.log(checkpath);  
+  if (checkpath === true && options) {
     if (options.validate === true) {
       validate(absolute).then((res) => resolve(res));
     }
@@ -13,6 +15,6 @@ const mdLinks = (path, options) => new Promise((resolve) => {
   }
   //console.log(checkpath); 
 });
-mdLinks('./test/read.md').then((res) => console.log(res));
-
+//mdLinks('./test/final.md', { validate: true }).then((res) => console.log(res));
+//mdLinks('test', { validate: true }).then((res) => console.log(res));
 module.exports = mdLinks; 

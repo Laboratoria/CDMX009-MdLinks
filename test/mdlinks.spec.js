@@ -1,5 +1,5 @@
 const {
-  absolutePath, getDirectory, getLinks,
+  absolutePath, walkDir, getLinks,
 } = require('../src/mdlink.js');
 
 describe('Funtion AbsolutePath', () => {
@@ -16,21 +16,25 @@ describe('Funtion AbsolutePath', () => {
   });
 });
 
-//Test prueba una funcion realizada con una lib para extraer rutas dentro de dir y subdir//
-
-describe('Asincrono - Promise(resolve, reject)', () => {
-  it('Promise(resolve, reject)', () => {
-    expect(typeof getDirectory).toEqual('function');
+// Test prueba una funcion usada para extraer rutas dentro de dir y subdir//
+describe('walkDir ', () => {
+  it('is a function', () => {
+    expect(typeof walkDir).toBe('function');
   });
-  it('Promise- .resolves', () => {
-    const positiveR = ['test/final.md', 'test/out.md', 'test/read.md', 'test/README.md'];
-    return expect(Promise.resolve(positiveR)).resolves.toEqual(positiveR);
-  });
-  it('Promise- .reject', () => {
-    const negativeR = ['Error'];
-    return expect(Promise.reject(negativeR)).rejects.toEqual(negativeR);
+  it('Deberia retornar un array de strings', () => {
+    const filesOutput = [
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\mdlinks.spec.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\other.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\prueba.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\test.md'];
+    expect(walkDir('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test')).toEqual(filesOutput);
   });
 });
+
 
 // Test funcion extraer links //
 

@@ -37,3 +37,4 @@ if (argv.length) {
       }));
   }
 }
+//mdLinks('./test/final.md', { validate: true }).then((res) => console.log(res));
