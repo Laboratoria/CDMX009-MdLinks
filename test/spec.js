@@ -23,20 +23,4 @@ describe('validarLink', () => {
 
 
 
-// describe("validateLinks", () => {
-//   it("Deberia de ser una funcion", async () =>{
-//     let espera= await validateLinks();
-//     expect(typeof espera).toEqual(Object)
-//   })
-// })
-
-// describe("Test de lo de ayer de bliss", () => {
-//   it("Test getResult", async () => {
-//     let theresultado = await getResult();
-//     expect(typeof theresultado).toBe("number");
-//   });
-// });
-
-
-
 
