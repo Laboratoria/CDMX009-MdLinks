@@ -1,6 +1,5 @@
-let path = require('path');
-let fs = require('fs');
-//const fetch = require('node-fetch');
+const path = require('path');
+const fs = require('fs');
 let { fileRoute, searchLinks, verifyLinks, statsLinks } = require('../src/app.js')
 
 describe('fileRoute', () => {
@@ -16,8 +15,8 @@ describe('fileRoute', () => {
 
     test('test file different to .md extension', () => {
         let uri = 'links.js'
-        let file = path.extname(uri)
-        expect(file).toEqual(expect.not.stringMatching('.md'))
+        let fileExtension = path.extname(uri)
+        expect(fileExtension).toEqual(expect.not.stringMatching('.md'))
     })
 })
 
@@ -28,7 +27,6 @@ describe('searchLinks', () => {
         expect(typeof searchLinks).toBe('function')
     })
     test('searchLinks turns file to string, and should return an object with links ', () => {
-        //let string = 'This is an _example_ markdown file used in the tests... [Markdown](https://es.wikipedia.org/wiki/Markdown)'
         let object = {
             links: ['https://es.wikipedia.org/wiki/Markdown', 'https://nodejs.org/es/', 'https://www.npmjs.com/', "http://this-should-not-work.local/oh/my/god",
                 "https://www.appleasadfffd.com/mx/"],
@@ -54,23 +52,18 @@ describe('verifyLinks', () => {
         let result = [{
             href: 'https://es.wikipedia.org/wiki/Markdown',
             status: '200 ok',
-            file: 'src/file.md'
+
         },
         {
             href: 'https://nodejs.org/es/',
             status: '200 ok',
-            file: 'src/file.md'
+
         },
 
         ]
         return verifyLinks(mockLink).then(res => {
             expect(typeof res).toBe('object')
         })
-        /* return verifyLinks(mockLink).then(res => {
-            expect(res).toBe(result)
-        }) */
-
-
     })
 })
 
@@ -89,7 +82,6 @@ describe('statsLinks', () => {
     })
     test('should turns validate statistics', () => {
         expect(statsLinks(resVal, total, arrLinks)).toEqual(stats)
-        // '\n' + 'Validation statistics:' + '\n' + 'Total: 1' + '\n' + 'Unique: 1' + '\n' + 'Broken: 1'
     })
 
 })

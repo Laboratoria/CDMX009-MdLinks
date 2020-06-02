@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-let fs = require('fs');
-let path = require('path');
+const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 const fetch = require('node-fetch');
 
@@ -52,7 +52,7 @@ const fileRoute = () => {
 
 
 
-const searchLinks = (uri) => {
+let searchLinks = (uri) => {
     let fileMd = fs.readFileSync(uri, 'utf-8')
     let newFile = fileMd.replace(/[\(\)]/g, " ");
     let space = " "
@@ -66,7 +66,7 @@ const searchLinks = (uri) => {
 
 
 
-const verifyLinks = (arrLinks, route) => {
+let verifyLinks = (arrLinks, route) => {
     let arrContent = arrLinks
     let totalLinks = arrLinks.length
     let arr = arrContent.map(link => new Promise((resolve) => {
@@ -148,7 +148,8 @@ function statsBasic(arrLinks) {
     let howManyUnique = uniqueLinks.length
     console.log(chalk`{bold Unique:} {cyan ${howManyUnique}}`);
 
-    function unique(value, index, self) {//comprueba, si el valor dado es el primero que ocurre, de lo contrario, debe ser un duplicado y no se copiará.
+    //Check if the given value is the first to occur, otherwise it must be a duplicate and will not be copied.
+    function unique(value, index, self) {
         return self.indexOf(value) === index;
     }
 }
@@ -161,7 +162,9 @@ function mdLinks(route, options) {
         let links = search.links
         let file = search.path
 
-        return verifyLinks(links, file).then(resp => resp).catch(err => err);
+        return verifyLinks(links, file)
+            .then(resp => resp)
+            .catch(err => err);
     } else {
         return new Promise(resolve => resolve(searchLinks(route)))
     }
