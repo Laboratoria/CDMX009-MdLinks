@@ -36,7 +36,7 @@ const readDir = path => filehound.create()
   .find();
 
 // validateLinks add the response status from a link.
-// with map, every link gets it's status and text status.
+// with map, every link gets its status code and status text.
 
 const validateLinks = links => Promise.all(links.map(link => new Promise((resolve, reject) => {
   fetch(link.href)
