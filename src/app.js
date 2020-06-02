@@ -20,7 +20,7 @@ function getLinks(string, link, regExp) {
     regExp = /\bhttps?:\/\/\S+/gi;
     let myArr = [];
     while ((link = regExp.exec(string)) !== null) {
-        myArr.push({ link: link[0] }); // si pongo una variable y la retorno no arroja nada?
+        myArr.push(link[0]); // si pongo una variable y la retorno no arroja nada?
     }
     validateLinks(myArr)
     //console.log(myArr)
