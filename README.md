@@ -23,8 +23,15 @@ Se creó con Nodejs y [chalk](https://www.npmjs.com/package/chalk).
 
 ## ¿Qué hace?
 
-La librería reconoce los archivos .md con la flag ####"--file" y el nombre del archivo a revisar. De no entregarle uno con ese formato aparece un mensaje donde te lo solicita.
-Cuando tiene el archivo correspondiente puedes pedirle que te entregue el status de cada link encontrado con la flag ####"--stats" o la validación de estos con la flag ####"--validate" o ambos uniendo las flags ####"--validate--stats".
+La librería reconoce los archivos .md con la flag
+#### --file 
+y el nombre del archivo a revisar. De no entregarle uno con ese formato aparece un mensaje donde te lo solicita.
+Cuando tiene el archivo correspondiente puedes pedirle que te entregue el status de cada link encontrado con la flag 
+#### --stats 
+o la validación de estos con la flag 
+#### --validate 
+o ambos uniendo las flags 
+#### --validate--stats
 
 ![stats](Imágenes/stats.png)
 
@@ -34,7 +41,8 @@ Cuando tiene el archivo correspondiente puedes pedirle que te entregue el status
 
 ## ¿Cómo lo instalo?
 
-
+Abre tu terminal en el proyecto o repositorio donde quieres instalar la librería y lo puedes instalar así:
+#### npm i cdmx009-mdlinks
 
 ## Objetivos de aprendizaje
 
@@ -42,32 +50,32 @@ Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ ] Uso de callbacks
+- [✨] Uso de callbacks
 - [ ] Consumo de Promesas
 - [ ] Creacion de Promesas
-- [ ] Modulos de Js
+- [✨] Modulos de Js
 - [ ] Recursión
 
 ### Node
 - [ ] Sistema de archivos
-- [ ] package.json
-- [ ] crear modules
-- [ ] Instalar y usar modules
-- [ ] npm scripts
-- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [✨] package.json
+- [✨] crear modules
+- [✨] Instalar y usar modules
+- [✨] npm scripts
+- [✨] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [ ] Testeo de tus funciones
+- [✨] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+- [✨] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [ ] Modularización
-- [ ] Nomenclatura / Semántica
-- [ ] Linting
+- [✨] Modularización
+- [✨] Nomenclatura / Semántica
+- [✨] Linting
 
