@@ -7,6 +7,7 @@ let uri = process.argv[index + 1];
 let options = process.argv[index + 2];
 let data = fs.readFileSync(uri, 'utf8')
 
+
 const readAndValidMarkDown = (uri) => {
   const fileExtencion = path.extname(uri);
   if (fileExtencion != '.md') {
@@ -22,9 +23,9 @@ const findLinks = (data) => {
   const toString = data.toString();
   const links = toString.match(rExLink);
   const text = toString.match(rExText);
-  var myReturnData = [];
+  let myReturnData = [];
   for (let i = 0; i < links.length; i++) {
-    var myLinkData = {
+    let myLinkData = {
       text: text[i],
       link: links[i],
       file: uri,
@@ -39,7 +40,7 @@ const findLinks = (data) => {
 // //function  fetch response status
 const readPathStatus = () => {
   if (readAndValidMarkDown(uri) === true) {
-    let myProcData = findLinks(data)    
+    let myProcData = findLinks(data)
     let erros = 0;
     for (let i = 0; i < myProcData.length; i++) {
       fetch(myProcData[i].link).then(response => {
