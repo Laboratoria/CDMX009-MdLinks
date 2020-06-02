@@ -37,16 +37,10 @@ function getLinks(fileContent, uri) {
   let deleteBrackets = fileContent.replace(/[\(\)]/gim, " "); //aqui quitamos los parentesis y ponemos espacios
   let matchMd = deleteBrackets.match(regexMarkdown); //trae los que coincidan con etiquetas y links
   let matchURL = deleteBrackets.match(regexURL); //trae solo los links
-  //console.log("etiquetas y links ",matchMd)
-  //console.log("long l&l ", matchMd.length + " markdown")
-  //console.log("match url ", matchURL);
-  //console.log("log match url ", matchURL.length+ " links")
-  //consultLinks(matchURL,regexURL,uri)
-  //console.log(links)
-  consultLinks(matchMd, uri, regexURL, regexLabel);
+   consultLinks(matchMd, uri, regexURL, regexLabel);
 }
 
-async function consultLinks(matchMd, uri, regexURL, regexLabel) {
+function consultLinks(matchMd, uri, regexURL, regexLabel) {
   let arrayN = [];
   matchMd.forEach((element) => {
     let links = element.match(regexURL);
@@ -58,44 +52,43 @@ async function consultLinks(matchMd, uri, regexURL, regexLabel) {
     };
     arrayN.push(newObjet);
   });
- 
-  let validateLinks = process.argv.indexOf("--validate");
-  let statsLinks = process.argv.indexOf("--stats");
 
-  if (validateLinks > 0 || statsLinks>0) {
-    getInfoLink(arrayN,validateLinks, statsLinks);
-    //validAndStatsLinks
+  let flagValidate = process.argv.indexOf("--validate");
+  let flagStats = process.argv.indexOf("--stats");
+
+  if (flagValidate > 0 || flagStats > 0) {
+    getInfoLink(arrayN, flagValidate, flagStats);
+    
   } else {
     //consultLinks(matchMd, uri, regexURL, regexLabel)
-   return console.log(
+    return console.log(
       arrayN,
       "\nSe encontraron ",
       arrayN.length,
       " links en el archivo"
     );
-     
   }
 }
 
-function getInfoLink(arrayN,validateLinks,statsLinks) {
+function getInfoLink(arrayN, flagValidate, flagStats) {
+  //console.log("Los links: ", arrayN)
+  let succes =0;
+  let broke =0;
   let arrayS = [];
   let arrFail = [];
   let links = arrayN.map((link) => {
     fetch(link.href)
       .then((res) => {
         let object = {
+          // si esta ok o fail
           href: res.url,
           label: link.label,
           status: res.status,
           statusText: res.statusText,
         };
         arrayS.push(object);
-        if (validateLinks>0 || statsLinks>0){
-          if(arrayN.length === arrayS.length+arrFail.length){
-             validAndStatsLinks(arrayS,arrayN,arrFail,validateLinks,statsLinks)
-          }
-          
-      }        
+                
+        newValidate(object, flagValidate);
       })
 
       .catch((err) => {
@@ -105,83 +98,54 @@ function getInfoLink(arrayN,validateLinks,statsLinks) {
         }
         arrFail.push(objetFail);
 
-        
-      });
-      
+        if(arrayS.length +arrFail.length === arrayN.length){
+          newStats(flagStats,arrayN,arrFail,arrayS,succes,broke);
+        }
+            });
+        });
+}
 
-    });
-  
+function newValidate(object, flagValidate) {
+   if (flagValidate > 0) {
+    if (object.status === 200) {
+      return console.log(`${object.label}`, chalk.bgBlue(`✔ ${object.statusText}`));
+    } else {
+      return console.log(`${object.label}`, chalk.bgRed(`X ${object.statusText}`));
+    }
+  }
+}
+
+function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
+  if (flagStats > 0) {
    
-
-} 
-
-
-
-function validAndStatsLinks(arrayS, arrayN, arrFail,validateLinks,statsLinks) {
-  console.log(validateLinks)
-  console.log(statsLinks)
-  if(validateLinks>0 && statsLinks>0){
-    console.log("estan los 2")
-    let succes = 0;
-  let broke =0;
-  let fail = 0;
-  const statusOk = (arrayS)=>{
-    arrayS.filter((linkOK) => {
-    if (linkOK.status===200){
-      succes++;
-      return console.log( `${linkOK.label}`,chalk.bgBlue(`✔ ${linkOK.statusText}`))
-    }  
-  });
-}
-  const statusNotFound = (arrayS)=>{
-    arrayS.filter((linkFail) => {
-    if(linkFail.status ===404){
-      broke++;
-      return console.log(`${linkFail.label}`, chalk.bgRed(`X ${linkFail.statusText}`));
-    }
-  });
-}
-/* 
-   let noConnect = arrFail.filter((failed)=>{
-    if(failed.reason === 'connect ECONNREFUSED 80.93.92.146:443'){
-      fail++;
-      return console.log("Error de conexión :", chalk.bgYellow(chalk.black(`${failed}`)));
-
-    }
-  })  */
-  //console.log(arrFail)
-  let total = arrayN.length;
-  let totalNoConnect = arrFail.length;
- 
-  console.log(succes," ok");
-  console.log(broke," fail");
-  console.log(totalNoConnect,"error conect");
-  console.log(total," totall");
-  
-  }
-    else if(statsLinks>0){
-      console.log("stadisticasss")
-      console.log(succes," ok");
-      console.log(broke," fail");
-      console.log(totalNoConnect,"error conect");
-      console.log(total," totall");
+       arrayS.map((link) => {
+      if (link.status===404){
+        broke++;
+      }else{
+          succes++;
+      }
+    });
     
-  }
-  else if(validateLinks>0){
-    console.log("validarrrr")
-    statusOk()
-    statusNotFound()
-  }
-  /* */
- 
-  
+    console.log("Links totales en el archivo",arrayN.length)
+    console.log("Links validados ",arrayS.length)
+    console.log("Links con error de conexion en fetch",arrFail.length)
+    console.log("status 200 ", succes)
+    console.log("404", broke)
+
+    if( arrayN.length ===arrFail.length+arrayS.length){
+      console.log("vamo bien")
+      return console.log(chalk.bgCyan((chalk.black(`Links Totales: ${arrayN.length}\n`)), 
+                         chalk.bgGreen(chalk.black(`Links trabanjando de manera correcta: ${succes} \n`)),
+                         chalk.bgYellow(chalk.black(`Error de conexion con fecth: ${arrFail.length} \n`)),
+                         chalk.bgRed(chalk.black((`Links no encontrados : ${broke} \n`)))))
+      
+    }
+   
 }
-
-
+}
 
 findFile();
 
 mdLinks.findFile = findFile;
 mdLinks.readFiles = readFiles;
-
 module.exports = mdLinks;
