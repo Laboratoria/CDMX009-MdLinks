@@ -103,3 +103,30 @@ function promiseResolved(res, link) {
 
 
 }
+
+
+// validacion y stas de bliss edith
+/* let validated = [];
+function validateLinks(links) {
+    let promises = links.map(link => fetch(link)
+        .then(res => {
+            validated.push(({ url: link, status: res.status, boolean: true }))
+        })
+        .catch(err => validated.push(({ url: link, status: 'Error', text: err.status, boolean: false }))))
+
+    return Promise.all(promises)
+        .then(results => {
+            console.log('total: ', validated.length);
+            console.log('Malos: ', validated.reduce((acc, el) => {
+                if (el.status === 404 || el.status === 'Error') return acc += 1;
+                return acc;
+            }, 0))
+            console.log('Buenos: ', validated.reduce((acc, el) => {
+                if (el.status !== 404)
+                    return acc += 1;
+                return acc;
+
+            }, 0))
+            return results;
+        })
+} */
