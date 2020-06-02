@@ -3,6 +3,7 @@
 // some fancy modules just because
 const chalk = require('chalk');
 const figlet = require('figlet');
+const ora = require('ora')
 const path = require('path');
 const mDLinks = require('./md-links.js');
 
@@ -14,6 +15,7 @@ console.log(chalk.bold.cyan(figlet.textSync('md-links', {
 
 
 let userPath = process.argv[2];
+const spinner = ora();
 
 if (path.isAbsolute(userPath)) {
   userPath = path.resolve(userPath);
@@ -22,17 +24,21 @@ if (path.isAbsolute(userPath)) {
 if (userPath.includes('.')) {
   if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
   || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
+    spinner.start();
     mDLinks.mdLinks(userPath, { validate: true })
       .then((links) => {
+        spinner.stop();
         const stats = mDLinks.stats(links, { validate: true });
         console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
         console.log(chalk.bold.blue('Unique:'), stats.unique, 'links');
         console.log(chalk.bold.red('Broken:'), stats.broken, 'links');
       });
   } else if (process.argv[3] === '--validate') {
+    spinner.start();
     mDLinks.mdLinks(userPath, { validate: true })
       .then((links) => {
         if (links.length >= 0) {
+          spinner.stop();
           console.log(links);
         } else {
           console.log(chalk.bold.red('No links were found in your file.'));

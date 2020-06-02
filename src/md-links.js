@@ -10,7 +10,7 @@ const marked = require('marked');
 
 const readFile = path => new Promise((resolve, reject) => {
   const links = [];
-  fs.readFile(path, 'utf-8', (error, data) => {
+  fs.readFile(path, 'utf8', (error, data) => {
     if (error) {
       reject(error);
     } else {
