@@ -30,11 +30,9 @@
   "dependencies": {
     "cfonts": "^2.8.2",
     "colors": "^1.4.0",
+    "esm": "^3.2.25",
     "inquirer": "^7.1.0",
-    "markdown-it": "^11.0.0",
-    "marked": "^1.1.0",
-    "node-fetch": "^2.6.0",
-    "ora": "^4.0.4"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "jest": "^26.0.1"
