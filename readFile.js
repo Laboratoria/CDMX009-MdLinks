@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const { showLinks } = require('./showLinks');
 
-function readFile(path) {
+function file(path) {
     return fs.readFile(path, 'utf8')
     .then(function(data){
         showLinks(data);
@@ -12,5 +12,5 @@ function readFile(path) {
     })
 }
 module.exports = {
-    readFile,
+    file,
 }
