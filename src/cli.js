@@ -1,6 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
 const chalk = require('chalk');
 const { urlStatus,
     findUrl,
@@ -47,7 +48,7 @@ const choosePath = (files) => {
 
         if(filesOptions.length != 0){
             filesOptions.forEach((file, index)=>{
-                console.log(`${index}: ${file}`);
+                console.log(chalk.yellow(`${index}: ${file}`));
             })
             const readline = require('readline').createInterface({
                 input: process.stdin,
@@ -55,46 +56,45 @@ const choosePath = (files) => {
             });
         
             readline.question(`Select the number of the file path you want: `, (pathIndex) => {
-                console.log(`You chose number:${pathIndex}`);
+                console.log(chalk.cyan(`You chose number:${pathIndex}`));
                 readline.close()
                 mdfile = filesOptions[pathIndex];
                 resolve (mdfile);
             })
            
         }else{
-            console.log('there is not a valid file');
+            console.log(chalk.red('there is not a valid file'));
         }
         
     });    
 }
 
-const readDir = () => {
+const readDir = (userPath) => {
     return new Promise ((resolve, reject) => { 
-        fs.readdir(argv.file, function(err, files) {
+        fs.readdir(userPath, function(err, files) {
             
             if (err) {
                 reject (err) 
-                console.log('Unable to scan directory: ' + err);
+                console.log(chalk.red('Unable to scan directory: ' + err));
             }
             resolve (files);
         })
     });
 }
 
-const validatePath = () => {
-    let pathFile = fs.statSync(argv.file);
+const validatePath = (userPath) => {
+    let pathFile = fs.statSync(userPath);
     if (pathFile.isFile()) {
-        if (path.extname(argv.file) == '.md') {
-            //console.log('Valid md file');
+        if (path.extname(userPath) == '.md') {
             return 'singleFile';
         } else {
-            console.log('This is not a markdown file, please try again');
+            console.log(chalk.red('This is not a markdown file, please try again'));
         }
     }else if (pathFile.isDirectory()) {
         return 'directory';
         
     } else {
-        console.log('Path no valid');
+        console.log(chalk.red('Path no valid'));
     }
 }
 
@@ -103,15 +103,15 @@ const validatePath = () => {
 switch (command) {
     
     case 'validate':
-        console.log(chalk.blue('Option: Validate'));
-        if(validatePath() == 'singleFile'){
+        console.log(chalk.cyan.bold('Option: Validate'));
+        if(validatePath(argv.file) == 'singleFile'){
             let mdfile = argv.file;
             urlStatus(mdfile)
             .then(urls => console.log(urls))
             .catch(e => console.log(e));
-        }else if (validatePath() == 'directory'){
+        }else if (validatePath(argv.file) == 'directory'){
             //console.log('Estoy en dir');
-            readDir()
+            readDir(argv.file)
             .then(files => choosePath(files))
             .then(mdfile => urlStatus(mdfile))
             .then(urls => console.log(urls))
@@ -121,15 +121,15 @@ switch (command) {
         break;
 
     case 'stats':
-        console.log(chalk.blue('Option: Stats'));
-        if(validatePath() == 'singleFile'){
+        console.log(chalk.cyan.bold('Option: Stats'));
+        if(validatePath(argv.file) == 'singleFile'){
             let mdfile = argv.file;
             urlStatus(mdfile)
             .then(urls => stats(urls))
             .catch(e => console.log(e));
-        }else if (validatePath() == 'directory'){
+        }else if (validatePath(argv.file) == 'directory'){
             //console.log('Estoy en dir');
-            readDir()
+            readDir(argv.file)
             .then(files => choosePath(files))
             .then(mdfile => urlStatus(mdfile))
             .then(urls => stats(urls))
@@ -139,8 +139,8 @@ switch (command) {
         break;
 
     case 'validateStats':
-        console.log(chalk.blue('Option: ValidateStats'));
-        if(validatePath() == 'singleFile'){
+        console.log(chalk.cyan.bold('Option: ValidateStats'));
+        if(validatePath(argv.file) == 'singleFile'){
             let mdfile = argv.file;
             urlStatus(mdfile)
             .then(urls => {
@@ -148,15 +148,15 @@ switch (command) {
                 stats(urls)
             })
             .catch(e => console.log(e));
-        }else if (validatePath() == 'directory'){
+        }else if (validatePath(argv.file) == 'directory'){
             //console.log('Estoy en dir');
-            readDir()
+            readDir(argv.file)
             .then(files => choosePath(files))
-            .then(mdfile => {
+            .then(mdfile => urlStatus(mdfile))
+            .then(urls => {
                 console.log(urls)
-                urlStatus(mdfile)
+                stats(urls)
             })
-            .then(urls => stats(urls))
             .catch(e => console.log(e));
         }
         
@@ -166,3 +166,10 @@ switch (command) {
 
 }
 
+
+module.exports = {
+    validatePath,
+    readDir,
+    choosePath,
+    
+}

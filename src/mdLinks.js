@@ -23,7 +23,7 @@ const validateUrl = async(href) => {
         const data = await response.status;
         return data;
     } catch (err) {
-        console.log(err);
+       // console.log(err);
         return err;
     }
 }
@@ -35,18 +35,24 @@ const findUrl = (mdfile) => {
     let urlArray = data.match(regExp);
     let urls = [];
     
-    urlArray.forEach((elem) => {
-        let urlElems = elem.split(/\]\(/);
-        let urlText = urlElems[0].split(/\[/);
-        let urlHref = urlElems[1].split(/\)/)
+    if(urlArray){
+        urlArray.forEach((elem) => {
+            let urlElems = elem.split(/\]\(/);
+            let urlText = urlElems[0].split(/\[/);
+            let urlHref = urlElems[1].split(/\)/)
 
-        urls.push({
-            "href": urlHref[0],
-            "text": urlText[1],
-            "File": mdfile
+            urls.push({
+                "href": urlHref[0],
+                "text": urlText[1],
+                "File": mdfile
+            })
         })
-    })
-    return urls;
+        return urls;
+    }else{
+        console.log(chalk.red('There are not URLs in this file'));
+        return;
+        
+    }    
 }
 
 const urlStatus = (mdFile) => {
@@ -54,27 +60,30 @@ const urlStatus = (mdFile) => {
     return new Promise ((resolve, reject) => {
         let urls = findUrl(mdFile);
         let count = 0;
-        urls.forEach(async(link) => {
-            try {
-                const code = await validateUrl(link.href);
-                if (code == 200 | code == 301) {
-                    link.code = code;
-                    link.status = 'ok';
-                } else {
-                    link.code = code;
-                    link.status = 'broken';
+        if(urls){
+            urls.forEach(async(link) => {
+                try {
+                    const code = await validateUrl(link.href);
+                    if (code == 200 | code == 301) {
+                        link.code = code;
+                        link.status = 'ok';
+                    } else {
+                        link.code = code;
+                        link.status = 'broken';
+                    }
+                    
+                    count++
+                    
+                    if (count == urls.length) {
+                        resolve(urls); 
+                    }
+                } catch (err) {
+                    console.log(err);
+                    console.log('error');
+                    reject(err);
                 }
-                 
-                count++
-                  
-                if (count == urls.length) {
-                    resolve(urls); 
-                }
-            } catch (err) {
-                console.log(err);
-                reject(err);
-            }
-        })
+            })
+        }
     });    
 }
 
