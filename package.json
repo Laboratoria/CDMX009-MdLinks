@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.9.0",
     "babel-jest": "^26.0.1",
+    "chalk": "^4.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.13.1",
