@@ -10,13 +10,13 @@
 El ejecutable de la aplicación es de la de la siguiente
 manera a través de la terminal:
 
-`danmdlinks --file <path-to-file/directory> [options]`
+`dan-mdlinks --file <path-to-file/directory> [options]`
 
 
 
 Para acceder a las opciones puedes ejecutar 
 
-`danmdlinks --help`
+`dan-mdlinks --help`
     --v         validate
     --validate  validate
     --s         stats
