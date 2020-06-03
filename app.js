@@ -3,53 +3,77 @@ const marked = require('marked')
 const path = require('path')
 const fetch = require('node-fetch');
 const colors = require('colors')
+const {validateLinks, linkStats, validateStats } = require('./utils.js') 
 
-let workingLinks = 0;
-let failed = 0; 
+let index = process.argv.indexOf("--file")
+let flags = process.argv
 
-function getArgs(){
-    let index = process.argv.indexOf("--file")
-    if (index<0) return console.log('Please use the --file flag before writing the path of the file (--file example.md)')
+function getUri() {
     let uri = process.argv[index + 1]
     let ext = path.extname(uri)
-    if (ext != '.md') return console.log('File must be a markdown file (.md)'.rainbow)
-    readFile(uri)
+        if (index<0) {
+             console.log('Please use the', '--file'.cyan, 'flag before writing the path of the file (--file example.md)')
+             return false
+        } else if (ext != '.md') {
+             console.log('File must be a markdown file (.md)')
+             return false
+        } else {
+            return uri
+        }
 }
 
-function readFile(uri){
-    let content = fs.readFileSync(uri, 'utf8')
-    let absolutePath = path.resolve(uri)  
-    getLinks(content, absolutePath) 
+function readFile(uri) { 
+
+    if (fs.existsSync(uri)){
+        let content = fs.readFileSync(uri, 'utf8') 
+        return content
+    }else {
+        console.log('File', uri.cyan, 'doesnt exist or is not available in this directory')
+        return false
+    }
 }
 
-function getLinks(content, absolutePath){
+function getLinks(content){
     let linksArr = []
     let renderer = new marked.Renderer() 
     renderer.link = ( href, file, text ) =>{
-        return linksArr.push({
+         linksArr.push({
             href: href,
             title: text.slice(0,50),
-            path: absolutePath
+            path: file
         })
     }
     marked(content, { renderer: renderer })
-    verifyLinks(linksArr)
+    return linksArr
 }
 
-//return 200 OK // 404 NOT FOUND 
-function verifyLinks(links) {
-    const validateLinks = links.map( link => {
-        fetch(link.href)
-            .then( res => {
-                if( res.status === 200 ){
-                    console.log('href: ' + res.url + ' status: ' + res.status + ' OK'.bold + ' ✓'.green)
-                }else {
-                    console.log('href: ' + res.url + ' status: ' + res.status + ' FAILED'.bold +  ' ✕'.red)
-                } 
-            })
-    })
-    return validateLinks
+async function main(){
+    let uri = getUri() 
+        if(uri != false) {
+            let content = readFile(uri)
+            if(content != false){
+                let linksArr = getLinks(content)
+                if (linksArr.length <= 0) return console.log('File', uri.cyan, 'has no links!')
+                if (flags.includes('--validate') && flags.includes('--stats') || flags.includes('--v') &&flags.includes('--s')){
+                    validateStats(linksArr, uri)
+                } else if (flags.includes('--validate') || flags.includes('--v')){
+                    validateLinks(linksArr, uri)
+                } else if (flags.includes ('--stats') || flags.includes('--s')){
+                    linkStats(linksArr, uri)    
+                } else {
+                if(linksArr != '')
+                console.log('Your file ' + uri.cyan  + ' contains the following links: \n')
+                linksArr.forEach(link => {
+                    console.log('   ⋆ '.yellow + link.href + '  ' + link.title)
+                })
+              }       
+            }
+    }
 }
 
-getArgs()
-
+module.exports = { 
+    main,
+    getLinks,
+    linkStats,
+    getUri
+}

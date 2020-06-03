@@ -1,8 +1,14 @@
 {
-  "name": "CDMX009-MdLinks",
+  "name": "keupa-mdlinks",
   "version": "1.0.0",
-  "description": "## Preámbulo",
+  "description": "fetch and validate links from a markdown file ",
   "main": "app.js",
+  "bin": {
+    "md-links": "cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest"
   },
@@ -10,19 +16,27 @@
     "type": "git",
     "url": "git+https://github.com/keupa/CDMX009-MdLinks.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli",
+    "md-links",
+    "npm"
+  ],
+  "author": "Keupa de la Peña",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/keupa/CDMX009-MdLinks/issues"
   },
   "homepage": "https://github.com/keupa/CDMX009-MdLinks#readme",
   "dependencies": {
-    "chalk": "^4.0.0",
+    "cfonts": "^2.8.2",
     "colors": "^1.4.0",
-    "jest": "^26.0.1",
+    "inquirer": "^7.1.0",
     "markdown-it": "^11.0.0",
     "marked": "^1.1.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "ora": "^4.0.4"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }
