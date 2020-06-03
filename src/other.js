@@ -106,7 +106,10 @@ function promiseResolved(res, link) {
 
 
 // validacion y stas de bliss edith
-/* let validated = [];
+
+
+
+let validated = [];
 function validateLinks(links) {
     let promises = links.map(link => fetch(link)
         .then(res => {
@@ -129,4 +132,113 @@ function validateLinks(links) {
             }, 0))
             return results;
         })
+}
+
+
+
+
+/* // funcion validacion y stats
+function validateLinks(links) {
+    let brokenLink = [];
+    let = [];
+    let totalLinks = links.length;
+    //console.log(links); // este console log si plasma el array de links
+    let newArr = links.map(link => new Promise (() =>
+        fetch(link)
+        .then((res) => {
+            if (res.status === 200) {
+                let links200 = res.url;
+                usefulLink.push(links200);
+                statusLink(totalLinks, usefulLink)
+
+                // console.log(chalk.green(links200 + (chalk.bold.green('  x'))));
+                //console.log('strings 200: ', links200)
+                //console.log('esto es lo que pasa', usefulLink.length)
+                return usefulLink;
+            } else {
+                let links = (res.status, link);
+                brokenLink.push(links);
+                statusLink(totalLinks, brokenLink)
+
+                // console.log(chalk.red(links + (chalk.bold.red('  ✔'))));
+                return brokenLink;
+            }
+
+        })
+        .catch((error) => {
+            // console.log(error.message);
+            //console.log(chalk.red(errorFetch + (chalk.bold.red('  x'))));
+            //brokenLinks.push(errorFetch)
+            //console.log(brokenLinks.length)
+        })
+
+    }))
+
+        //usefulLink.push(linksOk);
+    //console.log('prueba-------', usefulLink);
+
+
+//console.log(links)
+
+
+
+//console.log('broken  x  ', brokenLink);
+//console.log('useful    ok', usefulLink.length)
+
+//funciones separadas de validacion y stats
+
+function statusLink(totalLinks, validate) {
+    console.log(validate)
+    /*console.log(validate.length)
+    if (totalLinks === validate.length - 1) {
+        console.log(validate);
+    } else (
+        console.log('no se cumple')
+    ) */
+    //console.log('newArray', newArray.length);
+    //console.log(newArray)
+/* if (totalLinks.length === newArray.length) {
+    //
+} else {
+    //   console.log("no se cumple")
+} */
+    //console.log(newArray.length)
+/*  if (res.status !== 200) {
+     brokenLink.push(res.url);
+     // console.log(chalk.red(brokenLink.url + (chalk.bold.red('  x'))));
+     console.log(brokenLink);
+     return brokenLink;
+ }
+ if (res.status === 200) {
+     //console.log(chalk.green(res.url + (chalk.bold.green('  ✔'))));
+ }
+*/
+
+
+/* function validateLinks(links) {
+    let total = [];
+    let totalLinks = links.length; // este console log si plasma el array de links
+    links.forEach(link => {
+        //console.log(links)
+        return fetch(link)
+            .then((res) => {
+                if (res.status !== 200) {
+                    total.push(res);
+                    //console.log(chalk.red(res.url + (chalk.bold.red('  x'))));
+                    statusLink(res, total)
+                }
+                if (res.status === 200) {
+                    total.push(res);
+                    statusLink(res, total)
+                    //console.log(chalk.green(res.url + (chalk.bold.green('  ✔'))));
+                    //console.log(res)
+                }
+            })
+            .catch((e) => {
+                total.push(e);
+                //console.log('error------------', e)
+                statusLink(e, total)
+            })
+    }
+    )
 } */
