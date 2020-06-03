@@ -56,7 +56,7 @@ let allTheLinks = () => {
     let comandLine4 = process.argv[newFile + 2]
     let comandLine5 = process.argv[newFile + 3]
     
-    if (process.argv[2]!== '--help'){
+    if (process.argv[1]!== '--help'){
     if (!fs.lstatSync(uri).isDirectory()) {
         readFile(uri, comandLine4, comandLine5) 
     } else {
