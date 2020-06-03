@@ -2,7 +2,7 @@
 
 const CFonts = require('cfonts');
 
-let { main } = require("./app.js")
+let { main } = require("./src/app.js")
 
 async function init (){
     let mdTxt =  CFonts.say('.MD LINKS!', {

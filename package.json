@@ -1,8 +1,8 @@
 {
   "name": "keupa-mdlinks",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "fetch and validate links from a markdown file ",
-  "main": "app.js",
+  "main": "./src/app.js",
   "bin": {
     "keupa-mdlinks": "cli.js"
   },
@@ -32,7 +32,6 @@
     "colors": "^1.4.0",
     "esm": "^3.2.25",
     "inquirer": "^7.1.0",
-    "marked": "^1.1.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {

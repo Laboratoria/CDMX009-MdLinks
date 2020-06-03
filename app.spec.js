@@ -1,6 +1,6 @@
 
 const fs = require('fs')
-const { getLinks, getUri } = require("./app.js")
+const { getLinks, getUri } = require("./src/app.js")
 
 
 let content = fs.readFileSync('./test/example1.md', 'utf8')
