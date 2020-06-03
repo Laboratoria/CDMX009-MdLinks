@@ -1,80 +1,90 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
 const fetch = require('node-fetch');
+const chalk = require('chalk');
 let file;
 let string;
+let links;
 let matches = [];
 
 //Find file
 const indexFile = () => {
   let fileFlag = process.argv.indexOf('--file');
+  if (fileFlag > 0) {
   file = process.argv[fileFlag + 1];
   let directory = process.cwd();
   return console.log('file:', file, '\n dir: ', directory);
+  }
+  else{
+    console.log(chalk.red('Ingresa un archivo .md seguido de --file'));
+  }
 }
 indexFile();
 
-//Read file
-const readFile = () => {
-  string = fs.readFileSync(file, 'utf8');
-  return string;
-};
-
-//Find the md path file
-let pathFile = path.extname(file);
-if (pathFile === '.md') {
-  console.log('path:', pathFile);
-  readFile();
-}
-else {
-  console.log('path:', 'this is not a md file');
-}
-//console.log('path:', pathFile) 
-
-//Find links
+//Reg expresions to find links
 const fileLinks = () => {
-  matches = string.match(/\bhttps?:\/\/\S+/gi);
-  console.log('match: ', matches);
+  matches = string
+  .replace(/[{()}]/g, '')
+  .match(/\bhttps?:\/\/\S+/gi);
+  return matches
 }
-fileLinks();
-
-//Validating links
-/* async function allLinks() { // PROHIBIDO USAR THEN
-let array = []
-  
-  matches.forEach(async element => {
-     let res = await fetch(element)
-     let obj = 
-     {url:res.url, 
-      status:res.status, 
-      text:res.statusText}
-      
-     console.log('link', obj)
-     array.push(obj)
-    }) // esperar
-    console.log(array)
-  
+//Read file and find expresions
+const reading = () => {
+  let pathFile = path.extname(file)
+  if (pathFile === '.md') {
+    string = fs.readFileSync(file, 'utf-8');
+    links = fileLinks(string);
+    console.log('path: ', pathFile, '✔');
+    console.log('links: ', links);
+  }
+  else{
+    console.log(chalk.red('path: ', pathFile , '✘', '\nIngresa únicamente archivos .md'));
+  }
 }
-allLinks(); */
+reading();
 
-function allLinks() { 
+
+
+
+
+
+
+
+
+
+function validateLinks() { 
   let promises = matches.map(element=>fetch(element))
   return Promise.allSettled(promises)
   .then(res=>{
     let final = res.map(result=>{
-      return {
+      let okStatus = [];
+      let brokeStatus = [];
+      let obj = 
+       {
         url: result.value ? result.value.url:"error", 
         status:result.value ? result.value.status:"error", 
         text:result.value ? result.value.statusText:"error"
       }
+      //console.log('obj', obj.status)
+      if (obj.status === 404) {
+        brokeStatus.push(obj.url);
+        console.log('broke: ', brokeStatus)
+      }
+      else{
+        okStatus.push(obj.url);
+        console.log('OK: ', okStatus)
+      }
+      return obj
     })
-    console.log(final)
+    console.log('final', final)
+    //console.log('obj', obj.status)
     return final
   })
 }
-allLinks()
+validateLinks()   
+
+
 
 
 module.exports = indexFile;
