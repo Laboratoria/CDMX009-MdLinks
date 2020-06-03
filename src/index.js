@@ -27,7 +27,7 @@ inquirer
 
      const validateMd= (ruta)=>{
         if(path.extname(ruta) === '.md'){
-            console.log('valido')
+            console.log('archivo valido')
             readFile(ruta)
         }else{
             console.log('invalido ingresa un archivo de extensión .md')
@@ -51,19 +51,19 @@ inquirer
       validateLinks(links)
    }
 
-   let linkValid = 0;
-   let linkInvalid = 0;
+
    const validateLinks = (links) =>{
       for(let i=0; i<links.length;i++){
         fetch(links[i])
         .then(res => {
           if(res.status == 200){
-              linkValid +=1;
+            console.log('link valido: ',links[i],res.status )
           }else{
-              linkInvalid +=1;
+           
+            console.log('link invalido: ', links[i] ,res.status )
           }
-          console.log('links validos: ', linkValid)
-          console.log('links invalidos: ', linkInvalid)
+        }).catch(e =>{
+          console.log()
         })
       }
    } 
