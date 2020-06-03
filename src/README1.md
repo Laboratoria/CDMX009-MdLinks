@@ -5,8 +5,7 @@
 
 
 [DataLovers](https://lourdesdiaz11.github.io/CDMX009-Data-Lovers/>)
-[Node.js](https://nodejs.org/es/) 
-[Ubuntu](https://ubuntu.com/) 
+[Node.js](https://nodejs.org/es/) S
 - [Acerca de Node.js - Documentación oficial](https://nodejs.org/es/about/)
 - [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
 - [Node.js http.get - Documentación oficial](https://nodejs.org/api/http.html#http_http_get_options_callback)
@@ -17,4 +16,5 @@
 - [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
 - [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
 - [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
+
 

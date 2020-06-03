@@ -13,16 +13,16 @@ describe('mdLink', () => {
 });
 describe('validatePath', () => {
   it('should validate if path README1.md is a markdown file: true', () => {
-    expect(mdLink.readAndValidMarkDown(pathFiles)).toBe(true);
+    expect(mdLink.isMarkDown(pathFiles)).toBe(true);
     console.log('The path is true', pathFiles);
   })
   it('should validate if path index.js is a markdown file: false', () => {
-    expect(mdLink.readAndValidMarkDown(pathFile)).toBe(false);
+    expect(mdLink.isMarkDown(pathFile)).toBe(false);
     console.log('The path is false', pathFile);
   });
 });
 describe('getLinks', () => {
   it('getLinks in file README1.md should return an array with 3 elements', () => {
-    expect(mdLink.findLinks(data)).toHaveLength(3);
+    expect(mdLink.findLinks(data)).toHaveLength(4);
   });
 });
