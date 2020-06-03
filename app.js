@@ -1,7 +1,10 @@
+#!/usr/bin/env node
+
 let fs = require("fs");
 let path = require("path");
 let fetch = require("node-fetch");
 let chalk = require("chalk");
+
 
 const mdLinks = {};
 
@@ -9,11 +12,12 @@ function findFile() {
   //console.log("process ", process.argv);
   let index = process.argv.indexOf("--file");
   if (index < 0) {
-    return console.log("Necesitas usar la flag --file con un uri valido");
+     return console.log("Necesitas usar la flag --file con un uri valido");
   } else {
     let uri = process.argv[index + 1];
     //console.log("uri ", uri);
     let fileExt = path.extname(uri);
+   
     //console.log("extension ", fileExt);
     if (fileExt === ".md") {
       readFiles(uri);
@@ -21,8 +25,12 @@ function findFile() {
     } else {
       return console.log("por favor ingresa un archivo con esxtensión '.md'");
     }
-  }
+  
+  } 
+  
 }
+
+
 function readFiles(uri) {
   let fileContent = fs.readFileSync(uri, "utf-8");
   //console.log("todo el texto aqui ", fileContent)
@@ -38,6 +46,7 @@ function getLinks(fileContent, uri) {
   let matchMd = deleteBrackets.match(regexMarkdown); //trae los que coincidan con etiquetas y links
   let matchURL = deleteBrackets.match(regexURL); //trae solo los links
    consultLinks(matchMd, uri, regexURL, regexLabel);
+   return matchMd;
 }
 
 function consultLinks(matchMd, uri, regexURL, regexLabel) {
@@ -58,6 +67,7 @@ function consultLinks(matchMd, uri, regexURL, regexLabel) {
 
   if (flagValidate > 0 || flagStats > 0) {
     getInfoLink(arrayN, flagValidate, flagStats);
+   
     
   } else {
     //consultLinks(matchMd, uri, regexURL, regexLabel)
@@ -126,14 +136,15 @@ function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
       }
     });
     
-    console.log("Links totales en el archivo",arrayN.length)
+    
+    /* console.log("Links totales en el archivo",arrayN.length)
     console.log("Links validados ",arrayS.length)
     console.log("Links con error de conexion en fetch",arrFail.length)
     console.log("status 200 ", succes)
-    console.log("404", broke)
+    console.log("404", broke) */
 
     if( arrayN.length ===arrFail.length+arrayS.length){
-      console.log("vamo bien")
+      //console.log("vamo bien")
       return console.log(chalk.bgCyan((chalk.black(`Links Totales: ${arrayN.length}\n`)), 
                          chalk.bgGreen(chalk.black(`Links trabanjando de manera correcta: ${succes} \n`)),
                          chalk.bgYellow(chalk.black(`Error de conexion con fecth: ${arrFail.length} \n`)),
@@ -144,8 +155,17 @@ function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
 }
 }
 
+
+
+
 findFile();
 
 mdLinks.findFile = findFile;
 mdLinks.readFiles = readFiles;
+mdLinks.getLinks = getLinks;
+mdLinks.consultLinks = consultLinks;
+mdLinks.getInfoLink = getInfoLink;
+mdLinks.newValidate = newValidate;
+mdLinks.newStats = newStats;
+
 module.exports = mdLinks;
