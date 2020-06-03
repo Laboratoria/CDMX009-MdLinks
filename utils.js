@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
 const colors = require('colors')
-const ora = require('ora')
 
 function validateLinks (links, uri) {
     const validatedLinks = links.map( link => {

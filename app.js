@@ -75,5 +75,5 @@ module.exports = {
     main,
     getLinks,
     linkStats,
-    getUri
+    readFile
 }
