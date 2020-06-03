@@ -1,13 +1,21 @@
 {
-  "name": "package.json",
-  "version": "1.0.0",
-  "description": "## Preámbulo",
+  "name": "cdmx009-mdlinks",
+  "version": "0.0.1",
+  "description": "\"Find and Validate links inside of a Markdown File\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EstherManrique/CDMX009-MdLinks.git"
+  },
   "author": "Esther Manrique González",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EstherManrique/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/EstherManrique/CDMX009-MdLinks#readme",
   "dependencies": {
     "argvd": "^1.0.0",
     "enquire": "0.0.2",
