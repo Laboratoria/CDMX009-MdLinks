@@ -1,6 +1,6 @@
 {
   "name": "keupa-mdlinks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "fetch and validate links from a markdown file ",
   "main": "app.js",
   "bin": {
