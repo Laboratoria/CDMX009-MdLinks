@@ -21,7 +21,7 @@ if (argv.length) {
         const uniqueLinks = [...new Set(arrobj.map((obj) => obj.href))].length;
         console.log(blue(`\nTOTAL:   `) + green( totalLinks) ); 
         console.log(blue(`\nUNIQUE:   `) + green( uniqueLinks) ); 
-        //console.log((`\n Total : ${totalLinks} \n Unique: ${uniqueLinks}`);
+        //console.log((`\n Total : ${totalLinks} \n Unique: ${uniqueLinks}`); 
       });
   } else if ((argv[1] === '--validate' && argv[2] === '--stats')) {
     mdLinks(argv[0], { validate: true })
