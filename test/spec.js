@@ -5,6 +5,22 @@ let { validateFile, readFile, procesarFile, validateLinks, validarLink, } = requ
 
 describe('validarLink', () => {
   it('debería ser una función', () => {
+    expect(typeof validateFile).toBe('function');
+  });
+
+  it('debería ser una función', () => {
+    expect(typeof readFile).toBe('function');
+  });
+
+  it('debería ser una función', () => {
+    expect(typeof procesarFile).toBe('function');
+  });
+
+  it('debería ser una función', () => {
+    expect(typeof validateLinks).toBe('function');
+  });
+
+  it('debería ser una función', () => {
     expect(typeof validarLink).toBe('function');
   });
 

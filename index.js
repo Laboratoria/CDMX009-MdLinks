@@ -12,10 +12,11 @@ const validateLinks = async function (links) {
     let invalidos = 0; 
 
     while(index < size) {
+      process.stdout.write(".");
        let result = await validarLink(links[index])
        links[index].isValid = result;
        
-       (result == 200) ? validos++ : invalidos ++;
+       (result == true) ? validos++ : invalidos ++;
 
        index ++;
     }
@@ -29,6 +30,7 @@ const validateLinks = async function (links) {
  }
 //Verificar que sea un archivo .md
  const validateFile = (pathFile) => {
+   //  console.log("path: " + pathFile)
    let routeFile = path.extname(pathFile);
    if (routeFile !== '.md') {
       throw "Verificar que el archivo ingresado cumpla con la extención .md o ingresa una ruta correcta";
@@ -73,7 +75,7 @@ const validateLinks = async function (links) {
        let response = await fetch(link);
  
        if(response.status == 200){
-          isValid = 200
+          isValid = true
        }
     }catch(error) {
     //    console.log("Error en la peticion")
