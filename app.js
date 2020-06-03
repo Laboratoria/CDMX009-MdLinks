@@ -118,9 +118,9 @@ function getInfoLink(arrayN, flagValidate, flagStats) {
 function newValidate(object, flagValidate) {
    if (flagValidate > 0) {
     if (object.status === 200) {
-      return console.log(`${object.label}`, chalk.bgBlue(`✔ ${object.statusText}`));
+      return console.log(`${object.label}`, chalk.bgBlue(`${object.status} ✔ ${object.statusText}`));
     } else {
-      return console.log(`${object.label}`, chalk.bgRed(`X ${object.statusText}`));
+      return console.log(`${object.label}`, chalk.bgRed(`${object.status} X ${object.statusText}`));
     }
   }
 }
@@ -147,7 +147,7 @@ function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
       //console.log("vamo bien")
       return console.log(chalk.bgCyan((chalk.black(`Links Totales: ${arrayN.length}\n`)), 
                          chalk.bgGreen(chalk.black(`Links trabanjando de manera correcta: ${succes} \n`)),
-                         chalk.bgYellow(chalk.black(`Error de conexion con fecth: ${arrFail.length} \n`)),
+                         chalk.bgYellow(chalk.black(`Error de conexión: ${arrFail.length} \n`)),
                          chalk.bgRed(chalk.black((`Links no encontrados : ${broke} \n`)))))
       
     }
