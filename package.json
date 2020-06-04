@@ -1,8 +1,11 @@
 {
-    "name": "mdlinks",
+    "name": "mdLinks",
     "version": "1.0.0",
     "description": "Validate ok and broken URLs in a markdown file",
     "main": "cli.js",
+    "bin": {
+        "mdLinks": "./cli.js"
+    },
     "scripts": {
         "test": "jest --verbose --coverage"
     },
