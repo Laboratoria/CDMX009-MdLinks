@@ -5,59 +5,62 @@ let index = process.argv.indexOf("--file");
 let uri = process.argv[index + 1];
 let options = process.argv[index + 2];
 let data = fs.readFileSync(uri, 'utf8')
-const chalk = require("chalk");
+const colors = require("colors");
 
 //Se verifica que el archivo sea .md
-const readMd = (uri) => {
+const validateUri = (uri) => {
   const fileExtencion = path.extname(uri);
   if (fileExtencion != '.md') {
-    console.log (chalk.redBright('Introduce un archivo .md válido'));
+    console.log ('Introduce un archivo .md válido'.red);
     return false;
   } else {
-    console.log('Yay! Si es un archivo .md');
+    console.log('Yay! Si es un archivo .md'.rainbow);
     return true;
   }
 }
 //Para obtener los links
-const links = (data) => {
+const getLinks = (data) => {
   const rExLink = /((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n)]+/g; // todos los tipos de links
   const rExText = /(?:[^[])([^[]*)(?=(\]+\(((https?:\/\/)|(http?:\/\/)|(www\.))))/g; //el texto
   const toString = data.toString();
   const links = toString.match(rExLink);
   const text = toString.match(rExText);
-  var returnData = [];
+  let newData = [];
   for (let i = 0; i < links.length; i++) {
-    var newLinkData = {
+    let collectionData = {
       text: text[i],
       link: links[i],
       file: uri,
     };
-    returnData.push(newLinkData);
+    newData.push(collectionData);
   }
-  return returnData;
+  return newData;
 }
 //Función para leer el status de los links
-const readStats = ()  => {
-  if (readMd(uri) === true) {
-    myProcData = links(data)
+const showStats = () => {
+  if (validateUri(uri) === true) {
+    dataLinks = getLinks(data)
     let badLinks = 0;
     let goodLinks = 0;
-    for (let i = 0; i < myProcData.length; i++) {
-      fetch(myProcData[i].link).then(response => {
+    for (let i = 0; i < dataLinks.length; i++) {
+      fetch(dataLinks[i].link).then(response  => {
+        //await
         if (response.status == 200) {
           goodLinks++;
           console.log(
-            `File: ${uri}\n Text: ${myProcData[i].text}\n Link: ${
-            myProcData[i].link
+            `File: ${uri}\n Text: ${dataLinks[i].text}\n Link: ${
+              dataLinks[i].link
             }\n  Response code: ${response.status}\nResponse: ${response.statusText}\n`,
           );
+        //await
         } else if (response.status == 404 || response.status == 400) {
           badLinks++;
-          console.log(chalk.redBright(
-            `File: ${uri}\n Text:${myProcData[i].text}\n Link: ${
-            myProcData[i].link
-            }\n Response code: ${response.status}\nResponse: ${response.statusText}\n`,
-          ));
+          console.log(
+            `File: ${uri}\n Text:${dataLinks[i].text}\n Link: ${
+              dataLinks[i].link
+            }\n Response code: ${response.status}\nResponse: ${response.statusText}\n`.brightRed,
+          );
+        //await 
         } else {
           console.log('error', response.status);
         }
@@ -67,11 +70,11 @@ const readStats = ()  => {
 };
 // función para validar
 const validateLinks = ()  => {
-  myProcData = links(data)
+  dataLinks = getLinks(data)
   let badLinks = 0;
   let goodLinks = 0;
-  for (let i = 0; i < myProcData.length; i++) {
-    fetch(myProcData[i].link).then(response => {
+  for (let i = 0; i < dataLinks.length; i++) {
+    fetch(dataLinks[i].link).then(response => {
       if (response.status == 200) {
         goodLinks++;
       } else if (response.status == 404 || response.status == 400) {
@@ -80,50 +83,19 @@ const validateLinks = ()  => {
         console.log('error', response.status);
       }
       //se muestran los resultados de los links
-      if (badLinks + goodLinks === myProcData.length) {
-        console.log(chalk.cyan(`File: ${uri} has:`));
-        console.log(chalk.magenta(`✔ Total Links: ${myProcData.length}`));
-        console.log(chalk.greenBright(`✔ Total Unique Links: ${goodLinks}`));
-        console.log(chalk.redBright(`✖ Total Broken links: ${badLinks}\n`));
+      if (badLinks + goodLinks === dataLinks.length) {
+        console.log(`File: ${uri} has:`.cyan);
+        console.log(`✔ Total Links: ${dataLinks.length}`.brightYellow);
+        console.log(`✔ Total Unique Links: ${goodLinks}`.green);
+        console.log(`✖ Total Broken links: ${badLinks}\n`.red);
       }
     });
   }
 }
 //función stat y validate
-const validateAndStats = () => {
-  if (readMd(uri) === true) {
-    myProcData = links(data)
-    let badLinks = 0;
-    let goodLinks = 0;
-    for (let i = 0; i < myProcData.length; i++) {
-      fetch(myProcData[i].link).then(response => {
-        if (response.status == 200) {
-          goodLinks++;
-          console.log(
-            `File: ${uri}\n Text:${myProcData[i].text}\n Link: ${
-            myProcData[i].link
-            }\n  Response code: ${response.status}\nResponse: ${response.statusText}\n`,
-          );
-        } else if (response.status == 404 || response.status == 400) {
-          badLinks++;
-          console.log(chalk.redBright(
-            `File: ${uri}\n Text:${myProcData[i].text}\n Link: ${
-            myProcData[i].link
-            }\n Response code: ${response.status}\nResponse: ${response.statusText}\n`,
-          ));
-        } else {
-          console.log('error', response.status);
-        }
-        //se muestran los resultados de los links
-        if (badLinks + goodLinks === myProcData.length) {
-          console.log(chalk.cyan(`File: ${uri} has:`));
-          console.log(chalk.magenta(`✔ Total Links: ${myProcData.length}`));
-          console.log(chalk.greenBright(`✔ Total Unique Links: ${goodLinks}`));
-          console.log(chalk.redBright(`✖ Total Broken links: ${badLinks}\n`));
-        }
-      });
-    }
-  }
+const validateAndStats = (stats, validate) => {
+  showStats(stats);
+  validateLinks(validate);
 }
 // opciones en la terminal
 const menuOptions = () => {
@@ -131,7 +103,7 @@ const menuOptions = () => {
    console.log('Links Validate') 
    validateLinks();
   } else if (options === '--stats') {
-    console.log(readStats(uri));
+    console.log(showStats(uri));
   } else if (options === '--validate--stats') {
     console.log(validateAndStats(uri));
   }
@@ -139,7 +111,7 @@ const menuOptions = () => {
 menuOptions();
 
 const mdLink = {
-  readMd, links, validateAndStats, menuOptions, readStats, validateLinks
+  validateUri, getLinks, validateAndStats, menuOptions, showStats, validateLinks
 };
 
 module.exports = {

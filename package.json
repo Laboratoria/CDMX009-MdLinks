@@ -23,6 +23,7 @@
   "homepage": "https://github.com/TangCherry/CDMX009-MdLinks#readme",
   "dependencies": {
     "chalk": "^4.0.0",
+    "colors": "^1.4.0",
     "fetch": "^1.1.0",
     "marked": "^1.1.0",
     "node-fetch": "^2.6.0",
