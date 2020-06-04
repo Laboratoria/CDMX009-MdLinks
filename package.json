@@ -4,7 +4,7 @@
     "description": "Node library to validate and stats ok and broken URLs in a markdown file",
     "main": "cli.js",
     "bin": {
-        "dorsd-mdLinks": "./cli.js"
+        "mdLinks": "./cli.js"
     },
     "scripts": {
         "test": "jest --verbose --coverage"
