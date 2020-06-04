@@ -23,7 +23,7 @@ const indexFile = require('../src/app');
     })
      it('find directory', () => {
         let directory = process.cwd();
-        expect(directory).toEqual('/home/laboratoria57-am/CDMX009-MdLinks/src')
+        expect(directory).toEqual('/home/laboratoria57-am/CDMX009-MdLinks')
     })
 });
  /*    it ('should return test.md for --file test.md', () => {
