@@ -16,5 +16,5 @@ const mdLinks = (path, options) => new Promise((resolve) => {
   //console.log(checkpath); 
 });
 //mdLinks('./test/final.md', { validate: true }).then((res) => console.log(res));
-//mdLinks('test', { validate: true }).then((res) => console.log(res));
+mdLinks('test', { validate: true }).then((res) => console.log(res));
 module.exports = mdLinks; 
