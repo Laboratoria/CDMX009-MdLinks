@@ -71,7 +71,7 @@ utilizar [Jest](https://jestjs.io/) para tus pruebas unitarias.
 
 - Para este proyecto es opcional el uso de ES Modules `(import/export)`, en el
 caso optes utilizarlo deberas de crear un script de `build` en el `package.json`
-que transforme el código ES6+ a ES5 con ayuda de babel.
+que transforme el código ES6+ a ES5 con ayuda de babel. 
 
 ## Criterios de aceptacion
 
