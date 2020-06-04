@@ -52,7 +52,7 @@ las necesidades del usuario:
 
 ### `DIAGRAMA DE FLUJO MDLINKS`
 
-<img src ="imreadme/DFlujo.png">
+<img src ="imReadme/DFlujo.png">
 
 #### MDLINKS-ELY
 
