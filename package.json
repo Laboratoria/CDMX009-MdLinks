@@ -1,0 +1,36 @@
+{
+  "name": "mdlinks",
+  "version": "0.0.1",
+  "description": "libreria de markdown",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriana121/CDMX009-MdLinks.git"
+  },
+  "keywords": [
+    "npm",
+    "javascript",
+    "node.js",
+    "CLI",
+    "boilerplate",
+    "frontend"
+  ],
+  "author": "Adriana Aguilar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adriana121/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/adriana121/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "inquirer": "^7.1.0",
+    "markdown-it": "^11.0.0",
+    "node-fetch": "^2.6.0"
+  }
+}
