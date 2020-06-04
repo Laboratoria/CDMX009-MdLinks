@@ -7,7 +7,7 @@ function validateLinks(links) {
         .then(res => {
             if (res.status === 200) {
                 let link202 = chalk.green(res.url + (chalk.bold.green('  ✔')))
-                console.log(link202);
+                return link202;
             }
             if (res.status !== 200) {
                 let linkOthers = chalk.red(res.url + (chalk.bold.red('  x')));

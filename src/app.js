@@ -42,5 +42,5 @@ function getLinks(string, link, regExp) {
 findFiles();
 
 module.exports = {
-    findFiles,
+    findFiles, ""
 }

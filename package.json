@@ -12,7 +12,8 @@
     "figlet": "^1.4.0",
     "inquirer": "^7.1.0",
     "jest": "^25.5.4",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "yargs": "^15.3.1"
   },
   "devDependencies": {},
   "scripts": {
