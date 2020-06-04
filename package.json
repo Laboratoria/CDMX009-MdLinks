@@ -1,8 +1,11 @@
 {
-  "name": "md-links-mara",
+  "name": "md-links",
   "version": "1.0.0",
+  "bin": {
+    "md-links": "index.js"
+  },
   "description": "## Preámbulo",
-  "main": "index.js",
+  "main": "md-links.js",
   "scripts": {
     "test": "jest"
   },
@@ -10,8 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/maranyil/CDMX009-MdLinks.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "CLI",
+    "markdown"
+  ],
+  "author": "mara-mulato",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/maranyil/CDMX009-MdLinks/issues"

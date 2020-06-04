@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const ora = require('ora');
 const path = require('path');
-const mdlinks = require('./md-links.js');
+const mdlinks = require('./src/md-links.js');
 
 // I have a crush on figlet
 console.log(chalk.bold.cyan(figlet.textSync('md-links', {
