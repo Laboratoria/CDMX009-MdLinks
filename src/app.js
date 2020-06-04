@@ -1,6 +1,20 @@
-const fs = require('fs');
-const { validateLinks } = require('./validateLinks')
+#!/usr/bin/env node
 
+const fs = require('fs');
+const { validateLinks, stastLinks } = require('./validateLinks')
+let index = process.argv[3];
+
+function menuOptions(links, results) {
+    if (index === '--validate') {
+        validateLinks(links);
+    } else if (index === '--stats') {
+        stastLinks(results);
+    } else if (index === '--validate --stats') {
+        validateLinks(links);
+        stastLinks(results);
+    }
+};
+menuOptions();
 
 function findFiles() {
     let index = process.argv.indexOf('--file');
@@ -23,9 +37,7 @@ function getLinks(string, link, regExp) {
         myArr.push(link[0]);
     }
     validateLinks(myArr)
-
 }
-
 
 findFiles();
 
