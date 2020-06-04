@@ -1,28 +1,60 @@
 let fs = require('fs')
 let index = process.argv.indexOf("--file")
 let uri = process.argv[index+1]
-//let string = fs.readFileSync(uri,'utf8')
-//console.log(process.argv)
-//console.log("index: ", index)
-//console.log("uri: ", uri)
-//console.log( "Lectura de archivo", string);
-//read file
-/*fs.readFile(uri, function(err, data){
-  if (err){
-    console.log(err);
-  }
-  console.log(data.toString());
-  });*/
+let fetch = require ('node-fetch')
+let colors = require ("colors")
+
 
 // read file
-let string = fs.readFileSync(uri, 'utf-8')
-//console.log(string);
+function readMd (uri){
+  let readString = fs.readFileSync(uri, 'utf-8')
+  return `${readString}`
+}
+//console.log(readFile(uri));
+
 
 // get links
-let regEx = /https:\/\/([a-z./-])+([0-9./-a-z])+/gi
-let arrayLinks = string.match(regEx);
-console.log(arrayLinks);
+function getLinks(uri){
+  let links = readMd(uri)
+  let regEx = /\bhttps:\/\/([a-z0-9.a-z0-9\/]+)([-a-z0-9?=_$#\/]+)([.a-z0-9]+)/gi
+  let arrayLinks = links.match(regEx);
+  return arrayLinks
+}
+//console.log(getLinks(uri));
 
+// Validar links
+let totalLinks =[]
+function validateLinks(uri){
+  let readlinks = getLinks(uri)
+  let promises = readlinks.map(link => fetch(link)
+    .then(result =>{
+      totalLinks.push(({ url:result.url, status:result.status, boolean: true }))
+    })
+    .catch(err => {
+      totalLinks.push(({url:link, status:'Error', text: err.message, boolean: false }))
+    })
+  )
+  
+  return Promise.all(promises)
+          .then(result =>{
+            console.log('total: ', totalLinks.length);
+            console.log('Rechazados ',totalLinks.reduce((accountant, elem) =>{
+              if (elem.status !== 200){
+                console.log(colors.yellow(elem)) 
+                return accountant += 1
+              }
+              return accountant
+            },0));
+            console.log('Buenos ', totalLinks.reduce((accountant, elem) =>{
+              if (elem.status === 200){
+                console.log(colors.red(elem))
+                return accountant +=1
+              }
+              return accountant
+            },0));
+            return result
+          })
+}
+validateLinks(uri)
 
-// Check links
-for
+module.exports = { readMd }

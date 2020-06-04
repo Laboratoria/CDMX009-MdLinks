@@ -19,5 +19,9 @@
   "homepage": "https://github.com/IrisFyD/CDMX009-MdLinks#readme",
   "devDependencies": {
     "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "node-fetch": "^2.6.0"
   }
 }
