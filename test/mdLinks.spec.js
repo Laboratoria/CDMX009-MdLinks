@@ -6,6 +6,7 @@ const { validatePath,
   validateUrl,
   getStats } = require('../utils/utils');
 
+
 test('given a single file should be flag: singleFile', () =>{
   let path = '/home/laboratoria159-pm/CDMX009-MdLinks/README.md';
   expect(validatePath(path)).toBe('singleFile')
@@ -51,6 +52,15 @@ test('URLs status in a markdown file', async () => {
   expect(urlStatusResponse[1].code).toBe(200)
   expect(urlStatusResponse[2].code).toBe(200)
 })
+
+
+/*
+describe('prueba', ()=>{
+  test('given a single file should be flag: singleFile', () =>{
+    let path = '/home/laboratoria159-pm/CDMX009-MdLinks/README.md';
+    expect(validatePath(path)).toBe('singleFile')
+})*/
+
 
 /*
 test('read directory files', async () => {
