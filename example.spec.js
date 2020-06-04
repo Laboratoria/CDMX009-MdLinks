@@ -8,14 +8,12 @@ describe ('mdLink', () => {
     });
     describe('readMd', () => { 
         it ('should be a function', () => { 
-            expect (typeof mdLink.readMd).toBe('function');
-            console.log ('its a function!');
+            expect (typeof mdLink.validateUri).toBe('function');
         });
     });
     describe('Test.md', () => { 
         it ('It should read a .md file', () => { 
-            expect (mdLink.readMd (testFile)).toBe(true);
-            console.log('Yay, its a .md file!');
+            expect (mdLink.validateUri(testFile)).toBe(testFile);
         });
     });
 }); 
