@@ -61,8 +61,8 @@ const validateLinks = links => Promise.all(links.map(link => new Promise((resolv
 // I used Set to get the unique links apart from the total
 // If the statusTxt is different from 'ok', it count as a broken link
 
-const stats = (links, validate) => {
-  const linkStats = {};
+const getStats = (links, validate) => {
+  const linkStats = [];
   linkStats.total = links.length;
   const hrefLinks = links.map((link) => {
     return link.href;
@@ -84,7 +84,7 @@ const stats = (links, validate) => {
 
 // mdLinks connects the upper functions and interacts with index.js
 
-const mdLinks = (path, validate) => {
+const connector = (path, validate) => {
   return new Promise((resolve, reject) => {
     if (validate && validate.validate) {
       readFile(path)
@@ -107,6 +107,6 @@ module.exports = {
   readFile,
   readDir,
   validateLinks,
-  stats,
-  mdLinks,
+  getStats,
+  connector,
 };

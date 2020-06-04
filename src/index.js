@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const ora = require('ora');
 const path = require('path');
-const mDLinks = require('./md-links.js');
+const mdlinks = require('./md-links.js');
 
 // I have a crush on figlet
 console.log(chalk.bold.cyan(figlet.textSync('md-links', {
@@ -13,29 +13,28 @@ console.log(chalk.bold.cyan(figlet.textSync('md-links', {
   horizontalLayout: 'default',
 })));
 
-
-let userPath = process.argv[2];
 const spinner = ora();
+let userPath = process.argv[2];
+
 
 if (path.isAbsolute(userPath)) {
   userPath = path.resolve(userPath);
 }
 
 if (userPath.includes('.')) {
-  if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
-  || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
+  if ((process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
     spinner.start();
-    mDLinks.mdLinks(userPath, { validate: true })
+    mdlinks.connector(userPath, { validate: true })
       .then((links) => {
         spinner.stop();
-        const stats = mDLinks.stats(links, { validate: true });
-        console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
-        console.log(chalk.bold.blue('Unique:'), stats.unique, 'links');
-        console.log(chalk.bold.red('Broken:'), stats.broken, 'links');
+        const showStats = mdlinks.getStats(links, { validate: true });
+        console.log(chalk.bold.cyan('Your file contains:'), showStats.total, 'links');
+        console.log(chalk.bold.blue('Unique:'), showStats.unique, 'links');
+        console.log(chalk.bold.red('Broken:'), showStats.broken, 'links');
       });
   } else if (process.argv[3] === '--validate') {
     spinner.start();
-    mDLinks.mdLinks(userPath, { validate: true })
+    mdlinks.connector(userPath, { validate: true })
       .then((links) => {
         if (links.length >= 0) {
           spinner.stop();
@@ -45,14 +44,14 @@ if (userPath.includes('.')) {
         }
       });
   } else if (process.argv[3] === '--stats') {
-    mDLinks.mdLinks(userPath, { validate: false })
+    mdlinks.connector(userPath, { validate: false })
       .then((links) => {
-        const stats = mDLinks.stats(links, { validate: false });
+        const stats = mdlinks.getStats(links, { validate: false });
         console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
         console.log(chalk.bold.blue('Unique:'), stats.unique, 'links');
       });
   } else {
-    mDLinks.mdLinks(userPath, { validate: false })
+    mdlinks.connector(userPath, { validate: false })
       .then((links) => {
         if (links.length > 0) {
           console.log(links);
@@ -62,26 +61,25 @@ if (userPath.includes('.')) {
       });
   }
 } else {
-  mDLinks.readDir(userPath)
+  mdlinks.readDir(userPath)
     .then((files) => {
       if (files.length > 0) {
-        if ((process.argv[3] === '--validate' && process.argv[4] === '--stats')
-        || (process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
+        if ((process.argv[3] === '--stats' && process.argv[4] === '--validate')) {
           spinner.start();
           files.forEach((file) => {
-            mDLinks.mdLinks(file, { validate: true })
+            mdlinks.connector(file, { validate: true })
               .then((links) => {
                 spinner.stop();
-                const stats = mDLinks.stats(links, { validate: true });
-                console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
-                console.log(chalk.bold.blue('Unique links:'), stats.unique);
-                console.log(chalk.bold.red('Broken links:'), stats.broken);
+                const showStats = mdlinks.getStats(links, { validate: true });
+                console.log(chalk.bold.cyan('Your file contains:'), showStats.total, 'links');
+                console.log(chalk.bold.blue('Unique links:'), showStats.unique);
+                console.log(chalk.bold.red('Broken links:'), showStats.broken);
               });
           });
         } else if (process.argv[3] === '--validate') {
           spinner.start();
           files.forEach((file) => {
-            mDLinks.mdLinks(file, { validate: true })
+            mdlinks.connector(file, { validate: true })
               .then((links) => {
                 if (links) {
                   spinner.stop();
@@ -93,16 +91,16 @@ if (userPath.includes('.')) {
           });
         } else if (process.argv[3] === '--stats') {
           files.forEach((file) => {
-            mDLinks.mdLinks(file, { validate: false })
+            mdlinks.connector(file, { validate: false })
               .then((links) => {
-                const stats = mDLinks.stats(links, { validate: false });
+                const stats = mdlinks.getStats(links, { validate: false });
                 console.log(chalk.bold.cyan('Your file contains:'), stats.total, 'links');
                 console.log(chalk.bold.blue('Unique links:'), stats.unique);
               });
           });
         } else {
           files.forEach((file) => {
-            mDLinks.mdLinks(file, { validate: false })
+            mdlinks.connector(file, { validate: false })
               .then((links) => {
                 console.log(links);
               });
