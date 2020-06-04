@@ -23,7 +23,7 @@ function findFile() {
       readFiles(uri);
       return uri;
     } else {
-      return console.log("por favor ingresa un archivo con esxtensión '.md'");
+      return console.log("por favor ingresa un archivo con extensión '.md'");
     }
   
   } 
@@ -147,8 +147,8 @@ function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
       //console.log("vamo bien")
       return console.log(chalk.bgCyan((chalk.black(`Links Totales: ${arrayN.length}\n`)), 
                          chalk.bgGreen(chalk.black(`Links trabanjando de manera correcta: ${succes} \n`)),
-                         chalk.bgYellow(chalk.black(`Error de conexión: ${arrFail.length} \n`)),
-                         chalk.bgRed(chalk.black((`Links no encontrados : ${broke} \n`)))))
+                         chalk.bgYellow(chalk.black(`Links con error de conexión: ${arrFail.length} \n`)),
+                         chalk.bgRed(chalk.black((`Links rotos : ${broke} \n`)))))
       
     }
    
