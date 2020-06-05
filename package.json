@@ -1,0 +1,24 @@
+{
+  "name": "mdlinks",
+  "version": "1.0.0",
+  "description": "Proyecto mdlinks de Laboratoria",
+  "main": "app.js",
+  "bin": {
+    "mdlinks":"cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Natalia Olmos",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
+    "inquirer": "^7.1.0",
+    "markdown-it": "^11.0.0",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7"
+  }
+}
