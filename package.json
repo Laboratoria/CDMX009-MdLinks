@@ -1,0 +1,28 @@
+{
+  "name": "mdlinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "app.js",
+  "bin": {
+    "mdlinks": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/castillojessica/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/castillojessica/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/castillojessica/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "fetch": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
