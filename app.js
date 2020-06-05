@@ -40,8 +40,8 @@ function validateLinks(arrayLinks) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
           });
 
-    let promises = arrayLinks.map(aLink => fetch(aLink) // array de promesas
-            .then(response => { // resolve de la promesa
+    let promises = arrayLinks.map(aLink => fetch(aLink)
+            .then(response => { 
                 return {
                     url: response.url,
                     status: response.status,
@@ -51,23 +51,21 @@ function validateLinks(arrayLinks) {
             .catch(
                 error => {
                     return { error: error.message }
-                     //console.log(`${aLink} it's not valid`.underline.brightRed)
+                    
                 })
         )
-        // qué devuelve esta función ? ---> UNA ... P...R...O...M...E...S...A
-    return Promise.all(promises) // convierte el ARRAY de promesas por un ARRAY de res/rej
-        .then(result => result) // array de resultados {url,status,text,error}
-         //console.log("las promesas de tu ex: ", promises)
+    return Promise.all(promises) 
+        .then(result => result) 
 };
 
-let main = async() => { // la encargada de controlar lo que pasa en el programa (imperativo ó programacion imperativa)
+let main = async() => { 
     let string = getContentString()
-    let links = getLinks(string) // hasta aqui es lo obligado
-        // el user quiere validar?
+    let links = getLinks(string) 
+ 
     let shouldValidate = process.argv.indexOf('--validate')
     let shouldShowTotals = process.argv.indexOf('--stats')
     if (shouldValidate > -1) {
-        let results = await validateLinks(links) // sabemos que esto devuelve una promesa
+        let results = await validateLinks(links) 
         console.log(results) // le muestro la validación
         if (shouldShowTotals > -1) {
             // contar
