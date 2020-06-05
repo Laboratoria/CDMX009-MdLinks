@@ -2,28 +2,28 @@ const path = require('path');
 const fs = require('fs');
 const marked = require('marked');
 
-const archiveTrue = (archive) => fs.existsSync(archive);
+const fileTrue = (fileTrue) => fs.existsSync(fileTrue);
 
-const absolutePath = (archive) => {
-  if (path.isAbsolute(archive) === true) {
-    return archive;
+const absolutePath = (fileTrue) => {
+  if (path.isAbsolute(fileTrue) === true) {
+    return fileTrue;
   } 
-  return (path.resolve(archive));
+  return (path.resolve(fileTrue));
 };
 //absolutePath('./test/read.md');
 
-const isDirec = (archive) => fs.lstatSync(archive).isDirectory();
+const isDirec = (fileTrue) => fs.lstatSync(fileTrue).isDirectory();
 //console.log(isDirec('test/test-API/other.md'));
 //console.log(isDirec('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test'));
 
-const walkDir = (archive) => {
+const walkDir = (fileTrue) => {
   let arrayFile = [];
-  if (!isDirec(archive)) {
-    arrayFile.push(archive);
+  if (!isDirec(fileTrue)) {
+    arrayFile.push(fileTrue);
   } else {
-    const readDirectory = fs.readdirSync(archive);
+    const readDirectory = fs.readdirSync(fileTrue);
     readDirectory.map((read) => {
-      const next = path.join(archive, read);
+      const next = path.join(fileTrue, read);
       return (isDirec(next)) ? arrayFile = arrayFile.concat(walkDir(next)) : arrayFile.push(next);
     });
   }
@@ -40,10 +40,8 @@ const mdFilter = (fileArr) => {
   });
   return newArrayFileMd;
 };
-//console.log(mdFilter(['test/out.md', 'test/test-API/other.md', 'test/test-API/prueba.js']));
 
 const readMD = (file) => fs.readFileSync(file, 'utf-8');
-//console.log(readMD('test/final.md')); 
 
 const getLinks = (file) => {
   const mdFiles = walkDir(file);
@@ -63,8 +61,10 @@ const getLinks = (file) => {
   return (links);
 };
 
-//console.log(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test'));
 
 module.exports = {
-  archiveTrue, absolutePath, getLinks, walkDir
+  fileTrue, 
+  absolutePath, 
+  getLinks, 
+  walkDir
 }; 
