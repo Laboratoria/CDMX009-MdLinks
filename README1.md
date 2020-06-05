@@ -51,7 +51,7 @@ la información que se quiere compartir.
 - ✅ crear modules
 - ✅ Instalar y usar modules
 - ✅ npm scripts
-- ❌ CLI (Command Line Interface - Interfaz de Línea de Comando)
+- ✅ CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
 - ✅ Testeo de tus funciones
@@ -61,7 +61,7 @@ la información que se quiere compartir.
 - ❌ Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- ❌ Organización en Github
+- ✅ Organización en Github
 
 ### Buenas prácticas de desarrollo
 - ✅ Modularización

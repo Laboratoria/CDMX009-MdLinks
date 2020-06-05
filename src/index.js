@@ -23,8 +23,9 @@ const findLinks = (data) => {
       link: links[i],
       file: uri,
     };
-    myReturnData.push(myLinkData);
-  } return myReturnData;
+    myReturnData.push(myLinkData);    
+  }
+  return myReturnData;
 }
 
 const readPathValidate = () => {
