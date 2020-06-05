@@ -30,5 +30,5 @@ let cli = meow ([
     }
 }
 ])
-console.log(cli.input[0]);
-// foo(cli.input[0], cli.flags)
+// console.log(cli.input[0]);
+// // foo(cli.input[0], cli.flags)

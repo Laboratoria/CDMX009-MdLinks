@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 
 function validate(array) {
-    console.log(array)
     array.map(element => {
         if (element.status >= 400 || element.status ==="Error"){
             let stringify = JSON.stringify(element.url)
