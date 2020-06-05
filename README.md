@@ -52,34 +52,34 @@ De igual forma se pueden combinar ambas opciones para tener acceso a toda la inf
 
 
 ### Javascript
-- [x] Uso de callbacks
-- [x] Consumo de Promesas
-- [x] Creacion de Promesas
-- [x] Modulos de Js
-- [x] Recursión
+- [x ]  Uso de callbacks
+- [x ] Consumo de Promesas
+- [x ] Creacion de Promesas
+- [x ] Modulos de Js
+- [x ] Recursión
 
 ### Node
-- [x] Sistema de archivos
-- [x] package.json
-- [x] crear modules
-- [x] Instalar y usar modules
-- [x] npm scripts
-- [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [x ] Sistema de archivos
+- [x ] package.json
+- [x ] crear modules
+- [x ] Instalar y usar modules
+- [x ] npm scripts
+- [ x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [x] Testeo de tus funciones
-- [x] Testeo asíncrono
+- [x ]  Testeo de tus funciones
+- [x ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [x] Organización en Github
+- [x ] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [x] Modularización
-- [x] Nomenclatura / Semántica
-- [x] Linting
+- [x ] Modularización
+- [x ] Nomenclatura / Semántica
+- [x ] Linting
 
 
 
