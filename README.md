@@ -111,7 +111,7 @@ Url broken: 1
 ```
 ## Logical flowchart
 
-<img src="readmeImages/flowchart.png" alt="flowchart" width="250"/>
+<img src="readmeImages/flowchart.png" alt="flowchart" width="800"/>
 
 ***
 
