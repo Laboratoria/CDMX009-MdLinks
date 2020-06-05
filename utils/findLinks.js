@@ -2,7 +2,7 @@
 const chalk = require('chalk')
 
 
-const findLinks = (datos, urlF) => {
+const findLinks = (data, urlF) => {
     const allthelink = /\[(.*)\]\S((http|https):\/\/[^\s\n)]+)(?=\))/gim;
     const regularL = /(http|https):\/\/.*\)?/gi;
     const textReg = /\[(.*)\]/gim
@@ -13,7 +13,7 @@ const findLinks = (datos, urlF) => {
     let linkAndtext;
     let joinObject;
     return new Promise((resolve) => {
-        const buffers = datos;
+        const buffers = data;
         const newStrings = buffers.toString();
         let myArray;
         while ((myArray = allthelink.exec(newStrings)) !== null) {
@@ -23,9 +23,9 @@ const findLinks = (datos, urlF) => {
         const unique = linkAndtext.filter(onlyUnique)
        
         if (unique.length >= 1) {
-            unique.forEach(obj => {
-                const myLinks = obj.match(regularL);
-                const myText = obj.match(textReg);
+            unique.forEach(url => {
+                const myLinks = url.match(regularL);
+                const myText = url.match(textReg);
                 const dataObject = {
                     links: myLinks,
                     text: myText,

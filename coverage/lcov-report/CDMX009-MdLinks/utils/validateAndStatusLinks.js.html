@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">34.78% </span>
+                <span class="strong">36.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/46</span>
+                <span class='fraction'>17/46</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>2/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.56% </span>
+                <span class="strong">36.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/45</span>
+                <span class='fraction'>17/46</span>
             </div>
         
             
@@ -145,24 +145,26 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -236,22 +238,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const fetch = require('node-fetch');
 const chalk = require('chalk')
 &nbsp;
-const linksFunctions = {};
+let linksFunctions = {};
 &nbsp;
-const validate = <span class="fstat-no" title="function not covered" >(f</span>ile) =&gt; {
-<span class="cstat-no" title="statement not covered" >    file.map(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; {</span>
+const validate = (file, path) =&gt; {
+    file.forEach(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; {
 <span class="cstat-no" title="statement not covered" >        fetch(element.links)</span>
             .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-                let object = <span class="cstat-no" title="statement not covered" >{</span>
+                const object = <span class="cstat-no" title="statement not covered" >{</span>
                     href: res.url,
                     status: res.status,
                     statusText: res.statusText,
-                    text: element.text
+                    text: element.text,
+                    path: path
                 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                if (object.status === 200) { <span class="cstat-no" title="statement not covered" >console.log(chalk.green(`${object.href} ${object.text} ${object.status} ${object.statusText}   `)) </span>}</span>
-                //{console.log(object)}
-                else { <span class="cstat-no" title="statement not covered" >console.log(chalk.red(`${object.href}  ${object.status}  ${object.statusText} BAD `)) </span>}
+<span class="cstat-no" title="statement not covered" >                if (object.status === 200) { </span>
+<span class="cstat-no" title="statement not covered" >                    console.log(chalk.green(`Path: ${path}\n`)+ chalk.yellow(`${object.text}`)+chalk.green.bold(`${object.href}  ${object.status} ${object.statusText}\n   `)) </span>}
+                else { <span class="cstat-no" title="statement not covered" >console.log(chalk.bgRed.bold(`Path: ${path}\n`)+chalk.red(`${object.text}`) +  chalk.red.bold(`${object.href}  ${object.status}  ${object.statusText} BAD\n `)) </span>}
             })
             .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; <span class="cstat-no" title="statement not covered" >console.log(err.message))</span>
     })
@@ -261,10 +264,10 @@ const stats = <span class="fstat-no" title="function not covered" >(l</span>inks
     let validLink = <span class="cstat-no" title="statement not covered" >0;</span>
     let brokenLink = <span class="cstat-no" title="statement not covered" >0;</span>
     let erros = <span class="cstat-no" title="statement not covered" >0</span>
-<span class="cstat-no" title="statement not covered" >    links.map(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    links.forEach(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        fetch(element.links)</span>
             .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-                let object = <span class="cstat-no" title="statement not covered" >{</span>
+                const object = <span class="cstat-no" title="statement not covered" >{</span>
                     href: res.url,
                     status: res.status,
                     statusText: res.statusText
@@ -303,13 +306,13 @@ const getStatusLink = (links, comandLine4, comandLine5, path) =&gt; {
 <span class="cstat-no" title="statement not covered" >        validate(links, path);</span>
     }
     <span class="missing-if-branch" title="else path not taken" >E</span>if (comandLine4 !== "--stats" &amp;&amp; comandLine4 !== "--validate" &amp;&amp; comandLine4 !== "--s" &amp;&amp; comandLine4 !== "--v") {
-        let mesageLine = "please type a valid option";
+        const mesageLine = "please type a valid option";
         console.log(chalk.cyanBright(mesageLine))
         return mesageLine
     }
 <span class="cstat-no" title="statement not covered" >    if (comandLine5 !== undefined) {</span>
 <span class="cstat-no" title="statement not covered" >        if (comandLine5 !== "--stats" &amp;&amp; comandLine5 !== "--validate" &amp;&amp; comandLine5 !== "--s" &amp;&amp; comandLine5 !== "--v") {</span>
-            let mesageLine1 = <span class="cstat-no" title="statement not covered" >"type a valid second option";</span>
+            const mesageLine1 = <span class="cstat-no" title="statement not covered" >"type a valid second option";</span>
 <span class="cstat-no" title="statement not covered" >            console.log(chalk.cyanBright(mesageLine1))</span>
 <span class="cstat-no" title="statement not covered" >            return mesageLine1</span>
         }
@@ -328,7 +331,7 @@ module.exports = linksFunctions
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun May 31 2020 04:58:01 GMT-0500 (GMT-05:00)
+                at Fri Jun 05 2020 02:07:26 GMT-0500 (GMT-05:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>

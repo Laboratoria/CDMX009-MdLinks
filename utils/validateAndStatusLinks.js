@@ -1,10 +1,10 @@
 const fetch = require('node-fetch');
 const chalk = require('chalk')
 
-const linksFunctions = {};
+let linksFunctions = {};
 
 const validate = (file, path) => {
-    file.map(element => {
+    file.forEach(element => {
         fetch(element.links)
             .then((res) => {
                 const object = {
@@ -27,7 +27,7 @@ const stats = (links, path) => {
     let validLink = 0;
     let brokenLink = 0;
     let erros = 0
-    links.map(element => {
+    links.forEach(element => {
         fetch(element.links)
             .then((res) => {
                 const object = {

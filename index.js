@@ -8,8 +8,8 @@ const path = require('path')
 const chalk = require('chalk')
 
 const readDirectory=(uri, comandLine4, comandLine5)=>{
-    let direc = fs.readdirSync(uri)
-    direc.forEach(elemnt => {
+    let directoryToRead = fs.readdirSync(uri)
+    directoryToRead.forEach(elemnt => {
        
         let lastmd = elemnt.lastIndexOf(".");
         let newF = elemnt.slice(lastmd);
