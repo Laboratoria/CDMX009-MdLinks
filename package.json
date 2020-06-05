@@ -1,0 +1,31 @@
+{
+    "name": "dorsd-mdLinks",
+    "version": "1.0.0",
+    "description": "Node library to validate and stats ok and broken URLs in a markdown file",
+    "main": "cli.js",
+    "bin": {
+        "mdLinks": "./cli.js"
+    },
+    "scripts": {
+        "test": "jest --verbose --coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DorsD/CDMX009-MdLinks.git"
+    },
+    "author": "Fabiola Gonzalez",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DorsD/CDMX009-MdLinks/issues"
+    },
+    "homepage": "https://github.com/DorsD/CDMX009-MdLinks#readme",
+    "dependencies": {
+        "chalk": "^4.0.0",
+        "jest": "^26.0.1",
+        "node-fetch": "^2.6.0",
+        "yargs": "^15.3.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}
