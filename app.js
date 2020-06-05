@@ -24,23 +24,30 @@ function validateLinks(arrayLinks) {
         let i=0
         let work = 0
         let broke = 0
-        fetch(arrayLinks[i]).then(function(response) {
-            for( i=0 ;i < arrayLinks.length;i++){
-            if (response.status === 200) {
-                work ++ ;
-    
-            }else if (response.status === 404 || response.status == 400) {
-                broke ++;
 
+        for( i=0 ;i <arrayLinks.length;i++){
+
+            fetch(arrayLinks[i]).then(function(response) {
+                if (response.status === 200) {
+                    work ++;
+        
+                }else if (response.status == 404) {
+                    broke ++;
     
-            }else {
-                console.log('error', response.status);
-              }
-        }
-        console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
-        console.log(`✔ Total work Links: ${work}`.green);
-        console.log(`✖ Total Broken links: ${broke}\n`.red);
-          })
+        
+                }else {
+                    console.log('error', response.status);
+                  }
+                console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
+                console.log(`✔ Total work Links: ${work}`.green);
+                console.log(`✖ Total Broken links: ${broke}`.red);
+
+            }
+          )
+        
+        };
+
+            
 
     let promises = arrayLinks.map(aLink => fetch(aLink) // array de promesas
             .then(response => { // resolve de la promesa
