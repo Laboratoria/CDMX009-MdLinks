@@ -28,8 +28,8 @@ const validate = (archive) => {
 const getLinksStats = (path) => new Promise((resolve) => {
   validate(path)
     .then((response) => {
-      const totalLinks = response.length;
-      const uniqueLinks = [...new Set(response.map((response) => response.href))].length;
+      let totalLinks = response.length;
+      let uniqueLinks = [...new Set(response.map((response) => response.href))].length;
       resolve(`Total : ${totalLinks} Unique: ${uniqueLinks}`);
     });
 });
