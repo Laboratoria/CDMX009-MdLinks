@@ -1,5 +1,5 @@
 {
-    "name": "dorsd-mdLinks",
+    "name": "mdlinks-dors",
     "version": "1.0.0",
     "description": "Node library to validate and stats ok and broken URLs in a markdown file",
     "main": "cli.js",
