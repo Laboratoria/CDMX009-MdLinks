@@ -2,31 +2,18 @@
 let fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
-let index = process.argv.indexOf('--file');
-let file = process.argv[index + 1];
-let options = process.argv[index + 2];
 let colors = require('colors');
 
 
-
-
 const findFile = () => {
-
-    let content = fs.readFileSync(file, 'utf-8');
-    getLinks(content);
+    let index = process.argv.indexOf('--file');
+    let file = process.argv[index + 1];
+    readFile(file)
     return file
 }
-
-const validateMd = () => {
-    let findMd = path.extname(file);
-    if (findMd === '.md') {
-        console.log('´This is a .md file: ', file);
-        return true
-    }
-    else {
-        console.log('This is not a .md file: ', file);
-        return false
-    }
+const readFile = (newFile) => {
+    let content = fs.readFileSync(newFile, 'utf-8');
+    getLinks(content);
 }
 
 const getLinks = (string) => {
@@ -41,19 +28,23 @@ let validateLinks = links => {
     let allLinks = links.map(link => {
         return fetch(link)
             .then(res => {
+                let object = {
+                    url: res.url,
+                    status: res.status,
+                    statusText: res.statusText
+                };
                 if (res.status === 200) {
-                    console.log(colors.green(res.url + (colors.bold.green('  Valid link'))));
+                    console.log(colors.gray(link, '') + colors.green(`${object.statusText} `) + colors.bold.green(`${object.status}`))
+
                 }
                 else if (res.status !== 200) {
-                    console.log(colors.brightRed(res.url + (colors.bold.brightRed('  Broken link'))));
-                    //console.log(link, "Broken link: ".red, status)
+                    console.log(colors.gray(link, '') + colors.brightRed(`${object.statusText} `) + colors.bold.brightRed(`${object.status}`))
                 }
-                readLinks.push(({ url: res.url, status: res.status }));
+                readLinks.push(({ url: res.url, status: res.status, statusText: res.statusText }));
             })
             .catch(err => {
-                console.log(colors.grey(link + (colors.bold.grey('  Error'))));   //se retorna?
+                console.log(colors.grey(link + (colors.bold.yellow(' Error'))));   //se retorna?
                 readLinks.push(({ url: err.url, status: err.status }));
-                //console.log(`This is not a valid link: ${link}`.red);
             })
     })
     return Promise.all(allLinks)
@@ -63,14 +54,14 @@ let validateLinks = links => {
         });
 }
 let statsLinks = newres => {
-    console.log('Total Links: ', readLinks.length);
-    console.log(colors.green('Valids: ', readLinks.reduce((counter, element) => {
+    console.log('Total Links: ', colors.cyan(readLinks.length));
+    console.log(colors.green('Valids: '), colors.bold.green(readLinks.reduce((counter, element) => {
         if (element.status === 200) {
             return counter += 1;
         }
         return counter;
     }, 0)));
-    console.log(colors.brightRed('Invalids: ', readLinks.reduce((counter, element) => {
+    console.log(colors.brightRed('Invalids: '), colors.bold.brightRed(readLinks.reduce((counter, element) => {
         if (element.status !== 200) {
             return counter += 1;
         }
@@ -78,7 +69,6 @@ let statsLinks = newres => {
     }, 0)))
     return newres;
 }
-
 
 
 
