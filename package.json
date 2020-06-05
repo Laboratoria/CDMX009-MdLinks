@@ -1,0 +1,28 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrendaCarranco/CDMX009-MdLinks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrendaCarranco/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/BrendaCarranco/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "figlet": "^1.4.0",
+    "jest": "^26.0.1",
+    "mark-it-down": "^0.3.0",
+    "markdown-it": "^11.0.0",
+    "meow": "^7.0.1",
+    "node-fetch": "^2.6.0"
+  }
+}

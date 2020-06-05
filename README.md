@@ -247,32 +247,32 @@ Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ ] Uso de callbacks
+- [x] Uso de callbacks
 - [ ] Consumo de Promesas
-- [ ] Creacion de Promesas
-- [ ] Modulos de Js
+- [x] Creacion de Promesas
+- [x] Modulos de Js
 - [ ] Recursión
 
 ### Node
 - [ ] Sistema de archivos
-- [ ] package.json
-- [ ] crear modules
-- [ ] Instalar y usar modules
+- [x] package.json
+- [x] crear modules
+- [x] Instalar y usar modules
 - [ ] npm scripts
-- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [ ] Testeo de tus funciones
+- [x] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+- [x] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [ ] Modularización
+- [x] Modularización
 - [ ] Nomenclatura / Semántica
 - [ ] Linting
 
@@ -353,3 +353,4 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 - [Comprendiendo Promesas en Js](https://hackernoon.com/understanding-promises-in-javascript-13d99df067c1)
 - [Pill de recursión - video](https://www.youtube.com/watch?v=lPPgY3HLlhQ&t=916s)
 - [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)
+- [link] (http://holaquetaly89689698.com)
