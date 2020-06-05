@@ -10,6 +10,7 @@ const argv = require("yargs")
                 })
                 .argv
 
+
 let data = fs.readFileSync(`${argv.file }`,"utf-8");
 let comando = argv._[0]
 
@@ -32,3 +33,4 @@ switch (comando) {
         console.log("no es valido")
     break;
 }  
+

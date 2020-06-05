@@ -5,6 +5,6 @@ describe("stats", () =>{
     expect(typeof stats ).toBe('function');
   });
   it('muestra carac de los links', () => {
-    expect('- [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)').toEqual('https://github.com/merunga/pildora-recursion  OK  200');
+    expect('- [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)').toStrictEqual('https://github.com/merunga/pildora-recursion  OK  200');
   });
 });

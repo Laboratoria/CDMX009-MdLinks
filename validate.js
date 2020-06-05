@@ -22,4 +22,6 @@ function validate(data) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
     });
 }
+
+
 module.exports = validate;
