@@ -247,32 +247,32 @@ Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ ] Uso de callbacks
+- [x] Uso de callbacks
 - [ ] Consumo de Promesas
-- [ ] Creacion de Promesas
-- [ ] Modulos de Js
+- [x] Creacion de Promesas
+- [x] Modulos de Js
 - [ ] Recursión
 
 ### Node
 - [ ] Sistema de archivos
-- [ ] package.json
-- [ ] crear modules
-- [ ] Instalar y usar modules
+- [x] package.json
+- [x] crear modules
+- [x] Instalar y usar modules
 - [ ] npm scripts
-- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [ ] Testeo de tus funciones
+- [x] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+- [x] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [ ] Modularización
+- [x] Modularización
 - [ ] Nomenclatura / Semántica
 - [ ] Linting
 
