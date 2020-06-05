@@ -7,7 +7,7 @@ const validate = (file, path) => {
     file.map(element => {
         fetch(element.links)
             .then((res) => {
-                let object = {
+                const object = {
                     href: res.url,
                     status: res.status,
                     statusText: res.statusText,
@@ -15,8 +15,8 @@ const validate = (file, path) => {
                     path: path
                 };
 
-                if (object.status === 200) { console.log(chalk.green(`Path: ${path}\n`)+ chalk.yellow(`${object.text}`)+chalk.green.bold(`${object.href}  ${object.status} ${object.statusText}\n   `)) }
-                //{console.log(object)}
+                if (object.status === 200) { 
+                    console.log(chalk.green(`Path: ${path}\n`)+ chalk.yellow(`${object.text}`)+chalk.green.bold(`${object.href}  ${object.status} ${object.statusText}\n   `)) }
                 else { console.log(chalk.bgRed.bold(`Path: ${path}\n`)+chalk.red(`${object.text}`) +  chalk.red.bold(`${object.href}  ${object.status}  ${object.statusText} BAD\n `)) }
             })
             .catch(err => console.log(err.message))
@@ -30,7 +30,7 @@ const stats = (links, path) => {
     links.map(element => {
         fetch(element.links)
             .then((res) => {
-                let object = {
+                const object = {
                     href: res.url,
                     status: res.status,
                     statusText: res.statusText
@@ -69,13 +69,13 @@ const getStatusLink = (links, comandLine4, comandLine5, path) => {
         validate(links, path);
     }
     if (comandLine4 !== "--stats" && comandLine4 !== "--validate" && comandLine4 !== "--s" && comandLine4 !== "--v") {
-        let mesageLine = "please type a valid option";
+        const mesageLine = "please type a valid option";
         console.log(chalk.cyanBright(mesageLine))
         return mesageLine
     }
     if (comandLine5 !== undefined) {
         if (comandLine5 !== "--stats" && comandLine5 !== "--validate" && comandLine5 !== "--s" && comandLine5 !== "--v") {
-            let mesageLine1 = "type a valid second option";
+            const mesageLine1 = "type a valid second option";
             console.log(chalk.cyanBright(mesageLine1))
             return mesageLine1
         }

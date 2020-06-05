@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-//require('../')()
+
 
 const findLinks = require('./utils/findLinks')
 const linksFunctions = require('./utils/validateAndStatusLinks')
@@ -33,28 +33,28 @@ const readDirectory=(uri, comandLine4, comandLine5)=>{
 
 
 const readFile= (uri, comandLine4, comandLine5)=>{
-    let probe = uri.lastIndexOf(".");
-    let typeFile = uri.slice(probe);
+    const probe = uri.lastIndexOf(".");
+    const typeFile = uri.slice(probe);
     if (typeFile === ".md") {
-        let fileReal = fs.readFileSync(uri, 'utf-8')
+        const fileReal = fs.readFileSync(uri, 'utf-8')
         findLinks(fileReal, uri)
             .then(linksReal => {
                 return linksFunctions.getStatusLink(linksReal, comandLine4, comandLine5, uri)
             })
             .catch(er => console.log(er))
     } else { 
-        let messErr= 'you need a file with .md extention o you missed the flag --file before your path :) '
+        const messErr= 'you need a file with .md extention o you missed the flag --file before your path :) '
         console.log(chalk.redBright(messErr))
         return messErr
          }
 }
 
 
-let allTheLinks = () => {
-    let newFile = process.argv.indexOf('--file');
-    let uri = process.argv[newFile + 1];
-    let comandLine4 = process.argv[newFile + 2]
-    let comandLine5 = process.argv[newFile + 3]
+const allTheLinks = () => {
+    const newFile = process.argv.indexOf('--file');
+    const uri = process.argv[newFile + 1];
+    const comandLine4 = process.argv[newFile + 2]
+    const comandLine5 = process.argv[newFile + 3]
     
     if (process.argv[2]!== '--help'){
     if (!fs.lstatSync(uri).isDirectory()) {
