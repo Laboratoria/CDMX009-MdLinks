@@ -1,6 +1,6 @@
 {
     "name": "mdlinks-dors",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Node library to validate and stats ok and broken URLs in a markdown file",
     "main": "cli.js",
     "bin": {

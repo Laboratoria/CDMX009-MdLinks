@@ -20,22 +20,23 @@ const argv = require('yargs')
 
 
 let command = argv._[0];
+let userPath = argv.file;
 
 switch (command) {
     
     case 'validate':
         console.log(chalk.cyan.bold('Option: Validate'));
-        showValidate(argv.file);
+        showValidate(userPath);
         return;
 
     case 'stats':
         console.log(chalk.cyan.bold('Option: Stats'));
-        showStats(argv.file);
+        showStats(userPath);
         return;
 
     case 'validateStats':
         console.log(chalk.cyan.bold('Option: ValidateStats'));
-        showValidateStats(argv.file);
+        showValidateStats(userPath);
         return;
     
     default:
