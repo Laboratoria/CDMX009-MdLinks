@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 let fs = require("fs");
 let path = require("path");
 let fetch = require("node-fetch");
