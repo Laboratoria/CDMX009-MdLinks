@@ -1,10 +1,10 @@
 {
   "name": "cdmx009-mdlinks",
   "version": "1.0.0",
-  "description": "Libreria de node para archivos md",
+  "description": "Library with node for read md files",
   "main": "node index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,6 @@
     "md-links": "./cli.js"
   },
   "dependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/register": "^7.9.0",
-    "babel-jest": "^26.0.1",
     "chalk": "^4.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",

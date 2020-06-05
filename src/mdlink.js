@@ -1,44 +1,67 @@
 const path = require('path');
 const fs = require('fs');
-const glob = require('glob');
 const marked = require('marked');
 
-const archiveTrue = (archive) => fs.existsSync(archive);
+const fileTrue = (file) => fs.existsSync(file);
 
-const absolutePath = (archive) => {
-  if (path.isAbsolute(archive) === true) {
-    return archive;
-  } return (path.resolve(archive));
+const absolutePath = (file) => {
+  if (path.isAbsolute(file) === true) {
+    return file;
+  } 
+  return (path.resolve(file));
 };
-//absolutePath('./test/read.md');
 
-const getDirectory = (src) => new Promise((resolve, reject) => {
-  glob(`${src}/**/*.md`, (err, files) => {
-    if (err) {
-      reject(err);
-    } resolve(files);
+const isDirec = (file) => fs.lstatSync(file).isDirectory();
+
+const walkDir = (file) => {
+  let arrayFile = [];
+  if (!isDirec(file)) {
+    arrayFile.push(file);
+  } else {
+    const readDirectory = fs.readdirSync(file);
+    readDirectory.map((read) => {
+      const next = path.join(file, read);
+      let result= (isDirec(next)) ? arrayFile = arrayFile.concat(walkDir(next)) : arrayFile.push(next);
+      return result
+    });
+  }
+  return arrayFile;
+};
+
+const mdFilter = (fileArr) => {
+  const newArrayFileMd = [];
+  fileArr.forEach((item) => {
+    if (path.extname(item) === '.md') {
+      return newArrayFileMd.push(item);
+    }
   });
-});
-(getDirectory('./test').then((files) => (files)));
+  return newArrayFileMd;
+};
 
+const readMD = (file) => fs.readFileSync(file, 'utf-8');
 
 const getLinks = (file) => {
-  const mdFiles = fs.readFileSync(file).toString();
+  const mdFiles = walkDir(file);
+  const arrayMd = mdFilter(mdFiles);
   const myRen = new marked.Renderer();
   const links = [];
-
-  myRen.link = (href, title, text) => {
-    links.push({
-      href,
-      text,
-      file,
-    });
-  };
-  marked(mdFiles, { renderer: myRen });
+  arrayMd.forEach((file) => {
+    myRen.link = (href, title, text) => {
+      links.push({
+        href,
+        text,
+        file,
+      });
+    };
+    marked(readMD(file), { renderer: myRen });
+  });
   return (links);
 };
-//console.log(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'));
+
 
 module.exports = {
-  archiveTrue, absolutePath, getLinks, getDirectory, 
-};
+  fileTrue, 
+  absolutePath, 
+  getLinks,
+   walkDir
+}; 

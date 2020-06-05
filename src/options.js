@@ -6,29 +6,25 @@ const validate = (archive) => {
   const validateLinks = linksMd.map((element) => new Promise((resolve) => (
     fetch(element.href)
       .then((res) => {
-        const obj = {
+        const objLink = {
           href: element.href,
           text: element.text,
           file: element.file,
         };
         if (res.status >= 200 && res.status < 400) {
-          obj.status = res.status;
-          obj.message = res.statusText;
-          resolve(obj);
+          objLink.status = res.status;
+          objLink.message = res.statusText;
+          resolve(objLink);
         } else {
-          obj.status = res.status;
-          obj.message = 'Fail';
-          resolve(obj);
+          objLink.status = res.status;
+          objLink.message = 'Fail';
+          resolve(objLink);
         }
       })
   )));
   return Promise.all(validateLinks);
 };
 
-/*validate('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
-.then((res) => console.log (res))
-.catch((err) => console.log("NO SE PUEDE VERIFICAR EL STATUS DE LOS LINKS, VERIFICA TU ARCHIVO"));
-*/
 const getLinksStats = (path) => new Promise((resolve) => {
   validate(path)
     .then((response) => {
@@ -37,10 +33,7 @@ const getLinksStats = (path) => new Promise((resolve) => {
       resolve(`Total : ${totalLinks} Unique: ${uniqueLinks}`);
     });
 });
-/*getLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
-.then((res) => console.log (res))
-.catch((err) => console.log("NO SE PUEDE HACER CONTEO LINKS, VERIFICA TU ARCHIVO"));
-*/
+
 const getBrokenLinksStats = (path) => new Promise((resolve) => {
   validate(path)
     .then((response) => {
@@ -50,7 +43,8 @@ const getBrokenLinksStats = (path) => new Promise((resolve) => {
 });
 
 
-/*getBrokenLinksStats('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md')
- .then((res) => (res));
- */
-module.exports = { validate, getLinksStats, getBrokenLinksStats };
+module.exports = { 
+  validate, 
+  getLinksStats, 
+  getBrokenLinksStats 
+};

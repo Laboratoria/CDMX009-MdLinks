@@ -21,7 +21,6 @@ if (argv.length) {
         const uniqueLinks = [...new Set(arrobj.map((obj) => obj.href))].length;
         console.log(blue(`\nTOTAL:   `) + green( totalLinks) ); 
         console.log(blue(`\nUNIQUE:   `) + green( uniqueLinks) ); 
-        //console.log((`\n Total : ${totalLinks} \n Unique: ${uniqueLinks}`); 
       });
   } else if ((argv[1] === '--validate' && argv[2] === '--stats')) {
     mdLinks(argv[0], { validate: true })
@@ -32,8 +31,6 @@ if (argv.length) {
         console.log(blue(`\nTOTAL:   `) + green( totalLinks) ); 
         console.log(blue(`\nUNIQUE:   `) + green( uniqueLinks) ); 
         console.log(blue(`\nBROKEN:   `) + red( broken) ); 
-        
-        //console.log(`\n Total : ${totalLinks}\n Unique: ${uniqueLinks}\n Broken: ${broken}`);
       });
   } else if (argv[1] === '--validate') {
     options.validate = true;
@@ -42,7 +39,6 @@ if (argv.length) {
         console.log(blue(`\nPATH:  `) + green(links.file)); 
         console.log(blue(`LINK:  `) + green(`${links.href}  `) + yellow (`${links.status}  ${links.message} `));
         console.log(blue(`TITLE:  `) + green(links.text));
-        //console.log(`\n Path :${links.file} \n Link : ${links.href}  ${links.status}  ${links.message} \n File : ${links.text} `);
       }));
   } else {
     mdLinks(argv[0])
@@ -50,9 +46,7 @@ if (argv.length) {
         console.log(blue(`\nPATH:  `) + green(links.file)); 
         console.log(blue(`\nLINK:  `) + green(links.href));
         console.log(blue(`\nTITLE:  `) + green(links.text));
-        //console.log(`\n Path :${links.file}\n Link : ${links.href}  \n Title : ${links.text}`);
       }));
   }
 }
-//mdLinks('./test/final.md', { validate: true }).then((res) => console.log(res));
 
