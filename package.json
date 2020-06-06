@@ -1,0 +1,34 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "proyecto mdlinks",
+  "main": "index.js",
+  "bin": {
+    "mdlinks": "cli.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaren29/CDMX009-MdLinks.git"
+  },
+  "keywords": [
+    "npm",
+    "mdlinks",
+    "node"
+  ],
+  "author": "Ana Karen Jasso Jacobo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akaren29/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/akaren29/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "colors": "^1.4.0",
+    "jest": "^26.0.1",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
