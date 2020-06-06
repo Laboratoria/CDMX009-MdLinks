@@ -1,0 +1,39 @@
+{
+    "name": "cat-names",
+    "version": "1.0.0",
+    "description": "Get popular cat names",
+    "license": "MIT",
+    "repository": "sindresorhus/cat-names",
+    "author": {
+        "name": "Sindre Sorhus",
+        "email": "sindresorhus@gmail.com"
+    },
+    "bin": "cli.js",
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "scripts": {},
+    "files": [
+        "index.js",
+        "cli.js",
+        "cat-names.json"
+    ],
+    "keywords": [
+        "cli-app",
+        "cli",
+        "bin",
+        "array",
+        "random",
+        "rand",
+        "animal",
+        "cats",
+        "kitten",
+        "names"
+    ],
+    "dependencies": {
+        "chalk": "^4.0.0",
+        "meow": "^3.6.0",
+        "unique-random-array": "^1.0.0"
+    },
+    "devDependencies": {}
+}
