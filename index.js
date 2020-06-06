@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
-let path = require('path');
+const path = require('path');
 const marked = require('marked');
 const fetch = require('node-fetch');
 const colors = require('colors');
@@ -17,29 +17,15 @@ function getFile(){
          console.log('Please enter file with extension markdown'.red);
          return false;
      }else{
-         readFile(uri);
          return uri;    
      }
 };
 
-getFile();
 
   function readFile(uri){
    let fileMd = fs.readFileSync(uri,'utf-8');
-   searchLinks(fileMd, uri);
    return fileMd; 
   }
-
-
-  /* function searchLinks(fileMd, uri) {
-   let newFile = fileMd.replace(/[\(\)]/g, " ");
-   let space=" ";
-   let arrNewFile = newFile.split(space);
-   let arrLinks = arrNewFile.filter(text => text.includes('http'));
-   let objectLinks = {Links: arrLinks, File: uri};
-   console.log(objectLinks);
-   return objectLinks;
-   } */
 
    function searchLinks(fileMd, uri){
     let linksArr = []
@@ -52,24 +38,93 @@ getFile();
         })
     }
     marked(fileMd, { renderer: renderer })
-    validateLinks(linksArr,uri);
     return linksArr;
 }
  
-    function validateLinks(links, uri) {
-       const validateLinks= links.map(link => {
+    function validateLinks(linksArr, uri) {
+       const linksValid= linksArr.map(link => {
        return fetch(link.href)
         .then(res => {
             if(res.status === 200){
                 console.log(`Href: ${res.url}  Status: ${res.status} OK ✓`.green);   
             }else{
-                console.log(`Href: ${res.url}  Status: ${res.status} Failed ✕`.red);    
+                console.log(`Href: ${res.url}  Status: ${res.status} Fail ✕`.red);    
             }
         }).catch(error =>{
             console.log(`Don´t find link: ${res.url}`);
         })
        })
-       return validateLinks;
-   } 
+       return linksValid;
+   };
 
+   function stats(linksArr, uri){
+      let totalLinks= linksArr.length;
+      let uniqueLinks = [...new Set (linksArr.map(links => links.href))].length;
+
+      console.log(`The file ${uri} consists of the following: \n`);
+      console.log(`-- Total: ${totalLinks}`);
+      console.log(`-- Unique: ${uniqueLinks}`);
+   };
+
+   function validateAndStats(linksArr, uri){
+     let links = linksArr;
+     let totalLinks = linksArr.length;
+     let uniqueLinks = [...new Set(linksArr.map(links => links.href))].length;
+     let brokenLinks = 0;
+     let promises = [];
+
+     links.forEach(link => {
+         let promise = fetch(link.href)
+          .then(res =>{
+              if(res.status != 200){
+                  brokenLinks++;
+              }
+          })
+          promises.push(promise)
+     })
+     return Promise.all(promises)
+     .then(()=>{
+         console.log(`The file ${uri}  consists of the following: \n`);
+         console.log(`-- Total: ${totalLinks}`);
+         console.log(`-- Unique: ${uniqueLinks}`);
+         console.log(`-- Broken: ${brokenLinks}`);
+         return brokenLinks;
+     })
+   };
    
+async function route(){
+   let uri = getFile();
+    if(uri != false){
+        let fileMd = readFile(uri);
+        if(fileMd != false){
+            let linksArr = searchLinks(fileMd, uri);
+            if(linksArr.length <= 0){
+                return console.log(`Sorry the file ${uri} has no links`);
+            }if(flags.includes('--validate') && flags.includes('--stats') || flags.includes('--v') &&flags.includes('--s')){
+                validateAndStats(linksArr, uri);
+            }else if(flags.includes('--validate') || flags.includes('--v')){
+                validateLinks(linksArr, uri);
+            }else if(flags.includes ('--stats') || flags.includes('--s')){
+                stats(linksArr, uri);
+            }else{
+                if(linksArr != '')
+                console.log(`The file ${uri} conteint links: \n`);
+                linksArr.forEach(link => {
+                    console.log(`-- ${link.href} ${link.title}`);
+                })
+            }
+        }
+    }
+};
+
+route();
+
+
+module.exports = {
+ getFile,
+ readFile,
+ searchLinks,
+ validateLinks,
+ stats,
+ validateAndStats
+}
