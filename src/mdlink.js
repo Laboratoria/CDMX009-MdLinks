@@ -62,6 +62,6 @@ const getLinks = (file) => {
 module.exports = {
   fileTrue, 
   absolutePath, 
-  getLinks, 
-  walkDir
+  getLinks,
+   walkDir
 }; 
