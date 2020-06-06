@@ -1,9 +1,5 @@
 //Funcion para leer el README.md
 
-/* let fs = require("fs");
-console.log(fs.readFileSync("README.md", "utf8")); */
-
-
 /* ***** FUNCION OK ***** */
 
 const fs = require('fs'); 
@@ -17,7 +13,9 @@ function readFile() {
     console.log(process.argv);
     console.log('index: ', index);
     console.log('uri: ', uri);
-    console.log('The file contained: ', fileContent);
+    console.log('The file content: ', fileContent);
 }
 
-readFile(); 
+readFile();
+
+module.exports = { readFile }
