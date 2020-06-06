@@ -1,0 +1,32 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "Library with node for read md files",
+  "main": "node index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElizaFlores11/CDMX009-MdLinks.git"
+    
+  },
+  "author": "Elizabeth Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElizaFlores11/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/ElizaFlores11/CDMX009-MdLinks#readme",
+  "bin": {
+    "md-links": "./cli.js"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.13.1",
+    "jest": "^26.0.1",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
