@@ -6,58 +6,58 @@ describe('Funtion AbsolutePath', () => {
   it('is a function', () => {
     expect(typeof absolutePath).toBe('function');
   });
-  it('Deberia retornar un string con la ruta absoluta', () => {
+  it('Return absolute path', () => {
     const output = 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js'; 
     expect(absolutePath('./src/mdlink.js')).toBe(output);
   });
-  it('Deberia retornar un string con la entrada actual', () => {
+  it('It should return a string with the current entry', () => {
     const output = 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js';
     expect(absolutePath('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\src\\mdlink.js')).toBe(output);
   });
 });
 
-// Test prueba una funcion usada para extraer rutas dentro de dir y subdir//
+// assets prueba una funcion usada para extraer rutas dentro de dir y subdir//
 describe('walkDir ', () => {
   it('is a function', () => {
     expect(typeof walkDir).toBe('function');
   });
-  it('Deberia retornar un array de strings', () => {
+  it('Should return an array of strings', () => {
     const filesOutput = [
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\mdlinks.spec.js',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\out.md',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\read.md',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\other.md',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\out.md',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\prueba.js',
-      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\test-API\\test.md'];
-    expect(walkDir('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test')).toEqual(filesOutput);
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\mdlinks.spec.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\read.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\other.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\out.md',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\prueba.js',
+      'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\assets-API\\assets.md'];
+    expect(walkDir('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets')).toEqual(filesOutput);
   });
 });
 
 
-// Test funcion extraer links //
+// assets funcion extraer links //
 
 describe('getLinks', () => {
   it('is a function', () => {
     expect(typeof getLinks).toBe('function');
   });
-  it('Deberia retornar un array de objetos, cada uno con 3 propiedades', () => {
+  it('It should return an array of objects, each with 3 propertie', () => {
     const linksOutput = [{
         href: 'https://docs.npmjs.com/getting-started/what-is-npm',
         text: 'NPM',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       },
       {
         href: 'https://docs.npmjs.com/getting-started/publishing-npm-packages',
         text: 'Publicar packpage',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       },
       {
         href: 'https://javascript.info/promise-basics',
         text: 'Promise',
-        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md'
+        file: 'C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md'
       }]
-    expect(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\test\\final.md')).toEqual(linksOutput);
+    expect(getLinks('C:\\Users\\eliza\\Documents\\MdLinks\\CDMX009-MdLinks\\assets\\final.md')).toEqual(linksOutput);
   });
 });
