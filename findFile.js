@@ -8,8 +8,6 @@ function findFile() {
     return route;
 }
 
-findFile();
-
 
 module.exports = {
     findFile

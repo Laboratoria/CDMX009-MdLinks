@@ -2,13 +2,13 @@
 'use strict';
 
 const meow = require ('meow');
-// const { file } = require('./readFile');
-const foo = require ('./findFile');
+const { file } = require('./readFile');
+// const foo = require ('./findFile');
 
 let cli = meow ([
     `
     Usage
-      $ --file <input>
+      $ ./cli.js <input> --flag
 
     Options
       --validate, -v  Include links validated
@@ -16,8 +16,9 @@ let cli = meow ([
       --validate --stats, -v -s  Include links validated and stats
 
     Example
-    $ --file example.md --validate
+    $ ./cli.js example.md --validate
 `, {
+    booleanDefault: undefined,
     flags: {
         validate: {
             type: 'boolean',
@@ -30,5 +31,4 @@ let cli = meow ([
     }
 }
 ])
-// console.log(cli.input[0]);
-// // foo(cli.input[0], cli.flags)
+file(cli.input[0])
