@@ -62,8 +62,8 @@ function getFile(){
       let uniqueLinks = [...new Set (linksArr.map(links => links.href))].length;
 
       console.log(`The file ${uri} consists of the following: \n`);
-      console.log(`-- Total: ${totalLinks}`);
-      console.log(`-- Unique: ${uniqueLinks}`);
+      console.log(`-- Total: ${totalLinks}`.yellow);
+      console.log(`-- Unique: ${uniqueLinks}`.magenta);
    };
 
    function validateAndStats(linksArr, uri){
@@ -85,9 +85,9 @@ function getFile(){
      return Promise.all(promises)
      .then(()=>{
          console.log(`The file ${uri}  consists of the following: \n`);
-         console.log(`-- Total: ${totalLinks}`);
-         console.log(`-- Unique: ${uniqueLinks}`);
-         console.log(`-- Broken: ${brokenLinks}`);
+         console.log(`-- Total: ${totalLinks}`.yellow);
+         console.log(`-- Unique: ${uniqueLinks}`.magenta);
+         console.log(`-- Broken: ${brokenLinks}`.red);
          return brokenLinks;
      })
    };
@@ -110,7 +110,7 @@ async function route(){
                 if(linksArr != '')
                 console.log(`The file ${uri} conteint links: \n`);
                 linksArr.forEach(link => {
-                    console.log(`-- ${link.href} ${link.title}`);
+                    console.log(`-- ${link.href} ${link.title}`.magenta);
                 })
             }
         }
