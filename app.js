@@ -1,25 +1,80 @@
-//let chalk = require('chalk')
-//let inquire = require('inquire')
-let md = new require("markdown-it")()
-let fs = require("fs")
-let index = process.argv.indexOf("--file")
-if (index < 0) return console.log("Necesitas usar la flag --file con un uri válido")
-let uri = process.argv[index + 1]
-let string = fs.readFileSync(uri, "utf8")
-console.log(process.argv)
-console.log("index: ", index)
-console.log("uri: ", uri)
-console.log(string)
-console.log(typeof(string))
-    // 
-    // let string = fs.readFileSync('./README.md', "utf8")
-let result = md.parse(string)
-console.log("result", result)
+const fs = require('fs')
+const fetch = require('node-fetch')
+const colors = require('colors')
 
-function getLinks(token) {
+function getContentString() {
 
-    return result.token.filter(result => result.token.includes(token))
+    let index = process.argv.indexOf("--file")
+    if (index < 0) return console.log("You need to use a valid uri flag --file")
+    let uri = process.argv[index + 1]
+    let string = fs.readFileSync(uri, 'utf8')
+    return string
 }
-console.log("links", getLinks(token))
 
-//let resultRex = /[https]/
+function getLinks(string) {
+
+    const getArray = ("Text: ", string.toString());
+    let regExpression = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    return getArray.match(regExpression);
+}
+
+function validateAndCountLinks(arrayLinks) {
+    let i = 0
+    let work = 0
+    let broke = 0
+
+    for (i = 0; i < arrayLinks.length; i++) {
+
+        fetch(arrayLinks[i]).then(function(response) {
+            if (response.status === 200) {
+                work++;
+
+            } else if (response.status == 404) {
+                broke++;
+
+
+            } else {
+                console.log('error', response.status);
+            }
+            console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
+            console.log(`✔ Total work Links: ${work}`.green);
+            console.log(`✖ Total Broken links: ${broke}`.red);
+
+        })
+
+    };
+
+    let promises = arrayLinks.map(aLink => fetch(aLink) // array de promesas
+            .then(response => { // resolve de la promesa
+                return {
+                    url: response.url,
+                    status: response.status,
+                    text: response.statusText
+                }
+            })
+            .catch(
+                error => {
+                    return { error: error.message }
+                })
+        )
+        // qué devuelve esta función ? ---> UNA ... P...R...O...M...E...S...A
+    return Promise.all(promises) // convierte el ARRAY de promesas por un ARRAY de res/rej
+        .then(result => result) // array de resultados {url,status,text,error}
+        // console.log("las promesas: ", promises)
+};
+
+let main = async() => { //  (imperativo ó programacion imperativa)
+    let string = getContentString()
+    let links = getLinks(string)
+    let shouldValidate = process.argv.indexOf('--validate')
+    let shouldShowTotals = process.argv.indexOf('--stats')
+    if (shouldValidate > -1) {
+        let results = await validateAndCountLinks(links) //devuelve una promesa
+        console.log(results)
+        if (shouldShowTotals > -1) {
+
+        }
+    }
+}
+
+main();

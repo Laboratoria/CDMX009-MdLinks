@@ -50,7 +50,15 @@ Advanced Configuration
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
 Deployment
+This section has moved here: https://faok.github.io/create-react-app/docs/deployment
+
+
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+
+This section has moved here: https://faceok.githu.io/create-react-app/docs/deployment
 
 yarn build fails to minify
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+his section has moved here: https://facebook.githu.oi/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
