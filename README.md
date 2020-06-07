@@ -71,8 +71,10 @@ mdlinks stats --file <path>
 ```
 Results unfold as follows:
 ```
-Url Ok: 2
-Url broken: 1
+Total: 3
+Unique: 2
+Ok: 2
+broken: 1
 ```
 
 - **validateStats** commadn does both, validate and get tha stats of URL links. 
@@ -106,8 +108,10 @@ Results unfold as a combination of both validate and stats commands.
     status: 'ok'
   }
 ]
-Url Ok: 2
-Url broken: 1
+Total: 3
+Unique: 2
+Ok: 2
+broken: 1
 ```
 ## Logical flowchart
 

@@ -5,8 +5,7 @@ const { showValidate,
 
 
 function mdLinks(path, opts){
-    //console.log(typeof(opts));   
-    
+        
         if(opts.validate == true && opts.stats == false) {
             console.log(chalk.cyan.bold('Option: Validate'));
             showValidate(path);
@@ -24,3 +23,7 @@ function mdLinks(path, opts){
         } 
 }
 
+
+module.exports = {
+    mdLinks
+}
