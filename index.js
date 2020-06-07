@@ -4,25 +4,25 @@ const { showValidate,
     showValidateStats } = require('./utils/mdLinks');
 
 
-function mdLinks(path, validate, stats){
-       
-        
-       if(validate && !stats) {
+function mdLinks(path, opts){
+    //console.log(typeof(opts));   
+    
+        if(opts.validate == true && opts.stats == false) {
             console.log(chalk.cyan.bold('Option: Validate'));
             showValidate(path);
             return;
-        }else if (stats && !validate) {    
+        }else if (opts.validate == false && opts.stats == true) {    
             console.log(chalk.cyan.bold('Option: Stats'));
             showStats(path);
             return;
-        }else if (validate && stats) {    
+        }else if (opts.validate == true && opts.stats == true) {    
             console.log(chalk.cyan.bold('Option: ValidateStats'));
             showValidateStats(path);
             return;
         }else {
             console.log('Unrecognized command line');
-        }    
-   
+        } 
 }
 
-//mdLinks("/home/laboratoria159-pm/CDMX009-MdLinks/file1.md", {validate:true}, {stats:true});
+
+mdLinks("/home/laboratoria159-pm/CDMX009-MdLinks/file1.md", {validate:false, stats:true});

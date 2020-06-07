@@ -4,7 +4,8 @@ const { validatePath,
   urlStatus,
   findUrl,
   validateUrl,
-  getStats } = require('../utils/utils');
+  getStats,
+  uniqueUrls } = require('../utils/utils');
 
 
 test('given a single file should be flag: singleFile', () =>{
@@ -23,8 +24,10 @@ test('read directory files', async () => {
 })
 
 test('Finds URLs in a markdown file', () => {
-  let findUrlResponse=  findUrl('/home/laboratoria159-pm/CDMX009-MdLinks/file1.md');
-  expect(typeof findUrlResponse).toBe('object')
+  let findUrlResponse =  findUrl('/home/laboratoria159-pm/CDMX009-MdLinks/file1.md');
+  let uniqueUrlsResponse = uniqueUrls(findUrlResponse);
+  expect(typeof findUrlResponse).toBe('object');
+  expect(uniqueUrlsResponse).toBe(2);
 })
 
 test('Doesnt find URLs in a markdown file', () => {
@@ -52,6 +55,8 @@ test('URLs status in a markdown file', async () => {
   expect(urlStatusResponse[1].code).toBe(200)
   expect(urlStatusResponse[2].code).toBe(200)
 })
+
+
 
 
 /*

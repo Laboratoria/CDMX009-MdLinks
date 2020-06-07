@@ -3,10 +3,28 @@ const path = require('path');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 
+const uniqueUrls = (urls) => {
+    let repeted= 0;
+    let i;
+    let j=i+1;;
+    for(i=0; i<urls.length; i++ ) {
+        for(j=i; j<urls.length; j++ ) {
+            if(i != j){
+                if(urls[i].href == urls[j].href){
+                    repeted ++;
+                }
+            }    
+        }
+            
+    }
+    let unique = urls.length - repeted;
+    return unique;
+}
+
+
 const getStats = (urls) => {
     let ok = 0;
     let broken = 0;
-
     urls.forEach((e) => {
         if (e.status == 'ok') {
             ok++
@@ -14,8 +32,10 @@ const getStats = (urls) => {
             broken++
         }
     })
-    console.log(chalk.green.bold(`Url Ok: ${ok}`));
-    console.log(chalk.red.bold(`Url broken: ${broken}`));
+    console.log(chalk.yellow.bold(`Total: ${urls.length}`))
+    console.log(chalk.blue.bold(`Unique: ${uniqueUrls(urls)}`))
+    console.log(chalk.green.bold(`Ok: ${ok}`));
+    console.log(chalk.red.bold(`broken: ${broken}`));
     return `${ok} ${broken}`;
 }
 
@@ -169,5 +189,6 @@ module.exports = {
     urlStatus,
     findUrl,
     validateUrl,
-    getStats
+    getStats,
+    uniqueUrls
 }
