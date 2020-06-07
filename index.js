@@ -24,5 +24,3 @@ function mdLinks(path, opts){
         } 
 }
 
-
-mdLinks("/home/laboratoria159-pm/CDMX009-MdLinks/file1.md", {validate:false, stats:true});
