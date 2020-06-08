@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const fs = require("fs");
 const path = require("path");
 const utils = require("./utils/utils.js");
-const mdLinks = {};
+const sharidlinks = {};
 function findFile() {
   let uri = process.argv[2];
   new Promise((resolve, reject) => {
@@ -76,7 +76,7 @@ function getLinks(matchMd, uri, regexURL, regexLabel) {
 
 findFile();
 
-mdLinks.findFile = findFile;
-mdLinks.searchLinks = searchLinks;
-mdLinks.getLinks = getLinks;
-module.exports = mdLinks;
+sharidlinks.findFile = findFile;
+sharidlinks.searchLinks = searchLinks;
+sharidlinks.getLinks = getLinks;
+module.exports = sharidlinks;
