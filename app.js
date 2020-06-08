@@ -1,170 +1,82 @@
 #!/usr/bin/env node
-let fs = require("fs");
-let path = require("path");
-let fetch = require("node-fetch");
-let chalk = require("chalk");
 
-
+const chalk = require("chalk");
+const fs = require("fs");
+const path = require("path");
+const utils = require("./utils/utils.js");
 const mdLinks = {};
-
 function findFile() {
-  //console.log("process ", process.argv);
-  let index = process.argv.indexOf("--file");
-  if (index < 0) {
-     return console.log("Necesitas usar la flag --file con un uri valido");
-  } else {
-    let uri = process.argv[index + 1];
-    //console.log("uri ", uri);
-    let fileExt = path.extname(uri);
-   
-    //console.log("extension ", fileExt);
-    if (fileExt === ".md") {
-      readFiles(uri);
-      return uri;
-    } else {
-      return console.log("por favor ingresa un archivo con extensión '.md'");
+  let uri = process.argv[2];
+  new Promise((resolve, reject) => {
+    if (path.isAbsolute(uri)) {
+      let directory = fs.readdirSync(uri, "utf-8");
+      let eachDir = directory.forEach((re) => {
+        let extFile = path.extname(re);
+        if (extFile === ".md") {
+          let newDir = path.join(uri, re);
+          resolve(searchLinks(newDir));
+        }
+      });
     }
+    if (!path.isAbsolute(uri)) {
+      let extFile = path.extname(uri);
+      if (extFile != ".md") {
+        reject(
+          console.log(chalk.red("Ingresa una ruta, ejemplo: md-links some/example.md o --help")));
+      } else {
+        resolve(searchLinks(uri));
+      }
+    }
+  }).catch((err) => err);
+  let help = process.argv.indexOf("--help");
+  if (help > 0) 
+    return console.log(chalk.magenta("\n Instrucciones :  \n --help : recibe ayuda  \n md-links <path> <options> \n <path> : ruta del archivo o directorio \n <options> : \n --validate: regresa ruta de archivo,link evaluado, status de link ; \n --stats: conteo de los links correctos, links rotos y con error de conexion \n --validate --stats : regresa la estadistica de links encontrados y el estatus de cada uno"));
   
-  } 
-  
+
 }
 
-
-function readFiles(uri) {
+function searchLinks(uri) {
   let fileContent = fs.readFileSync(uri, "utf-8");
-  //console.log("todo el texto aqui ", fileContent)
-  getLinks(fileContent, uri);
-  return fileContent;
-}
-
-function getLinks(fileContent, uri) {
-  let regexMarkdown = /\[(.+)\]\s(https?:.+?\S+)/gim; //obtiene las etiquetas y links sin parentesis
+  let regexMarkdown = /\[(.+)\]\s(https?:.+?\S+)/gim;
   let regexURL = /https?:.+?\S+/gim;
-  let regexLabel = /\[(.+)\]\s/gim; //este regex trae todo lo que tenga []
-  let deleteBrackets = fileContent.replace(/[\(\)]/gim, " "); //aqui quitamos los parentesis y ponemos espacios
-  let matchMd = deleteBrackets.match(regexMarkdown); //trae los que coincidan con etiquetas y links
-  let matchURL = deleteBrackets.match(regexURL); //trae solo los links
-   consultLinks(matchMd, uri, regexURL, regexLabel);
-   return matchMd;
+  let regexLabel = /\[(.+)\]\s/gim;
+  let deleteBrackets = fileContent.replace(/[\(\)]/gim, " ");
+  let matchMd = deleteBrackets.match(regexMarkdown);
+  getLinks(matchMd, uri, regexURL, regexLabel);
+  return matchMd;
 }
 
-function consultLinks(matchMd, uri, regexURL, regexLabel) {
-  let arrayN = [];
+function getLinks(matchMd, uri, regexURL, regexLabel) {
+  let arrayLinks = [];
   matchMd.forEach((element) => {
     let links = element.match(regexURL);
-    let urls = element.match(regexLabel);
-    let newObjet = {
+    let txtLinks = element.match(regexLabel);
+    let properties = {
       href: links,
-      label: urls,
+      label: txtLinks,
       path: uri,
     };
-    arrayN.push(newObjet);
+    arrayLinks.push(properties);
   });
 
   let flagValidate = process.argv.indexOf("--validate");
   let flagStats = process.argv.indexOf("--stats");
 
   if (flagValidate > 0 || flagStats > 0) {
-    getInfoLink(arrayN, flagValidate, flagStats);
-   
-    
+    utils.getInfoLink(arrayLinks, flagValidate, flagStats);
   } else {
-    //consultLinks(matchMd, uri, regexURL, regexLabel)
     return console.log(
-      arrayN,
+      arrayLinks,
       "\nSe encontraron ",
-      arrayN.length,
+      arrayLinks.length,
       " links en el archivo"
     );
   }
 }
 
-function getInfoLink(arrayN, flagValidate, flagStats) {
-  //console.log("Los links: ", arrayN)
-  let succes =0;
-  let broke =0;
-  let arrayS = [];
-  let arrFail = [];
-  let links = arrayN.map((link) => {
-    fetch(link.href)
-      .then((res) => {
-        let object = {
-          // si esta ok o fail
-          href: res.url,
-          label: link.label,
-          status: res.status,
-          statusText: res.statusText,
-        };
-        arrayS.push(object);
-                
-        newValidate(object, flagValidate);
-      })
-
-      .catch((err) => {
-        let objetFail = err.message;
-        if (objetFail !== null) {
-          //console.log("Error de conexión :", chalk.bgYellow(chalk.black(`${objetFail}`)));
-        }
-        arrFail.push(objetFail);
-
-        if(arrayS.length +arrFail.length === arrayN.length){
-          newStats(flagStats,arrayN,arrFail,arrayS,succes,broke);
-        }
-            });
-        });
-}
-
-function newValidate(object, flagValidate) {
-   if (flagValidate > 0) {
-    if (object.status === 200) {
-      return console.log(`${object.label}`, chalk.bgBlue(`${object.status} ✔ ${object.statusText}`));
-    } else {
-      return console.log(`${object.label}`, chalk.bgRed(`${object.status} X ${object.statusText}`));
-    }
-  }
-}
-
-function newStats(flagStats,arrayN,arrFail,arrayS,succes,broke) {
-  if (flagStats > 0) {
-   
-       arrayS.map((link) => {
-      if (link.status===404){
-        broke++;
-      }else{
-          succes++;
-      }
-    });
-    
-    
-    /* console.log("Links totales en el archivo",arrayN.length)
-    console.log("Links validados ",arrayS.length)
-    console.log("Links con error de conexion en fetch",arrFail.length)
-    console.log("status 200 ", succes)
-    console.log("404", broke) */
-
-    if( arrayN.length ===arrFail.length+arrayS.length){
-      //console.log("vamo bien")
-      return console.log(chalk.bgCyan((chalk.black(`Links Totales: ${arrayN.length}\n`)), 
-                         chalk.bgGreen(chalk.black(`Links trabanjando de manera correcta: ${succes} \n`)),
-                         chalk.bgYellow(chalk.black(`Links con error de conexión: ${arrFail.length} \n`)),
-                         chalk.bgRed(chalk.black((`Links rotos : ${broke} \n`)))))
-      
-    }
-   
-}
-}
-
-
-
-
 findFile();
 
 mdLinks.findFile = findFile;
-mdLinks.readFiles = readFiles;
+mdLinks.searchLinks = searchLinks;
 mdLinks.getLinks = getLinks;
-mdLinks.consultLinks = consultLinks;
-mdLinks.getInfoLink = getInfoLink;
-mdLinks.newValidate = newValidate;
-mdLinks.newStats = newStats;
-
 module.exports = mdLinks;
