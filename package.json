@@ -1,0 +1,32 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "CDMX009 MDLinks Mariana Olimpia",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarianaOlimpia/CDMX009-MdLinks.git"
+  },
+  "author": "Mariana Olimpia",
+  "license": "ISC",
+  "bin": {
+    "mdlinks": "./app.js"
+  },
+  "bugs": {
+    "url": "https://github.com/MarianaOlimpia/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/MarianaOlimpia/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^7.1.0",
+    "markdown-link-extractor": "^1.2.3",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
