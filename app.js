@@ -96,3 +96,5 @@ const stats = async (links) => {
 }
 
 validateArgvExist(inputDoc);
+
+module.exports = { path, validateArgvExist, validateExt, readFiles, selectOption, getLinks, validateLinks, stats }
