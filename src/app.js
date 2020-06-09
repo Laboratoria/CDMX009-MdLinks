@@ -1,24 +1,16 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const { validateLinks } = require('./index')
+const { validateLinks, showLinksValidated, showLinksStats } = require('./index')
 
-function findFiles() {
-    let index = process.argv.indexOf('--file');
-    let uri = process.argv[index + 1];
-    if (index < 0 || !uri) return console.log("no hay archivo")
-    readFiles(uri)
-    return uri
-}
-
-function readFiles(currentFile) {
-    let string = fs.readFileSync(currentFile, 'utf8')
+function readFiles(ruta) {
+    let string = fs.readFileSync(ruta, 'utf8')
     getLinks(string)
-    return currentFile;
+    return string;
 }
 
-function getLinks(string, link, regExp) {
-    regExp = /\bhttps?:\/\/\S+/gi;
+function getLinks(string, link) {
+    let regExp = /\bhttps?:\/\/\S+/gi;
     let myArr = [];
     while ((link = regExp.exec(string)) !== null) {
         myArr.push(link[0]);
@@ -26,8 +18,39 @@ function getLinks(string, link, regExp) {
     validateLinks(myArr)
 }
 
-findFiles();
+function readFileValidation(ruta) { //validar lectura
+    let string = fs.readFileSync(ruta, 'utf8')
+    getLinksValidation(string)
+    return string;
+}
+
+function getLinksValidation(string, link) { //validar obtener links
+    let regExp = /\bhttps?:\/\/\S+/gi;
+    let myArr = [];
+    while ((link = regExp.exec(string)) !== null) {
+        myArr.push(link[0]);
+    }
+    showLinksValidated(myArr)
+}
+
+function readFilesStats(ruta) { //stats lectura
+    let string = fs.readFileSync(ruta, 'utf8')
+    getLinkStats(string)
+    return string;
+}
+
+function getLinkStats(string, link) { //stats obtener
+    let regExp = /\bhttps?:\/\/\S+/gi;
+    let myArr = [];
+    while ((link = regExp.exec(string)) !== null) {
+        myArr.push(link[0]);
+    }
+    showLinksStats(myArr)
+}
 
 module.exports = {
-    findFiles,
+    readFiles,
+    getLinks,
+    readFileValidation,
+    readFilesStats
 }

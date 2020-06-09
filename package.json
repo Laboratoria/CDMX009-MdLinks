@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "mdLinks": "./yargs.js"
+  },
   "directories": {
     "test": "test"
   },
@@ -17,14 +20,14 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "jest"
+    "test": "jest  --verbose --coverage"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vanyaxel/CDMX009-MdLinks.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Xel Jimenez",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vanyaxel/CDMX009-MdLinks/issues"

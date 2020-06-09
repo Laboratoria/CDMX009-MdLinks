@@ -249,7 +249,7 @@ pendientes de tu proyecto anterior.
 ### Javascript
 - [x] Uso de callbacks
 - [x] Consumo de Promesas
-- [ ] Creacion de Promesas
+- [x] Creacion de Promesas
 - [x] Modulos de Js
 - [ ] Recursión
 
@@ -258,11 +258,11 @@ pendientes de tu proyecto anterior.
 - [x] package.json
 - [x] crear modules
 - [x] Instalar y usar modules
-- [ ] npm scripts
+- [x] npm scripts
 - [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [ ] Testeo de tus funciones
+- [x] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales

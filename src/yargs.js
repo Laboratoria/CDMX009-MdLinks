@@ -1,24 +1,17 @@
-const { validateLinks } = require('./index')
-const chalk = require('chalk')
-const opciones = {
+const options = {
     path: {
-        demand: true, //forzado
-        alias: 'p', // path ruta direccion
-        //default: "README.md" //un archivo readme
+        demand: true,
+        alias: 'p',
+        default: "README.md"
     },
 }
-
-
-
 const argv = require('yargs')
-    .command('validate', 'hara la validación de los links', opciones)
-    .alias('--validate', '--val')
-    .command('stats', 'generará el total de links y a su vez dara el total de links que sirven y los que no', opciones)
-    .alias('--stats', '--s')
+    .command('validate', 'With this command you will be able to see the result of the validated links inside a Markdown File', options)
+    .command('stats', 'With this command you will be able to know the stats of the links(total, broken and useful', options)
+    .command('validateStats', 'With this command you will be able to know both, the validated links and the stats', options)
     .help()
-    .argv
+    .argv;
 
 module.exports = {
-    validateLinks,
     argv
 }
