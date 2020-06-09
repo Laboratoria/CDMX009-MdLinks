@@ -1,0 +1,24 @@
+{
+  "name": "mdlinks",
+  "version": "1.0.0",
+  "description": "Encontrando links en archivo markdown con node",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimenaMV/CDMX009-MdLinks.git"
+  },
+  "author": "Jimena Manzanares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JimenaMV/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/JimenaMV/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0"
+  }
+}
