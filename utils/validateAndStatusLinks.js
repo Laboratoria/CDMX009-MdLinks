@@ -50,11 +50,13 @@ const stats = (links, path) => {
             .catch((err) => {
                 let objetFail = err.message
                 if (objetFail !== null) {
-                    erros++;
+                    erros++
+                    if(links.length === validLink + brokenLink + erros){
                     return console.log(chalk.cyan.bold(`\n${path}\n`) + chalk.magenta.bold(`Total unique Links: ${links.length}\n   
                             Right Links :${validLink}\n 
                             Wrong Links : ${brokenLink}\n
                             Connection error : ${erros}  ${objetFail}`))
+                    }else console.log(' Please try again An error has occurred in the file: ' +  path)
                 }
             })
     })

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "find and validate the status of the links inside of a file or directory",
   "main": "index.js",
-  "bin": "index.js",
   "scripts": {
     "test": "jest --verbose --coverage"
   },

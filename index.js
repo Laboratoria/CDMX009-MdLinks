@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 
 const findLinks = require('./utils/findLinks')
 const linksFunctions = require('./utils/validateAndStatusLinks')
@@ -64,6 +62,12 @@ const allTheLinks = () => {
        
     }
     } else {console.log( `
+    To execute:
+
+    dan-mdlinks --file <path-to-file/directory> [options]
+
+    Options:
+
     --v         validate 
     --validate  validate
     --s         stats 
