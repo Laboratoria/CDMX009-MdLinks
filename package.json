@@ -1,0 +1,36 @@
+{
+  "name": "CDMX009-MdLinks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "mdLinks": "./yargs.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "fetch": "^1.1.0",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.1.0",
+    "jest": "^25.5.4",
+    "node-fetch": "^2.6.0",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest  --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanyaxel/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "Xel Jimenez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanyaxel/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/vanyaxel/CDMX009-MdLinks#readme"
+}
