@@ -43,11 +43,11 @@ function getLinks(string){
     /* fetch(links).then (function(res){
         console.log(res)
     }) */
-    validate(links)
+    fetchResponse(links)
 }
 
 
-function validate(links){
+function fetchResponse(links){
     let fetchPromises = links.map(link => {
         fetch(link)
         .then (res => {
@@ -63,12 +63,30 @@ function validate(links){
             //console.log(error)
             let err = {
                 url: error.message,
-                status: 'error',
+                status: 404,
                 error: error.errno
             }
             console.log(err)
             })
         })
+
+        if (resp.status === 404){
+            console.log(yeiii)
+        }else{
+
+        }
+        //validate(fetchPromises)
+}
+
+function validate (fetchPromises){
+    const validate = fetchPromises.map(function(element){
+        return element.url
+    })
+    /* if (res.status = 400 || status === 'error'){
+        console.log(res.url + 'Status: 404')
+    }else{
+
+    } */
 }
 
 
