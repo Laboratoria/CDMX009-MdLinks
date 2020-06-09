@@ -1,7 +1,7 @@
-const readMdFile = require('../index.js');
+const validateLinks = require('../app.js');
 
 describe('readMdfile', () => {
     it('soy una función', () => {
-        expect(typeof readMdFile).toBe('function');
+        expect(typeof validateLinks).toBe('function');
     })
 })
