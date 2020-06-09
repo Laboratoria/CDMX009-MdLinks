@@ -23,14 +23,21 @@ function readFile() {
     console.log(process.argv);
     console.log("index: ", index);
     console.log("uri: ", uri);
-    console.log("contenido del archivo: ", fileInformation);
+    showLinks(fileInformation);
 }
 
-// //node app.js --file README.md
+function showLinks(fileInformation) {
+    let regEx = /\bhttps:\/\/([a-z0-9.a-z0-9\/]+)([-a-z0-9?=_&#\/]+)([.a-z0-9]+)/gi;
+    let result = fileInformation.match(regEx);
+    console.log(result)
+}
+showLinks();
 
+//this is a proof of concept---->Still running
 function hola() {
     console.log("hola mundooo");
 }
+
 module.exports = {
     hola,
     checkItIsAMarkdownFile,
