@@ -66,12 +66,12 @@ function validateLinks(arrayLinks) {
 };
 
 let main = async() => { //  (imperativo ó programacion imperativa)
-    let string = getContentString()
-    let links = getLinks(string)
+    let string = getotString()
+    let links = Links(string)
     let shouldValidate = process.argv.indexOf('--validate')
     let shouldShowTotals = process.argv.indexOf('--stats')
     if (shouldValidate > -1) {
-        let results = await validateAndCountLinks(links) //devuelve una promesa
+        let results = await validateLinks(links) //devuelve una promesa
         console.log(results)
         if (shouldShowTotals > -1) {
 
@@ -80,3 +80,10 @@ let main = async() => { //  (imperativo ó programacion imperativa)
 }
 
 main();
+
+
+///
+let statsLinks = results = >{
+    console.log('Total links: ', colors.cyan(results.length))
+    console.log(colors.green('Valids: '), colors.bold.green(results.reduce((counter, elemnt))))
+}
