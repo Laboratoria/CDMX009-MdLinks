@@ -1,0 +1,28 @@
+{
+  "name": "zay-mdlinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZayraJero/CDMX009-MdLinks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZayraJero/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/ZayraJero/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "filehound": "^1.17.4",
+    "marked": "^1.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
