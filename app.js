@@ -19,6 +19,7 @@ const getLinks = (string) => {
     let regEx = (/https?:\S+\w/gi);
     let links = string.match(regEx);
     validateLinks(links)
+    return getLinks
 }
 
 function readFileValidation(newFile) { //validar lectura
