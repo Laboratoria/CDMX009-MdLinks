@@ -14,37 +14,14 @@ function getContentString() {
 function getLinks(string) {
 
     const getArray = ("Text: ", string.toString());
-    let regExpression = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    let regExpression = (/https?:\S+\w/gi);
     return getArray.match(regExpression);
 }
 
-function validateAndCountLinks(arrayLinks) {
-    let i = 0
-    let work = 0
-    let broke = 0
-
-    for (i = 0; i < arrayLinks.length; i++) {
-
-        fetch(arrayLinks[i]).then(function(response) {
-            if (response.status === 200) {
-                work++;
-
-            } else if (response.status == 404) {
-                broke++;
-
-
-            } else {
-                console.log('error', response.status);
-            }
-            console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
-            console.log(`✔ Total work Links: ${work}`.green);
-            console.log(`✖ Total Broken links: ${broke}`.red);
-
-        })
-
-    };
+function validateLinks(arrayLinks) {
 
     let promises = arrayLinks.map(aLink => fetch(aLink) // array de promesas
+
             .then(response => { // resolve de la promesa
                 return {
                     url: response.url,
@@ -63,18 +40,39 @@ function validateAndCountLinks(arrayLinks) {
         // console.log("las promesas: ", promises)
 };
 
+function countLinks(results) {
+
+    console.log("Total links: ", colors.black(results.length));
+    console.log(colors.green("Valids: "), colors.bold.green(results.reduce((counter, response) => {
+        if (response.status === 200) {
+            return counter += 1;
+        }
+        return counter
+    }, 0)));
+    console.log(colors.brightRed("Dead Links: "), colors.bold.brightRed(results.reduce((counter, response) => {
+        if (response.status > 200) {
+            return counter += 1;
+        }
+
+        return counter
+    }, 0)));
+}
+
+
+
 let main = async() => { //  (imperativo ó programacion imperativa)
     let string = getContentString()
     let links = getLinks(string)
     let shouldValidate = process.argv.indexOf('--validate')
-    let shouldShowTotals = process.argv.indexOf('--stats')
     if (shouldValidate > -1) {
-        let results = await validateAndCountLinks(links) //devuelve una promesa
+        let results = await validateLinks(links) //devuelve una promesa
         console.log(results)
+        let shouldShowTotals = process.argv.indexOf('--stats')
         if (shouldShowTotals > -1) {
-
+            let countTotals = countLinks(results)
         }
     }
 }
 
-main();
+
+main()
