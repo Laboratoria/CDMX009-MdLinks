@@ -133,5 +133,6 @@ let showLinksStats = links => {
 module.exports = {
     readFile,
     readFileValidation,
-    readFilesStats
+    readFilesStats,
+
 }
