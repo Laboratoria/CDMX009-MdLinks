@@ -4,144 +4,96 @@ const fetch = require('node-fetch')
 const colors = require('colors/safe')
 
 
-//Funcion para encontrar el archivo
-
-/* function findFile(){
-    const index = process.argv.indexOf ('--file')
-    console.log(index)
-    const uri = process.argv[index+1]
-}
-findFile(); */
-
+//Encontrar el archivo
 function findFile(){
-    const array = process.argv
-    const uri = process.argv.slice(array.length-1).toString()
-    //console.log(process.argv) 
-    //console.log(uri)
-   /*  if(path.extname(uri) === '.md'){
-        readFile(uri)
-    }else{
-        console.log('No se puede leer el archivo')
-    } */
+   /*  const array = process.argv
+    const uri = process.argv.slice(array.length-1).toString() */
+    const index = process.argv.indexOf ('--file')
+    //console.log(index)
+    const uri = process.argv[index+1]
     path.extname(uri) === '.md' ? readFile(uri) : console.log(colors.magenta.bold('*****Introduce un archivo con una extensión válida(.md)*****'))
 }
-
 findFile()
 
-
+//Leer archivo
 function readFile(uri){
     const string = fs.readFileSync(uri, 'utf-8')
     //console.log(string)
     getLinks(string)
 }
 
+//Obtener links
 function getLinks(string){
-//let expReg = /(https?:\/\/)([\w\.\/\-\#]+)/g
+//let expReg = (/https?:\S+\w/gi)
     const expReg = /(https?:)([\w\.\/\-\#\?\=\&]+)/g
     const links = string.match(expReg)
-    console.log('**********************linkssss********************** ', links)
-    /* fetch(links).then (function(res){
-        console.log(res)
-    }) */
-    fetchResponse(links)
+   // console.log('**********************linkssss********************** ', links)
+    validate(links)
 }
 
 
-function fetchResponse(links){
-    let fetchPromises = links.map(link => {
-        fetch(link)
-        .then (res => {
-            //console.log(res)
-            let resp = {
-                url: res.url,
-                status: res.status,
-                text: res.statusText
-            }
-            console.log(resp)
-            })
-        .catch (error => {
-            //console.log(error)
-            let err = {
-                url: error.message,
-                status: 404,
-                error: error.errno
-            }
-            console.log(err)
-            })
-        })
-
-        if (resp.status === 404){
-            console.log(yeiii)
-        }else{
-
-        }
-        //validate(fetchPromises)
-}
-
-function validate (fetchPromises){
-    const validate = fetchPromises.map(function(element){
-        return element.url
-    })
-    /* if (res.status = 400 || status === 'error'){
-        console.log(res.url + 'Status: 404')
-    }else{
-
-    } */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* function fetchResponse(links){
-    let fetchPromises = links.map(link=>fetch(link))
-    return Promise.all(fetchPromises)
-
-        .then (function(res){
-            //console.log(res)
-            let resp = {
-                url: res.url,
-                status: res.status,
-                text: res.statusText
-            }
-            console.log(resp)
-            })
+//Validar los links
+function validate(links){ 
+    let promises = links.map(link => fetch(link)
+   //.then(res => ({url: link, status: res.status, text:res.statusText}))
         
-} */
+        .then (res => {
+        //console.log(res)
+        let resp = {
+            url: res.url,
+            status: res.status,
+            text: res.statusText
+        }
+        if(resp.status === 200){
+            console.log(colors.magenta(res.status), colors.cyan(res.statusText), ('url:', link))
+        }else{
+            console.log(colors.yellow(res.status), colors.green(res.statusText),('url:', link))
+        }
+        return resp
+        // console.log (resp.url)
+    })
+    
 
+    //.catch(err=>({url: link, status: 'error', error:err.message}))
+   
+    .catch (error => {
+        let err = {
+            url: link,
+            status: 'error',
+            text: error.errno
+        }
+        if(err.status === 'error'){
+            console.log(colors.yellow(err.status), colors.green(err.text), ('url:', link))
+        }
+        return err
+        //console.log (err)
+    })
+    )
 
+    return Promise.all(promises)
+    //Todos los resultados, para sacar stats, hay que contarlos
+    .then(res => {
+        //console.log(res)
+        statsLinksValidated(res)
+        //return res
+    })
+}
 
+//Obteniendo estadísticas
+function statsLinksValidated (res){
+    console.log(colors.rainbow('Links totales: '), (res.length))
+    console.log(colors.magenta('Links sin futuro ni porvenir: ', res.reduce((accountant, element) => {
+        if (element.status !== 200){
+            return accountant += 1
+          }
+          return accountant
+        },0)))
+    console.log(colors.green('Links con ilusiones: ', res.reduce((accountant, elemento) => {
+        if (elemento.status === 200){
+            return accountant += 1
+          }
+          return accountant
+        },0)))
 
-
-
-
-/* function fetchResponse(links){
-   let allFetchs = Promise.all(links.map(link => fetch(link)))
-   return allFetchs.then(res => console.log(res))    
-} */
-
-
-
-
-
-
-/* 
-El método fetch() toma un argumento obligatorio, la ruta de acceso al recurso que desea recuperar. Devuelve una Promise que resuelve en Response a esa petición, sea o no correcta. Una vez que Response es recuperada, hay varios métodos disponibles para definir cuál es el contenido del cuerpo y como se debe manejar.
-Objetos Response
-Cómo has visto anteriormente, las instancias de Response son devueltas cuando fetch() es resuelto.
-
-Las propiedades de response que usarás son:
-
-Response.status — Entero (por defecto con valor 200) que contiene el código de estado de las respuesta.
-Response.statusText — Cadena (con valor por defecto "OK"), el cual corresponde al mensaje del estado de código HTTP.
-Response.ok — Visto en uso anteriormente, es una clave para comprobar que el estado está dentro del rango 200-299 (ambos incluidos). Este devuelve un valor Boolean, siendo true si lo anterior se cumple y false en otro caso.
-*/
-
+    return res
+}
