@@ -1,3 +1,8 @@
+// Debemos poder leer un archivo.
+// Asegurarnos que sea un archivo Markdown.
+// Obtener los links de este archivo
+// Validar esos links, que me devuelva un status 200
+
 const {validateLinks, linkStats, validateStats } = require('./main.js');
 
 const fs = require('fs');
@@ -53,7 +58,9 @@ async function validate(){
             let content = readFile(uri);
             if(content != false){
                 let arrayLinks = getLinks(content);
-                if (arrayLinks.length <= 0) return console.log('El archivo', uri.cyan, 'no tiene links!');
+                if (arrayLinks.length <= 0) {
+                     return console.log('El archivo'.red, uri.green, 'no tiene links!'.red);
+                }
                 if (flags.includes('--validate') && flags.includes('--stats') || flags.includes('--v') && flags.includes('--s')) {
                     validateStats(arrayLinks, uri);
                 } else if (flags.includes('--validate') || flags.includes('--v')){
@@ -62,11 +69,11 @@ async function validate(){
                     linkStats(arrayLinks, uri); 
                 } else {
                 if(arrayLinks != '') {
-                console.log('Los Links del Archivo '.blue + uri.green.bold.italic  + ' son: \n'.blue)
+                console.log('Los Links del Archivo '.blue + uri.green.bold.italic  + ' son:'.blue)
                 }
 
                 arrayLinks.forEach(link => {
-                    console.log('   ⋆ '.magenta + link.href.blue + '  ' + link.title.magenta);
+                    console.log(' ⋆ '.magenta + link.href.blue + '  ' + link.title.magenta);
                 });
               };     
             };
@@ -74,4 +81,4 @@ async function validate(){
 };
 
 validate()
-module.exports = { getUri, getLinks, linkStats, validate };
+module.exports = { readFile, getUri, getLinks, linkStats, validate };

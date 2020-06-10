@@ -14,7 +14,6 @@
     "npm",
     "md-links",
     "cli"
-    
   ],
   "author": "Esther Manrique González",
   "license": "ISC",
@@ -23,7 +22,6 @@
   },
   "homepage": "https://github.com/EstherManrique/CDMX009-MdLinks#readme",
   "dependencies": {
-    "cfonts": "^2.8.2",
     "colors": "^1.4.0",
     "enquire": "0.0.2",
     "esm": "^3.2.25",
