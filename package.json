@@ -25,9 +25,11 @@
     "colors": "^1.4.0",
     "enquire": "0.0.2",
     "esm": "^3.2.25",
+    "fs": "0.0.1-security",
     "markdown-it": "^11.0.0",
     "marked": "^1.1.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "jest": "^26.0.1"
