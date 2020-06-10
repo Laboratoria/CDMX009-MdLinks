@@ -80,10 +80,3 @@ let main = async() => { //  (imperativo ó programacion imperativa)
 }
 
 main();
-
-
-///
-let statsLinks = results = >{
-    console.log('Total links: ', colors.cyan(results.length))
-    console.log(colors.green('Valids: '), colors.bold.green(results.reduce((counter, elemnt))))
-}
