@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const { stats } = require('./stats')
 const { validate } = require('./validate')
 
-function array(links, flag){
+function array(links){
     let validated = [];
     let promises = links.map(link=>fetch(link)
                                     .then(res=> validated.push(({url: link,text:res.statusText,status:res.status, boolean:true })))
@@ -11,9 +11,8 @@ function array(links, flag){
         .then(
             results => {
                 if (validate){
-                    return validate(validated)
-                } else {
-                    return stats(validated)
+                    validate(validated)
+                    stats(validated)
                 } 
             return results
         }
@@ -22,5 +21,5 @@ function array(links, flag){
 
 
 module.exports = {
-    array,
+    array
 }
