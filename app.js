@@ -17,7 +17,6 @@ const readFile = () => {
     }
 }
 
-
 //finding links
 const showLinks = (fileInformation) => {
     console.log("all the information contained in the md file", fileInformation);
@@ -33,7 +32,7 @@ const checkLinkStatus = (allLinks) => {
     console.log(callAllLinks);
     let promises = allLinks.map(link => fetch(link)
         .then(res => {
-            let thrownAnswer = { //respuesta que me arroja
+            let thrownAnswer = {
                 url: res.url,
                 status: res.status,
                 text: res.statusText
@@ -59,12 +58,6 @@ const checkLinkStatus = (allLinks) => {
     )
     return promises;
 }
-
-
-
-
-
-
 
 module.exports = {
     readFile,
