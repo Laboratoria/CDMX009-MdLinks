@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "argvd": "^1.0.0",
+        "colors": "^1.4.0",
         "enquire": "0.0.2",
         "figlet": "^1.4.0",
         "meow": "^7.0.1",
