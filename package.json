@@ -4,7 +4,7 @@
   "description": "## Preámbulo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "fs": "0.0.1-security",
     "node": "^14.4.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }

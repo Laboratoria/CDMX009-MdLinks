@@ -13,6 +13,7 @@ function getoString() {
     return string
 }
 
+
 function Links(string) {
 
     const getArray = ("Text: ", string.toString());
@@ -66,7 +67,7 @@ function validateLinks(arrayLinks) {
 };
 
 let main = async() => { //  (imperativo ó programacion imperativa)
-    let string = getotString()
+    let string = getoString()
     let links = Links(string)
     let shouldValidate = process.argv.indexOf('--validate')
     let shouldShowTotals = process.argv.indexOf('--stats')
@@ -80,3 +81,8 @@ let main = async() => { //  (imperativo ó programacion imperativa)
 }
 
 main();
+module.exports = {
+    getoString,
+    Links,
+    validateLinks
+}
