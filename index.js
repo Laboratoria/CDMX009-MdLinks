@@ -17,12 +17,16 @@ function getoString() {
 function Links(string) {
 
     const getArray = ("Text: ", string.toString());
-    let regExpression = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-    return getArray.match(regExpression);
+    let regExpression = /\[.*\]\(((http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g
+    const result = [];
+    let match;
+    while(match = regExpression.exec(string)) {
+      result.push(match[1])
+    }  
+    return result;
 }
 
 function validateLinks(arrayLinks) {
-    let i = 0
     let work = 0
     let broke = 0
 
@@ -57,7 +61,7 @@ function validateLinks(arrayLinks) {
             })
             .catch(
                 error => {
-                    return { error: error.message }
+                    return { url: aLink, error: error.message }
                 })
         )
         // qué devuelve esta función ? ---> UNA ... P...R...O...M...E...S...A
