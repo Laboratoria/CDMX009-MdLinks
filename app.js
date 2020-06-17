@@ -22,14 +22,11 @@ const showLinks = (fileInformation) => {
     console.log("all the information contained in the md file", fileInformation);
     let regEx = /\bhttps:\/\/([a-z0-9.a-z0-9\/]+)([-a-z0-9?=_&#\/]+)([.a-z0-9]+)/gi;
     let result = fileInformation.match(regEx);
-    console.log("result", result);
     checkLinkStatus(result);
 }
 
 //check link status
 const checkLinkStatus = (allLinks) => {
-    let callAllLinks = allLinks.length;
-    console.log(callAllLinks);
     let promises = allLinks.map(link => fetch(link)
         .then(res => {
             let thrownAnswer = {
@@ -56,7 +53,32 @@ const checkLinkStatus = (allLinks) => {
             return bug
         })
     )
-    return promises;
+
+    return Promise.all(promises)
+        .then(res => {
+            arrayCount(res)
+
+        })
+
+}
+
+//Obtaining statistics
+function arrayCount(res) {
+    console.log(colors.rainbow('The total Links: '), (res.length))
+    console.log(colors.magenta('Broken Links: ', res.reduce((accountant, element) => {
+        if (element.status !== 200) {
+            return accountant += 1
+        }
+        return accountant
+    }, 0)))
+    console.log(colors.green('Works links: ', res.reduce((accountant, elemento) => {
+        if (elemento.status === 200) {
+            return accountant += 1
+        }
+        return accountant
+    }, 0)))
+
+    return res
 }
 
 module.exports = {
