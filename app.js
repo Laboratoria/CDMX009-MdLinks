@@ -35,7 +35,7 @@ const checkLinkStatus = (allLinks) => {
                 text: res.statusText
             }
             if (thrownAnswer.status === 200) {
-                console.log(colors.magenta(res.status), colors.cyan(res.statusText), ('url:', link))
+                console.log(colors.blue(res.status), colors.grey(res.statusText), ('url:', link))
             } else {
                 console.log(colors.yellow(res.status), colors.green(res.statusText), ('url:', link))
             }
@@ -48,7 +48,7 @@ const checkLinkStatus = (allLinks) => {
                 text: error.errno
             }
             if (bug.status === 'error') {
-                console.log(colors.yellow(bug.status), colors.green(bug.text), ('url:', link))
+                console.log(colors.yellow(bug.status), colors.red(bug.text), ('url:', link))
             }
             return bug
         })
