@@ -64,15 +64,15 @@ const checkLinkStatus = (allLinks) => {
 
 //Obtaining statistics
 function arrayCount(res) {
-    console.log(colors.rainbow('The total Links: '), (res.length))
+    console.log(colors.underline('The total Links: '), (res.length))
     console.log(colors.magenta('Broken Links: ', res.reduce((accountant, element) => {
         if (element.status !== 200) {
             return accountant += 1
         }
         return accountant
     }, 0)))
-    console.log(colors.green('Works links: ', res.reduce((accountant, elemento) => {
-        if (elemento.status === 200) {
+    console.log(colors.green('Works links: ', res.reduce((accountant, element) => {
+        if (element.status === 200) {
             return accountant += 1
         }
         return accountant
@@ -83,4 +83,8 @@ function arrayCount(res) {
 
 module.exports = {
     readFile,
+    showLinks,
+    isMarkDown,
+    checkLinkStatus,
+    arrayCount
 }
