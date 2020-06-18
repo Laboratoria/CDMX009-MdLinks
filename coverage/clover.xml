@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1592519756836" clover="3.2.0">
-  <project timestamp="1592519756837" name="All files">
+<coverage generated="1592520227709" clover="3.2.0">
+  <project timestamp="1592520227710" name="All files">
     <metrics statements="41" coveredstatements="16" conditionals="14" coveredconditionals="3" methods="11" coveredmethods="5" elements="66" coveredelements="24" complexity="0" loc="41" ncloc="41" packages="1" files="1" classes="1"/>
     <file name="app.js" path="C:\Users\Danna\Documents\CDMX009-MdLinks\app.js">
       <metrics statements="41" coveredstatements="16" conditionals="14" coveredconditionals="3" methods="11" coveredmethods="5"/>
