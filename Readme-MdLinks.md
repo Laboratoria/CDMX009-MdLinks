@@ -13,19 +13,19 @@ Para desarrollar la libreria se generaron 4 funciones
 
 # 1 La funcion que lee el archivo md y obtiene los links
 
-![extractLinks](utils/getlinks.png)
+![getLinks](/home/laboratoria84-am/Documentos/Laboratoria_Oralia/CDMX009-MdLinks/getLinks.png)
 
 # 2 La funcion que analiza y muestra los links funcionales y rotos
 
-![extractLinks](utils/validatelinks.png)
+![validateLinks](validatelinks.png)
 
 # 3 La funcion que muestra las estadisticas de los links funcionales y rotos
 
-![extractLinks](utils/statslinks.png)
+![statsLinks](statslinks.png)
 
 # 3 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
-![extractLinks](validateandstats.png)
+![validateAndStats](validateandstats.png)
 
 ## Documentacion
 
