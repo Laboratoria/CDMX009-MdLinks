@@ -247,7 +247,7 @@ pendientes de tu proyecto anterior.
 
 - [x] Uso de callbacks
 - [x] Consumo de Promesas
-- [ ] Creacion de Promesas
+- [x] Creacion de Promesas
 - [x] Modulos de Js
 - [x] Recursión
 
@@ -255,7 +255,7 @@ pendientes de tu proyecto anterior.
 
 - [x] Sistema de archivos
 - [x] package.json
-- [ ] crear modules
+- [x] crear modules
 - [x] Instalar y usar modules
 - [x] npm scripts
 - [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
@@ -264,8 +264,8 @@ pendientes de tu proyecto anterior.
 
 - [x] Testeo de tus funciones
 - [ ] Testeo asíncrono
-- [ ] Uso de librerias de Mock
-- [ ] Mocks manuales
+- [x] Uso de librerias de Mock
+- [x] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
@@ -275,7 +275,7 @@ pendientes de tu proyecto anterior.
 ### Buenas prácticas de desarrollo
 
 - [x] Modularización
-- [ ] Nomenclatura / Semántica
+- [x] Nomenclatura / Semántica
 - [ ] Linting
 
 ---
