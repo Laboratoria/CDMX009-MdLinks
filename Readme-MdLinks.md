@@ -37,16 +37,16 @@ Para analizar un archivo .md
 
 2. Indique la opcion deseada
 
-`validate` Muestra los links que contiene el archivo indicando los que funcionan y los que no
+   `validate` Muestra los links que contiene el archivo indicando los que funcionan y los que no
 
-`stats` Muestra las estadisticas de los links que funcionan y los que no
+   `stats` Muestra las estadisticas de los links que funcionan y los que no
 
-`validateStats` Muestra las dos anteriores
+   `validateStats` Muestra las dos anteriores
 
-`--help` para ver la ayuda
+   `--help` para ver la ayuda
 
 3. indique la ruta del archivo md
 
-ej. index.js validate -p "Ruta del archivo"
+   ej. index.js validate -p "Ruta del archivo"
 
 ## Instalacion
