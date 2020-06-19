@@ -56,33 +56,33 @@ parsing,
 - Este proyecto se debe "resolver" de manera individual.
 
 - La librería debe estar implementada en JavaScript para ser ejecutada con
-Node.js. **Está permitido usar librerías externas**.
+  Node.js. **Está permitido usar librerías externas**.
 
 - Tu módulo debe ser instalable via `npm install <github-user>/md-links`. Este
-módulo debe incluir tanto un _ejecutable_ que podamos invocar en la línea de
-comando como una interfaz que podamos importar con `require` para usarlo
-programáticamente.
+  módulo debe incluir tanto un _ejecutable_ que podamos invocar en la línea de
+  comando como una interfaz que podamos importar con `require` para usarlo
+  programáticamente.
 
 - Los tests unitarios deben **cubrir un mínimo del 70% de _statements_, _functions_,
-_lines_ y _branches_.**, ademas de pasar los test y el linter. Te recomendamos 
-utilizar [Jest](https://jestjs.io/) para tus pruebas unitarias.
+  _lines_ y _branches_.**, ademas de pasar los test y el linter. Te recomendamos
+  utilizar [Jest](https://jestjs.io/) para tus pruebas unitarias.
 
 - Para este proyecto no está permitido utilizar `async/await`.
 
 - Para este proyecto es opcional el uso de ES Modules `(import/export)`, en el
-caso optes utilizarlo deberas de crear un script de `build` en el `package.json`
-que transforme el código ES6+ a ES5 con ayuda de babel.
+  caso optes utilizarlo deberas de crear un script de `build` en el `package.json`
+  que transforme el código ES6+ a ES5 con ayuda de babel.
 
 ## Criterios de aceptacion
 
-Estos son los criterios de lo que debe ocurrir para que se satisfagan 
+Estos son los criterios de lo que debe ocurrir para que se satisfagan
 las necesidades del usuario:
 
 - Instalar la libreria via `npm install --global <github-user>/md-links`
 
 ### `README.md`
 
-- Encontrar el *pseudo codigo* o *diagrama de flujo* con el algoritmo que
+- Encontrar el _pseudo codigo_ o _diagrama de flujo_ con el algoritmo que
   soluciona el problema.
 - Encontrar un board con el backlog para la implementación de la librería.
 - Encontrar la documentación técnica de la librería.
@@ -103,14 +103,11 @@ las necesidades del usuario:
 - El ejecutable implementa `--stats`.
 - El ejecutable implementa `--validate` y `--stats` juntos.
 
-
 Para comenzar este proyecto tendrás que hacer un _fork_ y _clonar_ este
 repositorio.
 
 Antes de comenzar a codear, es necesario que pensemos en la arquitectura y
-boilerplate del proyecto, por lo que `antes de que empieces tu planificacion
-y a trabajar en la funcionalidad de tu proyecto deberás de haber
-creado tu boilerplate y tus tests`. Esto debería quedar
+boilerplate del proyecto, por lo que `antes de que empieces tu planificacion y a trabajar en la funcionalidad de tu proyecto deberás de haber creado tu boilerplate y tus tests`. Esto debería quedar
 detallado en tu repo y haberte asegurado de haber recibido feedback de uno
 de tus coaches. Una vez hayas terminado de definir la arquitectura y los tests
 de tu proyecto estarás lista para iniciar con tu **planificacion** por lo cual
@@ -134,7 +131,7 @@ siguiente interfaz:
   relativa, debe resolverse como relativa al directorio desde donde se invoca
   node - _current working directory_).
 - `options`: Un objeto con las siguientes propiedades:
-  * `validate`: Booleano que determina si se desea validar los links
+  - `validate`: Booleano que determina si se desea validar los links
     encontrados.
 
 ##### Valor de retorno
@@ -153,19 +150,19 @@ las siguientes propiedades:
 const mdLinks = require("md-links");
 
 mdLinks("./some/example.md")
-  .then(links => {
+  .then((links) => {
     // => [{ href, text, file }]
   })
   .catch(console.error);
 
 mdLinks("./some/example.md", { validate: true })
-  .then(links => {
+  .then((links) => {
     // => [{ href, text, file, status, ok }]
   })
   .catch(console.error);
 
 mdLinks("./some/dir")
-  .then(links => {
+  .then((links) => {
     // => [{ href, text, file }]
   })
   .catch(console.error);
@@ -243,40 +240,45 @@ para usarlo programáticamente.
 
 ## Objetivos de aprendizaje
 
-Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron 
+Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ ] Uso de callbacks
-- [ ] Consumo de Promesas
+
+- [x] Uso de callbacks
+- [x] Consumo de Promesas
 - [ ] Creacion de Promesas
-- [ ] Modulos de Js
-- [ ] Recursión
+- [x] Modulos de Js
+- [x] Recursión
 
 ### Node
-- [ ] Sistema de archivos
-- [ ] package.json
+
+- [x] Sistema de archivos
+- [x] package.json
 - [ ] crear modules
-- [ ] Instalar y usar modules
-- [ ] npm scripts
-- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [x] Instalar y usar modules
+- [x] npm scripts
+- [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
-- [ ] Testeo de tus funciones
+
+- [x] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+
+- [x] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [ ] Modularización
+
+- [x] Modularización
 - [ ] Nomenclatura / Semántica
 - [ ] Linting
 
-***
+---
 
 ## Pistas / Tips
 
@@ -294,8 +296,7 @@ desde GitHub. Ver [docs oficiales de `npm install` acá](https://docs.npmjs.com/
 
 Por ejemplo, el [`course-parser`](https://github.com/Laboratoria/course-parser)
 que usamos para la currícula no está publicado en el registro público de NPM,
-así que lo instalamos directamente desde GitHub con el comando `npm install
-Laboratoria/course-parser`.
+así que lo instalamos directamente desde GitHub con el comando `npm install Laboratoria/course-parser`.
 
 ### Sugerencias de implementación
 
