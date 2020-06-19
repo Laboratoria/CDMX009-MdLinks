@@ -3,24 +3,24 @@ Librería que nos permite validar links funcionales y rotos, aasí como obtener 
 
 ## Extensión .md
 Si el archivo no es extensión .md (markdown), el programa no se ejecuta y manda un mensaje de error
-![Imagen final](img/01_md-links)
+![Imagen final](img/01_md-links.jpg)
 
 ## Validando links y oteniendo estadísticas
 Si el uruario así lo requiere, se muestran links validados (ya sean rotos o funcionales) y los estadísticos.
-![Imagen final](img/02_md-links)
-![Imagen final](img/02b_md-links)
+![Imagen final](img/02_md-links.jpg)
+![Imagen final](img/02b_md-links.jpg)
 
 ## Validando únicamente links
 Si el uruario así lo requiere, se muestran únicamente los links validados (ya sean rotos o funcionales).
-![Imagen final](img/03_md-links)
+![Imagen final](img/03_md-links.jpg)
 
 ## Obteniendo únicamente estadísticos
 Si el uruario así lo requiere, se muestran únicamente los estadísticos de los links funcionales y de los links rotos.
-![Imagen final](img/04_md-links)
+![Imagen final](img/04_md-links.jpg)
 
 ## Ayuda
 Si el uruario no sabe cómo ejecutar la librería, puede ejecutar un comando de ayuda.
-![Imagen final](img/05_md-links)
+![Imagen final](img/05_md-links.jpg)
 
 
 
