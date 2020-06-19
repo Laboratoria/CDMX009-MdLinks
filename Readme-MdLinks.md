@@ -1,10 +1,10 @@
 # Markdown Links
 
-los archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
+Los archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
-_Nombre del ejecutable_ Esta libreria es una herramienta usando [Node.js], que lea y analiza archivos
+_Nombre del ejecutable_ Esta libreria es una herramienta usando [Node.js], que lee y analiza archivos
 en formato `Markdown`, para verificar los links que contengan y reportar algunas estadísticas.
 
 ## Pseudocodigo y diagramas de flujo
@@ -38,8 +38,11 @@ Para analizar un archivo .md
 2. Indique la opcion deseada
 
 `validate` Muestra los links que contiene el archivo indicando los que funcionan y los que no
+
 `stats` Muestra las estadisticas de los links que funcionan y los que no
+
 `validateStats` Muestra las dos anteriores
+
 `--help` para ver la ayuda
 
 3. indique la ruta del archivo md
