@@ -1,4 +1,32 @@
 # Markdown Links
+Librería que nos permite validar links funcionales y rotos, aasí como obtener las estadísticas de cada uno de los parámetros anteriormente mencionados
+
+## Extensión .md
+Si el archivo no es extensión .md (markdown), el programa no se ejecuta y manda un mensaje de error
+![Imagen final](img/01_md-links)
+
+## Validando links y oteniendo estadísticas
+Si el uruario así lo requiere, se muestran links validados (ya sean rotos o funcionales) y los estadísticos.
+![Imagen final](img/02_md-links)
+![Imagen final](img/02b_md-links)
+
+## Validando únicamente links
+Si el uruario así lo requiere, se muestran únicamente los links validados (ya sean rotos o funcionales).
+![Imagen final](img/03_md-links)
+
+## Obteniendo únicamente estadísticos
+Si el uruario así lo requiere, se muestran únicamente los estadísticos de los links funcionales y de los links rotos.
+![Imagen final](img/04_md-links)
+
+## Ayuda
+Si el uruario no sabe cómo ejecutar la librería, puede ejecutar un comando de ayuda.
+![Imagen final](img/05_md-links)
+
+
+
+
+
+# Markdown Links
 
 ## Preámbulo
 
@@ -247,19 +275,19 @@ Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ ] Uso de callbacks
-- [ ] Consumo de Promesas
-- [ ] Creacion de Promesas
-- [ ] Modulos de Js
+- [x] Uso de callbacks
+- [x] Consumo de Promesas
+- [x] Creacion de Promesas
+- [x] Modulos de Js
 - [ ] Recursión
 
 ### Node
-- [ ] Sistema de archivos
-- [ ] package.json
-- [ ] crear modules
-- [ ] Instalar y usar modules
-- [ ] npm scripts
-- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
+- [x] Sistema de archivos
+- [x] package.json
+- [x] crear modules
+- [x] Instalar y usar modules
+- [x] npm scripts
+- [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
 - [ ] Testeo de tus funciones
@@ -269,11 +297,11 @@ pendientes de tu proyecto anterior.
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
-- [ ] Organización en Github
+- [x] Organización en Github
 
 ### Buenas prácticas de desarrollo
-- [ ] Modularización
-- [ ] Nomenclatura / Semántica
+- [x] Modularización
+- [x] Nomenclatura / Semántica
 - [ ] Linting
 
 ***

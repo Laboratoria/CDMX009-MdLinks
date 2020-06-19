@@ -13,7 +13,7 @@
   "author": "Jimena Manzanares",
   "license": "MIT",
   "bin":{
-    "validarks": "./cli.js"
+    "bidibidibambam-mdlinks": "./cli.js"
   },
   "bugs": {
     "url": "https://github.com/JimenaMV/CDMX009-MdLinks/issues"

@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 
 const argv=require('./commands').argv
 const colors = require('colors/safe')
