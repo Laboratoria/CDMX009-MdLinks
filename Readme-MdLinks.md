@@ -25,7 +25,7 @@ Para desarrollar la libreria se generaron 4 funciones
 
 # 3 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
-![extractLinks](utils/validateandstats.png)
+![extractLinks](validateandstats.png)
 
 ## Documentacion
 
