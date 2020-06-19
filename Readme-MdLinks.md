@@ -13,19 +13,19 @@ Para desarrollar la libreria se generaron 4 funciones
 
 # 1 La funcion que lee el archivo md y obtiene los links
 
-![extractLinks][getlinks.png]
+![extractLinks](utils/getlinks.png)
 
 # 2 La funcion que analiza y muestra los links funcionales y rotos
 
-![extractLinks][validatelinks.png]
+![extractLinks](utils/validatelinks.png)
 
 # 3 La funcion que muestra las estadisticas de los links funcionales y rotos
 
-![extractLinks][statslinks.png]
+![extractLinks](utils/statslinks.png)
 
 # 3 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
-![extractLinks][validateandstats.png]
+![extractLinks](utils/validateandstats.png)
 
 ## Documentacion
 
