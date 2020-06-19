@@ -13,19 +13,19 @@ Para desarrollar la libreria se generaron 4 funciones
 
 #1 La funcion que lee el archivo md y obtiene los links
 
-![getLinks](getLinks.png)
+![getLinks](/utils/getLinks.png)
 
 #2 La funcion que analiza y muestra los links funcionales y rotos
 
-![validateLinks](validatelinks.png)
+![validateLinks](/utils/validateLinks.js)
 
 #3 La funcion que muestra las estadisticas de los links funcionales y rotos
 
-![statsLinks](statslinks.png)
+![statsLinks](/utils/Statslinks.png)
 
 #4 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
-![validateAndStats](validateandstats.png)
+![validateAndStats](/utils/validateAndStats.js)
 
 ## Documentacion
 
