@@ -4,6 +4,8 @@ const fetch = require('node-fetch')
 const colors = require('colors/safe')
 
 
+
+
 //Encontrar el archivo
 function findFile(){
    /*  const array = process.argv
@@ -96,4 +98,12 @@ function statsLinksValidated (res){
         },0)))
 
     return res
+}
+
+
+module.exports = {
+    readFile,
+    getLinks,
+    validate, 
+    statsLinksValidated
 }
