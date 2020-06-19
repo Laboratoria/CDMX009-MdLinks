@@ -11,19 +11,19 @@ en formato `Markdown`, para verificar los links que contengan y reportar algunas
 
 Para desarrollar la libreria se generaron 4 funciones
 
-# 1 La funcion que lee el archivo md y obtiene los links
+#1 La funcion que lee el archivo md y obtiene los links
 
-![getLinks](/home/laboratoria84-am/Documentos/Laboratoria_Oralia/CDMX009-MdLinks/getLinks.png)
+![getLinks](getLinks.png)
 
-# 2 La funcion que analiza y muestra los links funcionales y rotos
+#2 La funcion que analiza y muestra los links funcionales y rotos
 
 ![validateLinks](validatelinks.png)
 
-# 3 La funcion que muestra las estadisticas de los links funcionales y rotos
+#3 La funcion que muestra las estadisticas de los links funcionales y rotos
 
 ![statsLinks](statslinks.png)
 
-# 3 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
+#4 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
 ![validateAndStats](validateandstats.png)
 
