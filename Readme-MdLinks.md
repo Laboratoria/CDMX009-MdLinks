@@ -17,7 +17,7 @@ Para desarrollar la libreria se generaron 4 funciones
 
 #2 La funcion que analiza y muestra los links funcionales y rotos
 
-![validateLinks](/utils/validateLinks.js)
+![validateLinks](/utils/validate.js)
 
 #3 La funcion que muestra las estadisticas de los links funcionales y rotos
 
@@ -25,7 +25,7 @@ Para desarrollar la libreria se generaron 4 funciones
 
 #4 La funcion que analiza y muestra los links funcionales y rotos junto con las estadisticas de los links funcionales y rotos
 
-![validateAndStats](/utils/validateAndStats.js)
+![validateAndStats](/utils/validateandStats.js)
 
 ## Documentacion
 
