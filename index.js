@@ -1,7 +1,7 @@
 let fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch')
-const colors = require('colors')
+const fetch = require('node-fetch');
+const colors = require('colors');
 
 
 function getoString() {
@@ -10,9 +10,12 @@ function getoString() {
     if (index < 0) return console.log("You need to use a valid uri flag --file")
     let uri = process.argv[index + 1]
     let string = fs.readFileSync(uri, 'utf8')
+    console.log(string)
     return string
+    
 }
 
+getoString()
 
 function Links(string) {
 
@@ -26,13 +29,14 @@ function Links(string) {
     return result;
 }
 
+
 function validateLinks(arrayLinks) {
     let work = 0
     let broke = 0
 
-    for (i = 0; i < arrayLinks.length; i++) {
-
-        fetch(arrayLinks[i]).then(function(response) {
+    const fetches = arrayLinks.map((link) => (
+        fetch(link)
+          .then(function(response){
             if (response.status === 200) {
                 work++;
 
@@ -43,13 +47,15 @@ function validateLinks(arrayLinks) {
             } else {
                 console.log('error', response.status);
             }
-            console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
-            console.log(`✔ Total work Links: ${work}`.green);
-            console.log(`✖ Total Broken links: ${broke}`.red);
-
-        })
-
-    };
+          })
+    ));
+    
+    Promise.all(fetches).then(() => {
+        console.log(`✔ Total Links: ${arrayLinks.length}`.brightYellow);
+        console.log(`✔ Total work Links: ${work}`.green);
+        console.log(`✖ Total Broken links: ${broke}`.red);
+    })
+    
 
     let promises = arrayLinks.map(aLink => fetch(aLink) // array de promesas
             .then(response => { // resolve de la promesa
@@ -66,7 +72,7 @@ function validateLinks(arrayLinks) {
         )
         // qué devuelve esta función ? ---> UNA ... P...R...O...M...E...S...A
     return Promise.all(promises) // convierte el ARRAY de promesas por un ARRAY de res/rej
-        .then(result => result) // array de resultados {url,status,text,error}
+        //.then(result => result) // array de resultados {url,status,text,error}
         // console.log("las promesas: ", promises)
 };
 
@@ -77,14 +83,14 @@ let main = async() => { //  (imperativo ó programacion imperativa)
     let shouldShowTotals = process.argv.indexOf('--stats')
     if (shouldValidate > -1) {
         let results = await validateLinks(links) //devuelve una promesa
-        console.log(results)
+       // console.log(results)
         if (shouldShowTotals > -1) {
 
         }
     }
 }
 
-main();
+//main();
 module.exports = {
     getoString,
     Links,
