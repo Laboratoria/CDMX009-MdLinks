@@ -1,0 +1,30 @@
+{
+  "name": "mdlinks",
+  "version": "1.0.0",
+  "description": "## Preámbulo",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abigail-sanlo/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abigail-sanlo/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/abigail-sanlo/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "fetch": "^1.1.0",
+    "fs": "0.0.1-security",
+    "node": "^14.4.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
