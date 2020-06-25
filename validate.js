@@ -1,27 +1,41 @@
 const fetch = require('node-fetch');
 
-let work = 0;
+
+function validate(links){
+    let promises = links.map(link=>fetch(link).then(function(link) {
+        let arr =`${link.url}  ${link.statusText}  ${link.status}`
+        return arr
+    }).catch(function(error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+    }))
+    return Promise.all(promises) 
+       .then(r=>console.log( r ))
+}
+
+let ok = 0;
 let broke = 0;
+function validateStats(links) {
 
-function validate(data) {
-    let urlRegex = /(https?:\/\/[^\s)]+)/gi;
-    let links = data.match(urlRegex)
-    let i=0
-    fetch(links[i]).then(function(response) {
-        for( i ;i < links.length;i++){
-            if (response.status == 200) {
-            work += 1;
+    let promises = links.map(link=>fetch(link).then(function(link) {
 
-            }else if (response.status == 404) {
-            broke +=1;
+        if (link.status === 200) {
+            ok ++
+        }else if (link.status === 404) {
+            broke ++
+        }
+        let arr =`\n${link.url}  ${link.statusText}  ${link.status}`
+        return arr
+    }).catch(function(error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+    }))
+    return Promise.all(promises) 
+       .then(r=>console.log( r+"\nbroke:" + broke + "\nok:" + ok ))
+}
 
-            }}
-            console.log(`funciona:${work} roto:${broke} total:${links.length}`)
-            return `funciona:${work} roto:${broke} total:${links.length}`
-        }).catch(function(error) {
-            console.log('Hubo un problema con la petición Fetch:' + error.message);
-    });
+module.exports = {
+    validate,
+    validateStats
 }
 
 
-module.exports = validate;
+
