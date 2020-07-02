@@ -24,7 +24,6 @@ const getLinks = (string) => {
 };
 
 function readFileValidation(newFile) {
-  //validar lectura
   let string = fs.readFileSync(newFile, "utf8");
   linksValidation(string);
   return string;
@@ -36,14 +35,12 @@ function linksValidation(string) {
   showLinksValidated(links);
 }
 function readFilesStats(newFile) {
-  //stats lectura
   let string = fs.readFileSync(newFile, "utf8");
   getLinkStats(string);
   return string;
 }
 
 function getLinkStats(string) {
-  //stats obtener
   let regEx = /https?:\S+\w/gi;
   let links = string.match(regEx);
   showLinksStats(links);
@@ -61,14 +58,14 @@ let validateLinks = (links) => {
         if (object.status === 200) {
           console.log(
             colors.magenta(link, "") +
-              colors.bold.green(`${object.statusText} `) +
-              colors.bold.green(`${object.status}`)
+            colors.bold.green(`${object.statusText} `) +
+            colors.bold.green(`${object.status}`)
           );
         } else if (object.status !== 200) {
           console.log(
             colors.magenta(link, "") +
-              colors.bold.brightRed(`${object.statusText} `) +
-              colors.bold.brightRed(`${object.status}`)
+            colors.bold.brightRed(`${object.statusText} `) +
+            colors.bold.brightRed(`${object.status}`)
           );
         }
         return object;
@@ -123,14 +120,14 @@ let showLinksValidated = (links) => {
         if (object.status === 200) {
           console.log(
             colors.magenta(link, "") +
-              colors.green(`${object.statusText} `) +
-              colors.bold.green(`${object.status}`)
+            colors.green(`${object.statusText} `) +
+            colors.bold.green(`${object.status}`)
           );
         } else if (object.status !== 200) {
           console.log(
             colors.magenta(link, "") +
-              colors.brightRed(`${object.statusText} `) +
-              colors.bold.brightRed(`${object.status}`)
+            colors.brightRed(`${object.statusText} `) +
+            colors.bold.brightRed(`${object.status}`)
           );
         }
         return object;

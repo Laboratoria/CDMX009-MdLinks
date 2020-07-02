@@ -1,4 +1,4 @@
-describe.only("Las funciones principales de mdlinks", () => {
+describe.only("Principal MDlinks functions", () => {
   let mark = `Dentro de una comunidad de código abierto, nos han propuesto crear una
     herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
     en formato markdown, para verificar los links que contengan y reportar
@@ -9,13 +9,13 @@ describe.only("Las funciones principales de mdlinks", () => {
     return links;
   };
 
-  test("Evalua que la funcion retorne un valor", () => {
+  test("evaluates the function return a value", () => {
     expect(getLinks(mark)).toEqual(["https://nodejs.org"]);
   });
 
-  test("Evalua getlinks retorne un objeto", () => {
-    let arreglo = getLinks(mark)
-    expect(typeof arreglo).toEqual("object");
+  test("Evaluates getLinks return an object", () => {
+    let obj = getLinks(mark)
+    expect(typeof obj).toEqual("object");
   });
 
 });
