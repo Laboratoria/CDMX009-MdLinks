@@ -1,6 +1,6 @@
 let colors = require("colors");
 
-const { readFile, readFileValidation, readFilesStats } = require("./app.js");
+const { readFile, readFileValidation, readFilesStats } = require("./index.js");
 
 const options = {
   path: {
