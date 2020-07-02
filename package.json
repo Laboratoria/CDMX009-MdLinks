@@ -1,0 +1,28 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "\"Find links in md File\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paotm/CDMX009-MdLinks.git"
+  },
+  "keywords": [
+    "markdown"
+  ],
+  "author": "Paola T",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Paotm/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/Paotm/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
