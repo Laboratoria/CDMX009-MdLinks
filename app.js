@@ -1,101 +1,109 @@
 #!/usr/bin/env node
-
 const fs= require ("fs");
 const path = require("path");
 const fetch= require("node-fetch");
 let options= process.argv;
-  let index = process.argv.indexOf("--file");
-  let pathFile = process.argv[index +1];
-        
-// let pathFile= "README.md"
-// let pathFile= process.argv[2];
-let ext= (path.extname(pathFile));
-// console.log("path",pathFile);
-// verifica que sea un archivo md
 
-if (ext === '.md') {
-    console.log('el archivo es formato md');    
-} 
-else console.log('el archivo no esta en formato md'); 
-// lee el archivo
-// const rdFile = (pathFile) => {
-    
-    fs.readFile(pathFile, 'utf-8', (err, data) => {
-    if(err) {
-      console.log('error: ', err);
-    } else {
-        // recorrer archivo y buscar links
-      console.log("no hay error de lectura");
-        let string= data;  
-        let regExp= (/https?:\S+\w/gi);
-        let links= string.match(regExp);
-        console.log(links)
-        // console.log(links, "Total links:" ,links.length);
+let index = process.argv.indexOf("--file");    
+let pathFileArg = process.argv[index +1];
 
-// verifica el status del link y lo imprime en consola
-           
-        let okLinks = []
-        let broken = []
-        let i=0
-        let j=0
-        let link =[];
 
-      let promises =links.map( link =>fetch(link)
-        .then(res=> {
-           link= {
-            href:res.url,
-            statusText:res.statusText,
-            status:res.status,                           
-            file:pathFile          
-          }
-          if (link.status===200){
-            okLinks.push(link)
-            if(options.includes('--validate') ){
-              console.log(link);
-            console.log("bbbbbbbb href:",link.href,"file:",link.file)
-          }
-            return   i++          
-        }
-          if (link.status!==200){
-          broken.push(link)
-          if(options.includes('--validate') ){
-            console.log(link);
-        } else{
-          console.log("href:",link.href,"file:",link.file)
-        }
-          // console.log(link)
-          return   j++          
-        }
-      
-        })       
-        .catch(err=>{          
-         let blink={          
-          url:link,
-          error:err.code,
-          status:err.status,
-          file:pathFile 
-        }
-        if (blink.status!==200){
-          broken.push(blink)
-          if(options.includes('--validate') ){
-            console.log(blink);
-        } else{
-          console.log('xxxxxx', blink);
-          console.log("cccc href:",blink.url,"file:",blink.file)
-        }
-          console.log(blink)
-          return   j++          
-      }
-      }))
-        Promise.all(promises) 
-        .then(results=>
-          
-          console.log("Total links:", results.length, "Total Oklinks:", i, "Broken links:", j)
-         
-                )
-        .catch(e=> {
-          console.log('aaaaaaaaaaaaaaa')
-          console.log(e)
+ function validateExt(pathFile) {
+    try {
+        let ext= (path.extname(pathFile));            
+        return  ext === '.md' 
+    } catch (e) {
+        return false
+    }    
+ }
+
+
+function readMdFile(pathFile) {          
+    const data = fs.readFileSync(pathFile, 'utf-8')
+    return data; 
+}  
+
+
+function getLinks(data) {
+    let string= data;  
+    let regExp= (/https?:\S+\w/gi);
+    let links= string.match(regExp);
+    return links    
+}       
+
+let linkok =[]
+let okLinks = [] 
+let blink=[]
+let broken = [] 
+
+function statusLink(links) {    
+    let i=0        
+    let j=0  
+    let promises =links.map( link =>fetch(link)
+        .then(res=> { 
+            linkok= {
+                href:res.url,
+                statusText:res.statusText,
+                status:res.status,                           
+                file:pathFileArg          
+            }
+
+            if (linkok.status===200){
+                okLinks.push(linkok)
+                return i++
+            }
+            if (linkok.status!==200){
+                broken.push(linkok)
+                return   j++
+            } 
         })
-        }});
-       
+        .catch(err=>{          
+            blink={          
+                url:link,
+                error:err.code,
+                status:err.status,
+                file:pathFileArg 
+            }
+            if (blink.status!==200){
+                broken.push(blink)
+                return j++
+            }
+        }))
+        
+        return Promise.all(promises) 
+        .then(results => ({
+              Total: results.length,
+              Ok: i,
+              Broken: j,            
+        })
+        ) 
+}
+
+
+function main (pathFile) {
+    if (validateExt(pathFile)) {
+        const data = readMdFile(pathFile);
+        const links= getLinks(data);
+        console.log("Links encontrados:",links)
+        return statusLink(links)       
+    } else {
+        return Promise.reject('El archivo no está en formato md'); 
+    } 
+}
+
+main(pathFileArg)
+.then((result) => {    
+    if (options.includes('--validate') && options.includes('--stats')) {
+        console.log(result)
+        console.log("OK Links:",okLinks)
+        console.log("Broken Links:",broken)
+    }else if(options.includes('--validate')){       
+        console.log("OK Links:",okLinks)
+        console.log("Broken Links:",broken)
+    } else if(options.includes ('--stats')){
+        console.log(result)
+    }       
+})
+.catch(e=> {
+    console.log(e)
+  });;
