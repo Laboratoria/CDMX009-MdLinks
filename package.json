@@ -1,0 +1,24 @@
+{
+  "name": "CDMX009-MdLinks",
+  "version": "1.0.0",
+  "description": "[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado\r ligero muy popular entre developers. Es usado en muchísimas plataformas que\r manejan texto plano (GitHub, foros, blogs, ...), y es muy común\r encontrar varios archivos en ese formato en cualquier tipo de repositorio\r (empezando por el tradicional `README.md`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alissang/CDMX009-MdLinks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alissang/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/Alissang/CDMX009-MdLinks#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "node-fetch": "^2.6.0"
+  }
+}
