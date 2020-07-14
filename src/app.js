@@ -1,37 +1,30 @@
-// Debemos poder leer un archivo.
-// Asegurarnos que sea un archivo Markdown.
-// Obtener los links de este archivo
-// Validar esos links, que me devuelva un status 200
-
 const {validateLinks, linkStats, validateStats } = require('./main.js');
 
 const fs = require('fs');
 const marked = require('marked');
 const path = require('path');
-//const colors = require('colors');
 
 let index = process.argv.indexOf("--file");
 let flags = process.argv;
 
-function readFile(uri) { 
-    if (fs.existsSync(uri)){
-        let fileContent = fs.readFileSync(uri, 'utf8');
+function readFile(path) { 
+    if (fs.existsSync(path)){
+        let fileContent = fs.readFileSync(path, 'utf8');
         return fileContent;
     } else {
-        console.log('El archivo'.red, uri.red.bgCyan, 'NO existe'.red);
+        console.log('El archivo'.red, path.red.bgCyan, 'NO existe'.red);
         return false;
     };
 };
 
-function getUri() {
+function confirmMdFile() {
     let uri = process.argv[index + 1];
     let ext = path.extname(uri);
         if (index < 0) {
-             console.log('Poner'.red, '--file'.red.bgCyan, '(--file Nombre_Archivo.md)'.red);
+            console.log('Poner'.red, '--file'.red.bgCyan, '(--file Nombre_Archivo.md)'.red);
              return false;
         } else if (ext != '.md') {
              console.log('Archivo invalido!'.red + '\nDebe ser un archivo '.red + 'Markdown (.md)'.red.bgCyan);
-
              return false;
         } else {
             return uri;
@@ -52,8 +45,8 @@ function getLinks(content){
     return arrayLinks;
 }
 
-async function validate(){
-    let uri = getUri();
+function integrationCLI(){
+    let uri = confirmMdFile();
         if(uri != false) {
             let content = readFile(uri);
             if(content != false){
@@ -80,5 +73,10 @@ async function validate(){
     };
 };
 
-validate()
-module.exports = { readFile, getUri, getLinks, linkStats, validate };
+//integrationCLI()
+module.exports = { 
+    readFile, 
+    confirmMdFile, 
+    getLinks, 
+    integrationCLI 
+};

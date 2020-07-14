@@ -1,10 +1,13 @@
 {
   "name": "cdmx009-mdlinks",
   "version": "0.0.1",
-  "description": "Encontrar y Validar Links de un Archivo Markdown",
+  "description": "Search and Validate Markdown files",
   "main": "./src/app.js",
+  "bin": {
+    "emg-mdlinks": "cli.js"
+  },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",

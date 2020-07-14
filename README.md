@@ -13,7 +13,7 @@ muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
 ## Md - Links
-Modulo creado con Node.js.
+Es una libreía creada con Node.js, que lee archivos en formato Markdown, verifica si el este contiene Links y hace la validación de los mismos.
 
 ## Objetivos de aprendizaje
 
@@ -39,7 +39,7 @@ pendientes de tu proyecto anterior.
 - [X] Testeo de tus funciones
 - [ ] Testeo asíncrono
 - [ ] Uso de librerias de Mock
-- [ ] Mocks manuales
+- [X] Mocks manuales
 - [ ] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
