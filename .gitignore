@@ -1,0 +1,8 @@
+node_modules/
+.vscode/
+files/
+src/README.md
+src/text.md
+package-lock.json
+text.md
+text1.md
