@@ -4,7 +4,8 @@
   "description": "Encontrando links en archivo markdown con node",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
