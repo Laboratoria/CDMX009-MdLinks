@@ -5,6 +5,11 @@
 El objetivo práctico de este proyecto es que aprendas cómo crear tu propia
 **librería** (o biblioteca - _library_) en JavaScript.
 
+Diagrama de Flujo  (MDLINKS)
+
+![prototipo sobre papel](https://github.com/YazTepRod/CDMX009-MdLinks/blob/master/md-links.jpg)
+
+
 ## Objetivos de aprendizaje
 
 Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron 
