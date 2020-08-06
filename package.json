@@ -1,0 +1,32 @@
+{
+  "name": "cdmx009-mdlinks",
+  "version": "1.0.0",
+  "description": "\"Validate MarkDown Links\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laboratoria/CDMX009-MdLinks.git"
+  },
+  "keywords": [
+    "markdown",
+    "links",
+    "javascript",
+    "node.js"
+  ],
+  "author": "Yazmin Tepale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laboratoria/CDMX009-MdLinks/issues"
+  },
+  "homepage": "https://github.com/Laboratoria/CDMX009-MdLinks#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
